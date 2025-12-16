@@ -100,9 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d925824042822c458168eb573ee5118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
-  collapseDelay: 0.8
-  respawnDelay: 5
+  axialCoord: {x: 0, y: 0}
+  score: 20
 --- !u!64 &5491885269626657951
 MeshCollider:
   m_ObjectHideFlags: 0
