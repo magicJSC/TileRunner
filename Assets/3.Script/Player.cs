@@ -35,6 +35,9 @@ public class Player : MonoBehaviour
         {
             yield return null;
 
+            if(GameManager.Instance.isGameOver)
+                yield break;
+
             leftPressed = false;
             rightPressed = false;
 
