@@ -12,8 +12,11 @@ public class TileManager : MonoBehaviour
 {
     [Header("타일 설정")]
     public GameObject tilePrefab;
+    public GameObject startTilePrefab;
     public int radius = 5;
     public float tileSize = 1f;
+    public Transform playerTransform;
+    private Vector3 startPlayerPos;
 
     [Header("시간 설정")]
     public float collapseDelay = 0.8f;   // 밟고 사라지기까지
@@ -44,7 +47,20 @@ public class TileManager : MonoBehaviour
 
     void Start()
     {
+        startPlayerPos = playerTransform.position;
         GenerateInitialMap();
+        
+        GameManager.Instance.startGameAction += StartGame;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.startGameAction -= StartGame;
+    }
+
+
+    private void StartGame()
+    {
         StartCoroutine(RandomTileChange());
     }
 
@@ -61,7 +77,11 @@ public class TileManager : MonoBehaviour
             for (int r = r1; r <= r2; r++)
             {
                 Vector2Int coord = new Vector2Int(q, r);
-                SpawnTile(coord);
+
+                if(coord != new Vector2Int(0,0))
+                    SpawnTile(coord);
+                else
+                    SpawnStartTile(coord);
             }
         }
     }
@@ -80,10 +100,22 @@ public class TileManager : MonoBehaviour
         else
             tileGo = tilePrefab;
 
-        Vector3 pos = AxialToWorld(coord);
+        Vector3 pos = AxialToWorld(coord) + new Vector3(startPlayerPos.x,0, startPlayerPos.z);
         GameObject tile = Instantiate(tileGo, pos, Quaternion.identity, transform);
 
         tile.GetComponent<HexTile>().axialCoord = coord;
+        activeTiles.Add(coord, tile);
+    }
+
+    void SpawnStartTile(Vector2Int coord)
+    {
+        if (activeTiles.ContainsKey(coord))
+            return;
+        
+        Vector3 pos = AxialToWorld(coord) + new Vector3(startPlayerPos.x, 0, startPlayerPos.z);
+        GameObject tile = Instantiate(startTilePrefab, pos, Quaternion.identity, transform);
+
+        tile.GetComponent<StartTile>().axialCoord = coord;
         activeTiles.Add(coord, tile);
     }
 

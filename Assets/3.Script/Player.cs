@@ -22,6 +22,16 @@ public class Player : MonoBehaviour
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        GameManager.Instance.startGameAction += StartGame;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.startGameAction -= StartGame;
+    }
+
+    private void StartGame()
+    {
         StartCoroutine(CheckInputCor());
         StartCoroutine(SetVelocityToCharacter());
     }
