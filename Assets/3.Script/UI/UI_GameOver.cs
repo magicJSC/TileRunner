@@ -34,14 +34,20 @@ public class UI_GameOver : MonoBehaviour
     private bool CheckBestScore()
     {
         return GameManager.Instance.Score > GameManager.Instance.bestScore;
-    } 
+    }
 
+    /// <summary>
+    /// 최고 점수 패널 닫고 종료 패널 열기
+    /// </summary>
     public void CloseBestScorePanel()
     {
         newScorePanel.SetActive(false);
         endPanel.SetActive(true);
     }
 
+    /// <summary>
+    /// 게임 재시작
+    /// </summary>
     public void ResetGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

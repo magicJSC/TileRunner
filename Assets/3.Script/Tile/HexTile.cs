@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
@@ -17,6 +18,11 @@ public class HexTile : MonoBehaviour
         TileManager.Instance.RequestTileCollapse(axialCoord);
         GameManager.Instance.Score += score;
         isStepped = true;
+        StepAniation();
     }
 
+    public void StepAniation()
+    {
+        transform.GetChild(0).DOShakePosition(0.65f, 0.5f).onComplete += () => { transform.GetChild(0).DOScale(Vector3.zero, 0.15f); };
+    }
 }
