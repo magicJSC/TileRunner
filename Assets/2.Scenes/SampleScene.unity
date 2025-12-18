@@ -407,8 +407,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.24773744, y: 0.31607297, z: -0.08587907, w: 0.91178334}
-  m_LocalPosition: {x: -6.49, y: 8.2, z: -8.24}
+  m_LocalRotation: {x: 0.2922546, y: 0.31581432, z: -0.10291908, w: 0.8968034}
+  m_LocalPosition: {x: -8.2300005, y: 11.19, z: -10.360001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -647,7 +647,7 @@ MonoBehaviour:
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
-  FollowOffset: {x: -6.98, y: 7.04, z: -8.65}
+  FollowOffset: {x: -8.72, y: 10.03, z: -10.77}
 --- !u!114 &643401868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -699,13 +699,68 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 643401865}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.24773741, y: 0.31607294, z: -0.08587905, w: 0.9117834}
-  m_LocalPosition: {x: -6.49, y: 8.2, z: -8.24}
+  m_LocalRotation: {x: 0.2922546, y: 0.31581432, z: -0.10291908, w: 0.8968034}
+  m_LocalPosition: {x: -8.2300005, y: 11.19, z: -10.360001}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 36.1, y: 38.8, z: 0}
+--- !u!1 &675212901
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 675212902}
+  - component: {fileID: 675212903}
+  m_Layer: 0
+  m_Name: TimeController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &675212902
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675212901}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.041934848, y: 0.26863247, z: -0.21477826}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &675212903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675212901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e677dded9285191439daa2474ed960c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeSOList:
+  - {fileID: 11400000, guid: 59eef86db1237fe489eba9396a55e59c, type: 2}
+  - {fileID: 11400000, guid: d86197712e493774fb728bfe3b0e38e6, type: 2}
+  - {fileID: 11400000, guid: 7b7a3de1e9a61c04e9c594dc7789baf4, type: 2}
+  - {fileID: 11400000, guid: b7a5a7161ead79d469723e488477253f, type: 2}
+  - {fileID: 11400000, guid: 572ac56d8767cc64591e57cb3f972d85, type: 2}
+  - {fileID: 11400000, guid: 17280329fde23204089b67443fe2e44b, type: 2}
+  - {fileID: 11400000, guid: 59bff424d691cbc4dae509a41995d7e9, type: 2}
+  - {fileID: 11400000, guid: b99000800052bf64fa06eb78503f61d9, type: 2}
+  - {fileID: 11400000, guid: 3caba710eca9b3243aee98d95ea7ab96, type: 2}
+  - {fileID: 11400000, guid: 82c5419507a49454a99880c0f6675508, type: 2}
 --- !u!1 &761385554
 GameObject:
   m_ObjectHideFlags: 0
@@ -755,12 +810,10 @@ MonoBehaviour:
   radius: 5
   tileSize: 1
   playerTransform: {fileID: 1643607828}
-  collapseDelay: 0.8
-  respawnDelay: 10
-  dangerInterval: 6
-  randomRemoveCount: 1
+  timeSO: {fileID: 0}
   tileList:
   - {fileID: 661439313910053398, guid: 0ca1704881cab384c9b0883fefbf725f, type: 3}
+  - {fileID: 661439313910053398, guid: 877f4c8c4fb9f854fbee4b2b06996204, type: 3}
 --- !u!1 &801236130
 GameObject:
   m_ObjectHideFlags: 0
@@ -1350,7 +1403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b6b41d6403220040b54274ff8367abc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnSpeed: 150
+  turnSpeed: 200
   moveSpeed: 4
   jumpHeight: 3
   gravity: -9.81
@@ -1661,3 +1714,4 @@ SceneRoots:
   - {fileID: 205328426}
   - {fileID: 30509060}
   - {fileID: 870573063}
+  - {fileID: 675212902}
