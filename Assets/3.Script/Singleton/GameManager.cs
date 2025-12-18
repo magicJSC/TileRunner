@@ -11,4 +11,6 @@ public class GameManager : Singleton<GameManager>
     public Action<int> scoreAction;
 
     public bool isGameOver = false;
+
+    public Action startGameAction;
 }

@@ -12,14 +12,14 @@ public class TileManager : MonoBehaviour
 {
     [Header("타일 설정")]
     public GameObject tilePrefab;
+    public GameObject startTilePrefab;
     public int radius = 5;
     public float tileSize = 1f;
+    public Transform playerTransform;
+    private Vector3 startPlayerPos;
 
     [Header("시간 설정")]
-    public float collapseDelay = 0.8f;   // 밟고 사라지기까지
-    public float respawnDelay = 4.0f;    // 다시 생기기까지
-    public float dangerInterval = 6.0f;  // 랜덤 제거 주기
-    public int randomRemoveCount = 1;
+    public TimeSO timeSO;
 
     [Header("특별 타일")]
     public List<GameObject> tileList;
@@ -27,6 +27,17 @@ public class TileManager : MonoBehaviour
     // 현재 존재하는 타일
     Dictionary<Vector2Int, GameObject> activeTiles =
         new Dictionary<Vector2Int, GameObject>();
+
+
+    private static readonly Vector2Int[] HexDirections =
+{
+    new Vector2Int( 1,  0),
+    new Vector2Int(-1,  0),
+    new Vector2Int( 0,  1),
+    new Vector2Int( 0, -1),
+    new Vector2Int( 1, -1),
+    new Vector2Int(-1,  1)
+};
 
     public static TileManager Instance { get { if (instance == null) Init(); return instance; } set { instance = value; } }
     private static TileManager instance;
@@ -44,7 +55,20 @@ public class TileManager : MonoBehaviour
 
     void Start()
     {
+        startPlayerPos = playerTransform.position;
         GenerateInitialMap();
+        
+        GameManager.Instance.startGameAction += StartGame;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.startGameAction -= StartGame;
+    }
+
+
+    private void StartGame()
+    {
         StartCoroutine(RandomTileChange());
     }
 
@@ -61,7 +85,11 @@ public class TileManager : MonoBehaviour
             for (int r = r1; r <= r2; r++)
             {
                 Vector2Int coord = new Vector2Int(q, r);
-                SpawnTile(coord);
+
+                if(coord != new Vector2Int(0,0))
+                    SpawnTile(coord);
+                else
+                    SpawnStartTile(coord);
             }
         }
     }
@@ -80,10 +108,22 @@ public class TileManager : MonoBehaviour
         else
             tileGo = tilePrefab;
 
-        Vector3 pos = AxialToWorld(coord);
+        Vector3 pos = AxialToWorld(coord) + new Vector3(startPlayerPos.x,0, startPlayerPos.z);
         GameObject tile = Instantiate(tileGo, pos, Quaternion.identity, transform);
 
         tile.GetComponent<HexTile>().axialCoord = coord;
+        activeTiles.Add(coord, tile);
+    }
+
+    void SpawnStartTile(Vector2Int coord)
+    {
+        if (activeTiles.ContainsKey(coord))
+            return;
+        
+        Vector3 pos = AxialToWorld(coord) + new Vector3(startPlayerPos.x, 0, startPlayerPos.z);
+        GameObject tile = Instantiate(startTilePrefab, pos, Quaternion.identity, transform);
+
+        tile.GetComponent<StartTile>().axialCoord = coord;
         activeTiles.Add(coord, tile);
     }
 
@@ -112,11 +152,11 @@ public class TileManager : MonoBehaviour
 
     IEnumerator CollapseRoutine(Vector2Int coord)
     {
-        yield return new WaitForSeconds(collapseDelay);
+        yield return new WaitForSeconds(timeSO.collapseDelay);
 
         RemoveTile(coord);
 
-        yield return new WaitForSeconds(respawnDelay);
+        yield return new WaitForSeconds(timeSO.respawnDelay);
 
         SpawnTile(coord);
     }
@@ -128,11 +168,11 @@ public class TileManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(dangerInterval);
+            yield return new WaitForSeconds(timeSO.dangerInterval);
 
             List<Vector2Int> keys = new List<Vector2Int>(activeTiles.Keys);
 
-            for (int i = 0; i < randomRemoveCount && keys.Count > 0; i++)
+            for (int i = 0; i < timeSO.randomRemoveCount && keys.Count > 0; i++)
             {
                 int idx = UnityEngine.Random.Range(0, keys.Count);
                 Vector2Int coord = keys[idx];
@@ -155,5 +195,30 @@ public class TileManager : MonoBehaviour
         float x = tileSize * (Mathf.Sqrt(3f) * coord.x + Mathf.Sqrt(3f) / 2f * coord.y);
         float z = tileSize * (3f / 2f * coord.y);
         return new Vector3(x, 0f, z);
+    }
+
+
+    /// <summary>
+    /// 근첩한 타일 좌표 반환
+    /// </summary>
+    /// <param name="center"></param>
+    public List<Vector2Int> GetNeighborCoords(Vector2Int center)
+    {
+        List<Vector2Int> neighbors = new List<Vector2Int>();
+
+        foreach (var dir in HexDirections)
+        {
+            Vector2Int neighbor = center + dir;
+
+            if (activeTiles.ContainsKey(neighbor))
+                neighbors.Add(neighbor);
+        }
+
+        return neighbors;
+    }
+
+    public void SteppedTile(Vector2Int tileVector)
+    {
+        activeTiles[tileVector].GetComponent<HexTile>().OnStepped();
     }
 }
