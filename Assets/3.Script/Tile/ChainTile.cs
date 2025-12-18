@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ChainTile : HexTile
+public class ChainTile : SpecialTile
 {
     public override void OnStepped()
     {
@@ -10,5 +10,10 @@ public class ChainTile : HexTile
         {
            TileManager.Instance.SteppedTile(coord);
         }
+    }
+
+    public override void TimerOver()
+    {
+        OnStepped();
     }
 }

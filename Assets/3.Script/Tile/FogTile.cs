@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FogTile : HexTile
+public class FogTile : SpecialTile
 {
     [SerializeField] GameObject fogController;
 
@@ -8,5 +8,9 @@ public class FogTile : HexTile
     {
         Instantiate(fogController, transform.position,Quaternion.identity);
         base.OnStepped();
+    }
+    public override void TimerOver()
+    {
+        OnStepped();
     }
 }
