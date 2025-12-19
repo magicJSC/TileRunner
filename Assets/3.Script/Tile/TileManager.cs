@@ -22,7 +22,9 @@ public class TileManager : MonoBehaviour
     public TimeSO timeSO;
 
     [Header("특별 타일")]
-    public List<GameObject> tileList;
+    public List<GameObject> dangerTileList;
+    public GameObject scoreTile;
+    public float scoreInterval;
 
     // 현재 존재하는 타일
     Dictionary<Vector2Int, GameObject> activeTiles =
@@ -69,7 +71,8 @@ public class TileManager : MonoBehaviour
 
     private void StartGame()
     {
-        StartCoroutine(RandomTileChange());
+        StartCoroutine(RandomTileChangeDanger());
+        StartCoroutine(RandomTileChangeScore());
     }
 
     // =========================
@@ -162,9 +165,9 @@ public class TileManager : MonoBehaviour
     }
 
     // =========================
-    // 시간마다 랜덤 타일 제거
+    // 시간마다 랜덤 타일 위험타일로 변경
     // =========================
-    IEnumerator RandomTileChange()
+    IEnumerator RandomTileChangeDanger()
     {
         while (true)
         {
@@ -181,9 +184,29 @@ public class TileManager : MonoBehaviour
                 keys.RemoveAt(idx);
 
                 // 랜덤으로 특별 타일 생성
-                int randomIdx = UnityEngine.Random.Range(0, tileList.Count);
-                SpawnTile(coord, tileList[randomIdx]);
+                int randomIdx = UnityEngine.Random.Range(0, dangerTileList.Count);
+                SpawnTile(coord, dangerTileList[randomIdx]);
             }
+        }
+    }
+
+    /// <summary>
+    /// 시간마다 랜덤 타일 점수타일로 변경
+    /// </summary>
+    IEnumerator RandomTileChangeScore()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(scoreInterval);
+
+            List<Vector2Int> keys = new List<Vector2Int>(activeTiles.Keys);
+
+            int idx = UnityEngine.Random.Range(0, keys.Count);
+            Vector2Int coord = keys[idx];
+
+            RemoveTile(coord);
+
+            SpawnTile(coord, scoreTile);
         }
     }
 
