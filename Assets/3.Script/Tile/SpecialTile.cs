@@ -32,6 +32,7 @@ public class SpecialTile : HexTile
 
     public virtual void TimerOver()
     {
-        base.OnStepped();
+        TileManager.Instance.RequestTileCollapse(axialCoord);
+        StepAniation();
     }
 }

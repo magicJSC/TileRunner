@@ -6,7 +6,7 @@ public class ScoreTile : SpecialTile
     public override void OnStepped()
     {
         base.OnStepped();
-        
+        GameManager.Instance.doubleScoreAction?.Invoke();
     }
 
     public override void TimerOver()

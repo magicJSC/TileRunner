@@ -12,8 +12,4 @@ public class ChainTile : SpecialTile
         }
     }
 
-    public override void TimerOver()
-    {
-        OnStepped();
-    }
 }

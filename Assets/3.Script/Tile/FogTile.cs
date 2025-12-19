@@ -9,8 +9,4 @@ public class FogTile : SpecialTile
         Instantiate(fogController, transform.position,Quaternion.identity);
         base.OnStepped();
     }
-    public override void TimerOver()
-    {
-        OnStepped();
-    }
 }
