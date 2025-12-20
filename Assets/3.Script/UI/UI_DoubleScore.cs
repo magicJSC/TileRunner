@@ -17,6 +17,7 @@ public class UI_DoubleScore : MonoBehaviour
     private void OnDisable()
     {
         GameManager.Instance.doubleScoreAction -= StartDouble;
+        GameManager.Instance.isIncreaseDoubleScore = false;
     }
 
     private void StartDouble()

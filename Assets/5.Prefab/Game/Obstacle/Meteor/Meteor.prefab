@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetSignPrefab: {fileID: 4934914258770008471, guid: 9f3f2901b5afb374fb2a426d1516645c, type: 3}
-  speed: 10
+  speed: 20
 --- !u!54 &1727358209723079594
 Rigidbody:
   m_ObjectHideFlags: 0
