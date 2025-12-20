@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e447393a4c1c3d48af8f315a22c8fe2, type: 3}
-  m_Name: Level2
+  m_Name: Level10
   m_EditorClassIdentifier: 
   collapseDelay: 0.8
-  respawnDelay: 8.5
-  dangerInterval: 5.6
+  respawnDelay: 12.5
+  dangerInterval: 4
   randomRemoveCount: 1
-  nextLevelTime: 10
+  nextLevelTime: 120

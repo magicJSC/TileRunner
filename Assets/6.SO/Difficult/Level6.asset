@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level6
   m_EditorClassIdentifier: 
   collapseDelay: 0.8
-  respawnDelay: 12
+  respawnDelay: 10
   dangerInterval: 4.5
   randomRemoveCount: 1
   nextLevelTime: 70
