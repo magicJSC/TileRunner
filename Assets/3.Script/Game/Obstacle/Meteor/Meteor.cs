@@ -32,7 +32,7 @@ public class Meteor : MonoBehaviour
             lineRenderer.SetPosition(0, transform.position);
             lineRenderer.SetPosition(1, new Vector3(transform.position.x, 0.2f, transform.position.z));
 
-            if((transform.position - targetSign.transform.position).magnitude < 0.05f)
+            if(transform.position.y < targetSign.transform.position.y)
             {
                 Destroy(gameObject);
                 yield break;

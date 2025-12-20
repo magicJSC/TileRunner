@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-   public int Score { get { return score; } 
+    #region 점수
+    public int Score { get { return score; } 
         
         set
         { 
@@ -16,11 +17,32 @@ public class GameManager : Singleton<GameManager>
             scoreAction?.Invoke(score);
         } 
     }
+
     private int score;
 
     public int bestScore;
 
     public Action<int> scoreAction;
+    #endregion
+
+    #region 코인
+    public int Coin
+    {
+        get { return coin; }
+
+        set
+        {
+            coin = value;
+
+            coinAction?.Invoke(coin);
+        }
+    }
+    private int coin;
+    
+
+    public Action<int> coinAction;
+    #endregion
+
 
     public bool isGameOver = false;
 

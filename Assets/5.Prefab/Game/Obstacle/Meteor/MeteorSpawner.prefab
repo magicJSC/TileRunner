@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meteor: {fileID: 216064376562894321, guid: 868daa90714e2044d802b6781aa1760b, type: 3}
-  spawnHeight: 30
+  spawnHeight: 60
   spawnCount: 5

@@ -288,4 +288,11 @@ public class TileManager : MonoBehaviour
     {
         return activeTiles[tileVector];
     }
+
+    public GameObject GetRandomTile()
+    {
+        List<GameObject> values = new List<GameObject>(activeTiles.Values);
+        int idx = UnityEngine.Random.Range(0, values.Count);
+        return values[idx];
+    }
 }
