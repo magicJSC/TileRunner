@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -5,11 +6,11 @@ using UnityEngine.UI;
 public class SpecialTile : HexTile
 {
     [SerializeField] float coolTime;
-    private float curTime;
+    protected float curTime;
 
     private Image coolImage; 
 
-    private void Start()
+    protected override void Init()
     {
         curTime = coolTime;
         coolImage  = Util.FindChild<Image>(gameObject, "CurTime");
@@ -30,9 +31,12 @@ public class SpecialTile : HexTile
         TimerOver();
     }
 
+    /// <summary>
+    /// 쿨타임이 끝났을 때 실행
+    /// </summary>
     public virtual void TimerOver()
     {
         TileManager.Instance.RequestTileCollapse(axialCoord);
-        StepAniation();
+        transform.DOScale(Vector3.zero, 0.4f);
     }
 }

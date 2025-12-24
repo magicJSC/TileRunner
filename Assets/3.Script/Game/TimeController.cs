@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,16 @@ public class TimeController : MonoBehaviour
     public List<TimeSO> timeSOList;
 
     private int time = 0;
+
     private int levelIndex = 0;
+    public int LevelIndex { get { return levelIndex; }
+        set
+        {
+            levelIndex = value;
+            levelAction.Invoke(levelIndex);
+        }
+    }
+    public Action<int> levelAction;
 
     private Coroutine timerCoroutine;
 
@@ -45,16 +55,18 @@ public class TimeController : MonoBehaviour
     /// </summary>
     private void CheckTimeSO()
     {
-        if (timeSOList[levelIndex + 1] == null)
+        // 다음 단계가 없으면 정지
+        if (timeSOList[LevelIndex + 1] == null)
         {
             StopCoroutine(timerCoroutine);
             return;
         }
 
-        if (timeSOList[levelIndex + 1].nextLevelTime <= time)
+        // 시간되면 난이도 상승
+        if (timeSOList[LevelIndex + 1].nextLevelTime <= time)
         {
-            levelIndex++;
-            TileManager.Instance.timeSO = timeSOList[levelIndex];
+            LevelIndex++;
+            TileManager.Instance.timeSO = timeSOList[LevelIndex];
         }
     }
 }

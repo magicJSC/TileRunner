@@ -44,7 +44,7 @@ public class Meteor : MonoBehaviour
     {
         if (other.TryGetComponent(out Player player))
         {
-            GameEnder.Instance.EndGame();
+            player.Die();
             Destroy(gameObject);
         }
         else if (other.TryGetComponent(out HexTile tile))

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XR;
 
 public class Player : MonoBehaviour
 {
@@ -16,12 +16,14 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float gravity = -9.81f;
     private CharacterController controller;
+    private Animator anim;
 
     private bool isGrounded;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        anim = GetComponent<Animator>();
         GameManager.Instance.startGameAction += StartGame;
     }
 
@@ -34,6 +36,7 @@ public class Player : MonoBehaviour
     {
         StartCoroutine(CheckInputCor());
         StartCoroutine(SetVelocityToCharacter());
+        anim.SetTrigger("run");
     }
 
     /// <summary>
@@ -75,6 +78,7 @@ public class Player : MonoBehaviour
                 TurnRight();
 
             Forward();
+
         }
     }
 
@@ -147,6 +151,20 @@ public class Player : MonoBehaviour
         float jumpVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
         velocity.y = jumpVelocity;
         isGrounded = false;
+        anim.SetTrigger("jump");
+        anim.SetBool("keepJump", true);
+    }
+
+    public void Die()
+    {
+        GameEnder.Instance.EndGame();
+        anim.Play("Die");
+    }
+
+    public void Fall()
+    {
+        GameEnder.Instance.EndGame();
+        anim.SetTrigger("fall");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -155,6 +173,7 @@ public class Player : MonoBehaviour
         if (tile != null)
         {
             isGrounded = true;
+            anim.SetBool("keepJump",false);
             tile.OnStepped();
         }
     }
