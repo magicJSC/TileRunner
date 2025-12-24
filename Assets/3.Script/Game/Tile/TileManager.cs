@@ -22,7 +22,7 @@ public class TileManager : MonoBehaviour
     public TimeSO timeSO;
 
     [Header("특별 타일")]
-    public List<GameObject> dangerTileList;
+    public GameObject dangerTile;
     public GameObject scoreTilePrefab;
     public float scoreInterval;
 
@@ -156,7 +156,7 @@ public class TileManager : MonoBehaviour
 
         var scoreTile = tile.GetComponent<ScoreTile>();
         scoreTile.axialCoord = coord;
-        scoreTile.Init(TrialPicker.Instance.PickTrial());
+        //scoreTile.InitTrial(TrialPicker.Instance.PickTrial());
         activeTiles.Add(coord, tile);
     }
 
@@ -193,7 +193,7 @@ public class TileManager : MonoBehaviour
 
             List<Vector2Int> keys = new List<Vector2Int>(activeTiles.Keys);
 
-            for (int i = 0; i < timeSO.randomRemoveCount && keys.Count > 0; i++)
+            for (int i = 0; i < timeSO.dangerCount && keys.Count > 0; i++)
             {
                 int idx = UnityEngine.Random.Range(0, keys.Count);
                 Vector2Int coord = keys[idx];
@@ -202,8 +202,7 @@ public class TileManager : MonoBehaviour
                 keys.RemoveAt(idx);
 
                 // 랜덤으로 특별 타일 생성
-                int randomIdx = UnityEngine.Random.Range(0, dangerTileList.Count);
-                SpawnTile(coord, dangerTileList[randomIdx]);
+                SpawnTile(coord, dangerTile);
             }
         }
     }

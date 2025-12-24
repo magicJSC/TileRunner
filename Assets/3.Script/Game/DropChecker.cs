@@ -8,7 +8,7 @@ public class DropChecker : MonoBehaviour
             return;
         if(other.TryGetComponent<Player>(out var player))
         {
-            GameEnder.Instance.EndGame();
+            player.Fall();
         }
     }
 }

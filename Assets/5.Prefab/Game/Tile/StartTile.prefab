@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axialCoord: {x: 0, y: 0}
+  steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
 --- !u!1 &4749453656411114336
 GameObject:
   m_ObjectHideFlags: 0

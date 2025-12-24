@@ -10,7 +10,18 @@ public class CoinSpawner : MonoBehaviour
 
     private void Start()
     {
+        GameManager.Instance.startGameAction += StartAction;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.startGameAction -= StartAction;
+    }
+
+    void StartAction()
+    {
         StartCoroutine(SpawnCoinCor());
+
     }
 
     IEnumerator SpawnCoinCor()
