@@ -56,7 +56,7 @@ public class TimeController : MonoBehaviour
     private void CheckTimeSO()
     {
         // 다음 단계가 없으면 정지
-        if (timeSOList[LevelIndex + 1] == null)
+        if (timeSOList.Count == LevelIndex - 1)
         {
             StopCoroutine(timerCoroutine);
             return;

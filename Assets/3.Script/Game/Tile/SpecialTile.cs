@@ -21,7 +21,7 @@ public class SpecialTile : HexTile
     {
         while(curTime > 0)
         {
-            if(isStepped)
+            if(isDisappear)
                 yield break;
             curTime -= Time.deltaTime;
             coolImage.fillAmount = curTime / coolTime;
@@ -36,7 +36,15 @@ public class SpecialTile : HexTile
     /// </summary>
     public virtual void TimerOver()
     {
-        TileManager.Instance.RequestTileCollapse(axialCoord);
-        transform.DOScale(Vector3.zero, 0.4f);
+        Disappear();
+    }
+
+    public override void Disappear()
+    {
+        if (isDisappear)
+            return;
+
+        base.Disappear();
+        GetComponentInChildren<Light>().enabled = false;
     }
 }

@@ -154,7 +154,7 @@ public class TileManager : MonoBehaviour
         Vector3 pos = AxialToWorld(coord) + new Vector3(startPlayerPos.x, 0, startPlayerPos.z);
         GameObject tile = Instantiate(scoreTilePrefab, pos, Quaternion.identity, transform);
 
-        var scoreTile = tile.GetComponent<ScoreTile>();
+        var scoreTile = tile.GetComponent<RocketTile>();
         scoreTile.axialCoord = coord;
         //scoreTile.InitTrial(TrialPicker.Instance.PickTrial());
         activeTiles.Add(coord, tile);
@@ -281,6 +281,15 @@ public class TileManager : MonoBehaviour
     public void SteppedTile(Vector2Int tileVector)
     {
         activeTiles[tileVector].GetComponent<HexTile>().OnStepped();
+    }
+
+    /// <summary>
+    /// 타일 사라지게 처리
+    /// </summary>
+    /// <param name="tileVector"></param>
+    public void DissapearTile(Vector2Int tileVector)
+    {
+        activeTiles[tileVector].GetComponent<HexTile>().Disappear();
     }
 
     public GameObject GetTile(Vector2Int tileVector)

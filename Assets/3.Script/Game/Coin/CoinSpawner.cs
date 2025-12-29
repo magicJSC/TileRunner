@@ -6,6 +6,7 @@ public class CoinSpawner : MonoBehaviour
 {
     [SerializeField] GameObject coin;
     [SerializeField] int maxCoinCount = 5;
+    [SerializeField] float spawnCool = 5;
     int currentCoinCount = 0;
 
     private void Start()
@@ -31,7 +32,7 @@ public class CoinSpawner : MonoBehaviour
             yield return null;
             if (currentCoinCount < maxCoinCount)
             {
-                yield return new WaitForSeconds(5);
+                yield return new WaitForSeconds(spawnCool);
                 SpawnCoin();
             }
         }
