@@ -19,7 +19,7 @@ public class TileManager : MonoBehaviour
     private Vector3 startPlayerPos;
 
     [Header("시간 설정")]
-    public TimeSO timeSO;
+    public DifficultSO difficultSO;
 
     [Header("특별 타일")]
     public GameObject dangerTile;
@@ -71,8 +71,8 @@ public class TileManager : MonoBehaviour
 
     private void StartGame()
     {
-        StartCoroutine(RandomTileChangeDanger());
-        StartCoroutine(RandomTileChangeScore());
+        //StartCoroutine(RandomTileChangeDanger());
+        //StartCoroutine(RandomTileChangeScore());
     }
 
     // =========================
@@ -173,11 +173,11 @@ public class TileManager : MonoBehaviour
 
     IEnumerator CollapseRoutine(Vector2Int coord)
     {
-        yield return new WaitForSeconds(timeSO.collapseDelay);
+        yield return new WaitForSeconds(difficultSO.collapseDelay);
 
         RemoveTile(coord);
 
-        yield return new WaitForSeconds(timeSO.respawnDelay);
+        yield return new WaitForSeconds(difficultSO.respawnDelay);
 
         SpawnTile(coord);
     }
@@ -189,11 +189,11 @@ public class TileManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(timeSO.dangerInterval);
+            yield return new WaitForSeconds(difficultSO.dangerInterval);
 
             List<Vector2Int> keys = new List<Vector2Int>(activeTiles.Keys);
 
-            for (int i = 0; i < timeSO.dangerCount && keys.Count > 0; i++)
+            for (int i = 0; i < difficultSO.dangerCount && keys.Count > 0; i++)
             {
                 int idx = UnityEngine.Random.Range(0, keys.Count);
                 Vector2Int coord = keys[idx];
@@ -303,4 +303,42 @@ public class TileManager : MonoBehaviour
         int idx = UnityEngine.Random.Range(0, values.Count);
         return values[idx];
     }
+
+    public Vector3 GetRandomTilePosition(
+     Transform target,
+     float minDistance,
+     float maxDistance)
+    {
+        List<Vector3> candidates = new List<Vector3>();
+        Vector3 targetPos = target.position;
+
+        // 타일이 존재할 수 있는 좌표 범위 (초기 맵 기준)
+        for (int q = -radius; q <= radius; q++)
+        {
+            int r1 = Mathf.Max(-radius, -q - radius);
+            int r2 = Mathf.Min(radius, -q + radius);
+
+            for (int r = r1; r <= r2; r++)
+            {
+                Vector2Int coord = new Vector2Int(q, r);
+
+                Vector3 worldPos =
+                    AxialToWorld(coord) + new Vector3(startPlayerPos.x, 0, startPlayerPos.z);
+
+                float dist = Vector3.Distance(targetPos, worldPos);
+
+                if (dist >= minDistance && dist < maxDistance)
+                {
+                    candidates.Add(worldPos);
+                }
+            }
+        }
+
+        if (candidates.Count == 0)
+            return Vector3.zero;
+
+        int idx = UnityEngine.Random.Range(0, candidates.Count);
+        return candidates[idx];
+    }
+
 }

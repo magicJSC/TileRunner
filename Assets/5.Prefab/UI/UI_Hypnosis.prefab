@@ -213,5 +213,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dad968b93fa1a94b9e22d5c07bca28d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hypnosisCount: 2
-  coolTime: 3
+  hypnosisCount: 1
+  coolTime: 2

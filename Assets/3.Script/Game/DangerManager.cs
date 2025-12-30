@@ -18,7 +18,7 @@ public class DangerManager : MonoBehaviour
 
     private void Start()
     {
-        var timeController = GetComponent<TimeController>();
+        var timeController = GetComponent<DifficultController>();
         timeController.levelAction += GetDangerSO;
         GetDangerSO(timeController.LevelIndex);
 

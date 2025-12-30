@@ -1,51 +1,92 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// 몬스터 기본 클래스
+/// </summary>
 public class Monster : MonoBehaviour
 {
-    [SerializeField] float coolTime;
+    [SerializeField] float moveSpeed = 2f;
+    [SerializeField] float gravity = -9.81f;
 
-    [Header("스킬 쿨")]
-    [SerializeField] GameObject hypnosisUI;
-    void Start()
+    Transform playerTransform;
+    CharacterController controller;
+
+    private Vector3 velocity;
+    private int spawnIndex;
+    private Action<int> dieAction;
+
+    private void Start()
     {
-        DoSkill();
+        playerTransform = GameManager.Instance.player;
+        controller = GetComponent<CharacterController>();
+
+        StartCoroutine(ActCor());
+    }
+
+    public void Init(int index, Action<int> dieAction)
+    {
+        spawnIndex = index;
+        this.dieAction += dieAction;
     }
 
     /// <summary>
-    /// 스킬 사용 신호 -> 스킬 선택
+    /// 행동 반복 코루틴
     /// </summary>
-    void DoSkill()
+    IEnumerator ActCor()
     {
-        StartCoroutine(ChoiceSkill());
+        while (true)
+        {
+            Move();
+            Rotate();
+            yield return null;
+        }
     }
 
-    /// <summary>
-    /// 스킬 선택
-    /// </summary>
-    IEnumerator ChoiceSkill()
+    void Move()
     {
-        yield return new WaitForSeconds(coolTime);
-        Hypnosis();
-        //int idx = Random.Range(0, 4);
-        //switch (idx)
-        //{
-        //    case 0:
-        //        Hypnosis();
-        //        break;
-        //    case 1:
+        Vector3 dir = playerTransform.position - transform.position;
+        dir.y = 0f;
+        dir.Normalize();
 
-        //        break;
-        //    case 2:
-        //        break;
-        //    case 3:
-        //        break;
-        //}
+        // 수평 이동
+        Vector3 move = dir * moveSpeed;
+
+        // 중력 적용
+        if (controller.isGrounded)
+        {
+            if (velocity.y < 0)
+                velocity.y = -2f; // 바닥에 붙이기
+        }
+        else
+        {
+            velocity.y += gravity * Time.deltaTime;
+        }
+
+        Vector3 finalMove = move + velocity;
+
+        controller.Move(finalMove * Time.deltaTime);
     }
 
-    void Hypnosis()
+    void Rotate()
     {
-        Instantiate(hypnosisUI).GetComponent<IEndSignal>().AddEndSignalListener(DoSkill);
+        Vector3 dir = playerTransform.position - transform.position;
+        dir.y = 0f;
+
+        if (dir.sqrMagnitude < 0.001f)
+            return;
+
+        Quaternion targetRot = Quaternion.LookRotation(dir);
+        transform.rotation = targetRot;
+    }
+
+    public void Die()
+    {
+        dieAction?.Invoke(spawnIndex);
+
+        transform.DOScale(Vector3.zero, 0.3f)
+            .OnComplete(() => Destroy(gameObject));
     }
 }

@@ -20,6 +20,11 @@ public class Player : MonoBehaviour
 
     private bool isGrounded;
 
+    private void Awake()
+    {
+        GameManager.Instance.player = transform;
+    }
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();

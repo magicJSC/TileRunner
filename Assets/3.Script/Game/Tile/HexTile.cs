@@ -21,6 +21,7 @@ public class HexTile : MonoBehaviour
     public virtual void OnStepped()
     {
         Disappear();
+        GameManager.Instance.Score++;
     }
 
     public virtual void Disappear()

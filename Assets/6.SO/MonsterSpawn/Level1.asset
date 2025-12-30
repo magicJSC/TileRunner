@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30fa9cf89f5b6684c8a63560383ff556, type: 3}
-  m_Name: Level2
+  m_Script: {fileID: 11500000, guid: ca80ca0e1d7047243a1603d3a88b1d56, type: 3}
+  m_Name: Level1
   m_EditorClassIdentifier: 
-  collapseDelay: 0.8
-  respawnDelay: 4
-  dangerInterval: 6
-  dangerCount: 1
-  nextLevelScore: 500
+  spawnInterval: 3
+  spawnList:
+  - {fileID: 7441045628847793690, guid: 7fcad610e7965964d8dce162599f6357, type: 3}
+  - {fileID: 7441045628847793690, guid: 7fcad610e7965964d8dce162599f6357, type: 3}

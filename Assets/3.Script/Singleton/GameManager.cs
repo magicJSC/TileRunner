@@ -42,4 +42,6 @@ public class GameManager : Singleton<GameManager>
     public bool isGameOver = false;
 
     public Action startGameAction;
+
+    public Transform player;
 }
