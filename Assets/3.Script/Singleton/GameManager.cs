@@ -8,12 +8,7 @@ public class GameManager : Singleton<GameManager>
         
         set
         { 
-            int getValue = value - score;
             score = value;
-
-            if(isIncreaseDoubleScore)
-                score += getValue;
-
             scoreAction?.Invoke(score);
         } 
     }
@@ -48,9 +43,5 @@ public class GameManager : Singleton<GameManager>
 
     public Action startGameAction;
 
-
-    // Double Score ฐüทร
-    public bool isIncreaseDoubleScore = false;
-
-    public Action doubleScoreAction;
+    public Transform player;
 }

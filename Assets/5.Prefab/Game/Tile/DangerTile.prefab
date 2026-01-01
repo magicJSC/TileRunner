@@ -31,8 +31,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 3395824958446046019}
   - {fileID: 6021855107845221857}
+  - {fileID: 3395824958446046019}
   m_Father: {fileID: 284750439841167576}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &4027923097907917123
@@ -215,7 +215,6 @@ MonoBehaviour:
   score: 10
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
   coolTime: 6
-  tileCount: 6
 --- !u!1 &2357131563994125186
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,7 +452,7 @@ GameObject:
   - component: {fileID: 2991685401434219349}
   - component: {fileID: 8976484872555923576}
   m_Layer: 0
-  m_Name: Point Light
+  m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

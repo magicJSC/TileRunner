@@ -10,5 +10,9 @@ public class DropChecker : MonoBehaviour
         {
             player.Fall();
         }
+        if (other.TryGetComponent<Monster>(out var monster))
+        {
+            monster.Die();
+        }
     }
 }

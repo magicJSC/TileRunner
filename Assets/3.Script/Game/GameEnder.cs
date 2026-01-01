@@ -16,7 +16,6 @@ public class GameEnder : MonoBehaviour
         if (GameManager.Instance.isGameOver) return;
 
         GameManager.Instance.isGameOver = true;
-        GameManager.Instance.isIncreaseDoubleScore = false;
         Instantiate(gameOverUI);
     }
 }

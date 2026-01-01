@@ -18,7 +18,7 @@ public class DangerManager : MonoBehaviour
 
     private void Start()
     {
-        var timeController = GetComponent<TimeController>();
+        var timeController = GetComponent<DifficultController>();
         timeController.levelAction += GetDangerSO;
         GetDangerSO(timeController.LevelIndex);
 
@@ -44,28 +44,28 @@ public class DangerManager : MonoBehaviour
         var coordList = TileManager.Instance.GetRandomActivateCoord(curDangerSO.removeCount);
         foreach (var coord in coordList)
         {
-            TileManager.Instance.SteppedTile(coord);
+            TileManager.Instance.DissapearTile(coord);
         }
 
         // 안개 생성
         if (curDangerSO.fog)
         {
-            Instantiate(fog);
+            Instantiate(fog,tileTransform.transform.position,Quaternion.identity);
         }
 
         // 토네이도 스폰
         if(curDangerSO.tornadoCount != 0)
         {
-            StartCoroutine(SpawnTornador(curDangerSO.tornadoCount, tileTransform));
+            StartCoroutine(SpawnTornador(curDangerSO.tornadoCount, tileTransform.transform.position + new Vector3(0, 0.8f,0)));
         }
     }
     
-    IEnumerator SpawnTornador(int count, Transform tileTransform)
+    IEnumerator SpawnTornador(int count, Vector3 tilePos)
     {
         for(int i = 0; i < count; i++)
         {
             yield return new WaitForSeconds(tornadorSpawnTerm);
-            Instantiate(tornador, tileTransform.position,Quaternion.identity);
+            Instantiate(tornador, tilePos, Quaternion.identity);
         }
     }
 }

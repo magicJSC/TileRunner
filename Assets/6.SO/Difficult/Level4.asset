@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e447393a4c1c3d48af8f315a22c8fe2, type: 3}
+  m_Script: {fileID: 11500000, guid: 30fa9cf89f5b6684c8a63560383ff556, type: 3}
   m_Name: Level4
   m_EditorClassIdentifier: 
   collapseDelay: 0.8
-  respawnDelay: 6.5
-  dangerInterval: 4.5
-  dangerCount: 2
+  respawnDelay: 6
+  bossGageAmount: 3
+  dangerCount: 1
   nextLevelTime: 40
