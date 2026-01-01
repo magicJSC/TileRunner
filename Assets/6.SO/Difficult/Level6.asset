@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level6
   m_EditorClassIdentifier: 
   collapseDelay: 0.8
-  respawnDelay: 4
-  dangerInterval: 6
+  respawnDelay: 6
+  bossGageAmount: 3
   dangerCount: 1
-  nextLevelScore: 3200
+  nextLevelTime: 70

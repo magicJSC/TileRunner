@@ -22,6 +22,8 @@ public class DifficultController : MonoBehaviour
 
     public static DifficultController Instance;
 
+    public float playTime;
+
     private void Awake()
     {
         Instance = this;
@@ -30,14 +32,24 @@ public class DifficultController : MonoBehaviour
     private void Start()
     {
         TileManager.Instance.difficultSO = difficultSOList[0];
-        GameManager.Instance.scoreAction += CheckScoreAndSetSO;
-        CheckScoreAndSetSO(0);
+        BossController.Instance.difficultSO = difficultSOList[0];
+        StartCoroutine(TimerCor());
+    }
+
+    IEnumerator TimerCor()
+    {
+        while (true)
+        {
+            yield return null;
+            playTime += Time.deltaTime;
+            CheckTimeAndSetSO();
+        }
     }
 
     /// <summary>
     /// 특정 시간이 되면 난이도 레벨 변경
     /// </summary>
-    private void CheckScoreAndSetSO(int score)
+    private void CheckTimeAndSetSO()
     {
         // 다음 단계가 없으면 정지
         if (difficultSOList.Count == LevelIndex - 1)
@@ -46,10 +58,11 @@ public class DifficultController : MonoBehaviour
         }
 
         // 시간되면 난이도 상승
-        if (difficultSOList[LevelIndex + 1].nextLevelScore <= score)
+        if (difficultSOList[LevelIndex + 1].nextLevelTime <= playTime)
         {
             LevelIndex++;
             TileManager.Instance.difficultSO = difficultSOList[LevelIndex];
+            BossController.Instance.difficultSO = difficultSOList[LevelIndex];
         }
     }
 }

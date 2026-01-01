@@ -187,23 +187,19 @@ public class TileManager : MonoBehaviour
     // =========================
     IEnumerator RandomTileChangeDanger()
     {
-        while (true)
+        yield return null;
+        List<Vector2Int> keys = new List<Vector2Int>(activeTiles.Keys);
+
+        for (int i = 0; i < difficultSO.dangerCount && keys.Count > 0; i++)
         {
-            yield return new WaitForSeconds(difficultSO.dangerInterval);
+            int idx = UnityEngine.Random.Range(0, keys.Count);
+            Vector2Int coord = keys[idx];
 
-            List<Vector2Int> keys = new List<Vector2Int>(activeTiles.Keys);
+            RemoveTile(coord);
+            keys.RemoveAt(idx);
 
-            for (int i = 0; i < difficultSO.dangerCount && keys.Count > 0; i++)
-            {
-                int idx = UnityEngine.Random.Range(0, keys.Count);
-                Vector2Int coord = keys[idx];
-
-                RemoveTile(coord);
-                keys.RemoveAt(idx);
-
-                // 랜덤으로 특별 타일 생성
-                SpawnTile(coord, dangerTile);
-            }
+            // 랜덤으로 특별 타일 생성
+            SpawnTile(coord, dangerTile);
         }
     }
 

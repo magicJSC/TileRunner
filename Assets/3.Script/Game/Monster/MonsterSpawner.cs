@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    [SerializeField] int spawnCount = 3;
     [SerializeField] float minDistance;
     [SerializeField] float maxDistance;
 
@@ -57,9 +56,6 @@ public class MonsterSpawner : MonoBehaviour
             yield return new WaitForSeconds(curMonsterSpawnSO.spawnInterval);
 
             if (availableIndexList.Count == 0)
-                continue;
-
-            if (spawnCount <= 0)
                 continue;
 
             SpawnMonster();
