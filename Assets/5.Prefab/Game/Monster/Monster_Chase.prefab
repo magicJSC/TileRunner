@@ -732,7 +732,7 @@ GameObject:
   - component: {fileID: 6488051562521810013}
   - component: {fileID: 5601747884099900164}
   m_Layer: 7
-  m_Name: Monster
+  m_Name: Monster_Chase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -753,6 +753,7 @@ Transform:
   m_Children:
   - {fileID: 706532921691411370}
   - {fileID: 6412308478553124259}
+  - {fileID: 3443305110839861222}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3627421718860792435
@@ -767,7 +768,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 003f6a96243b0c54cadcbc1abcc0eb11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  declineAmount: 25
   moveSpeed: 3
+  gravity: -9.81
+  checkPos: {fileID: 0}
 --- !u!114 &7617497841952514354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -832,6 +836,37 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.79, z: 0}
+--- !u!1 &7900447561724672753
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3443305110839861222}
+  m_Layer: 7
+  m_Name: CheckPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3443305110839861222
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7900447561724672753}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.682, z: 0.749}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2428108825884109155}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8316680987101716335
 GameObject:
   m_ObjectHideFlags: 0

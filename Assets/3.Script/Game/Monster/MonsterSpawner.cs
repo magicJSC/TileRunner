@@ -76,7 +76,7 @@ public class MonsterSpawner : MonoBehaviour
         GameObject monsterGO = Instantiate(prefab, GetSpawnPosition(), Quaternion.identity);
 
         Monster monster = monsterGO.GetComponent<Monster>();
-        monster.Init(spawnIndex, ReturnSpawnIndex);
+        monster.Init(spawnIndex, DifficultController.Instance.LevelIndex, ReturnSpawnIndex);
     }
 
     Vector3 GetSpawnPosition()
@@ -85,8 +85,11 @@ public class MonsterSpawner : MonoBehaviour
     }
 
     // 몬스터 사망 시 호출
-    public void ReturnSpawnIndex(int index)
+    public void ReturnSpawnIndex(int index, int level)
     {
+        if (DifficultController.Instance.LevelIndex != level)
+            return;
+
         if (!availableIndexList.Contains(index))
             availableIndexList.Add(index);
     }

@@ -24,6 +24,16 @@ public class HexTile : MonoBehaviour
         GameManager.Instance.Score++;
     }
 
+    public void OnSlamStepped()
+    {
+        OnStepped();
+        var coordList = TileManager.Instance.GetNeighborCoords(axialCoord);
+        foreach (var coord in coordList)
+        {
+            TileManager.Instance.SteppedTile(coord);
+        }
+    }
+
     public virtual void Disappear()
     {
         if (isDisappear)

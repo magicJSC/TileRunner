@@ -5391,6 +5391,9 @@ MonoBehaviour:
   moveSpeed: 5
   jumpHeight: 3
   gravity: -12
+  slamSpeed: 25
+  slamDelay: 0.2
+  jumpCooldown: 0.2
 --- !u!95 &919132147996217197
 Animator:
   serializedVersion: 7
@@ -5489,7 +5492,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f01e49049d2a6c54c9c8e06a709572a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missle: {fileID: 0}
   bossMaxGage: 100
   difficultSO: {fileID: 0}
 --- !u!95 &919132148906380431

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5411590221798243745}
   - component: {fileID: 4430732211564380242}
   - component: {fileID: 5491885269626657951}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NormalTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axialCoord: {x: 0, y: 0}
-  score: 1
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
 --- !u!64 &5491885269626657951
 MeshCollider:
@@ -137,7 +136,7 @@ GameObject:
   - component: {fileID: 5669798705753628491}
   - component: {fileID: 556878875596553380}
   - component: {fileID: 4440045823250855577}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
