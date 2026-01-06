@@ -185,9 +185,8 @@ public class TileManager : MonoBehaviour
     // =========================
     // 시간마다 랜덤 타일 위험타일로 변경
     // =========================
-    IEnumerator RandomTileChangeDanger()
+    public void RandomTileChangeDanger()
     {
-        yield return null;
         List<Vector2Int> keys = new List<Vector2Int>(activeTiles.Keys);
 
         for (int i = 0; i < difficultSO.dangerCount && keys.Count > 0; i++)
@@ -309,24 +308,16 @@ public class TileManager : MonoBehaviour
         Vector3 targetPos = target.position;
 
         // 타일이 존재할 수 있는 좌표 범위 (초기 맵 기준)
-        for (int q = -radius; q <= radius; q++)
+       foreach(var coord in activeTiles.Keys)
         {
-            int r1 = Mathf.Max(-radius, -q - radius);
-            int r2 = Mathf.Min(radius, -q + radius);
+            Vector3 worldPos =
+                AxialToWorld(coord) + new Vector3(startPlayerPos.x, 0, startPlayerPos.z);
 
-            for (int r = r1; r <= r2; r++)
+            float dist = Vector3.Distance(targetPos, worldPos);
+
+            if (dist >= minDistance && dist < maxDistance)
             {
-                Vector2Int coord = new Vector2Int(q, r);
-
-                Vector3 worldPos =
-                    AxialToWorld(coord) + new Vector3(startPlayerPos.x, 0, startPlayerPos.z);
-
-                float dist = Vector3.Distance(targetPos, worldPos);
-
-                if (dist >= minDistance && dist < maxDistance)
-                {
-                    candidates.Add(worldPos);
-                }
+                candidates.Add(worldPos);
             }
         }
 

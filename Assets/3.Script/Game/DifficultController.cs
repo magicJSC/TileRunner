@@ -15,7 +15,7 @@ public class DifficultController : MonoBehaviour
         set
         {
             levelIndex = value;
-            levelAction.Invoke(levelIndex);
+            levelAction?.Invoke(levelIndex);
         }
     }
     public Action<int> levelAction;
@@ -33,6 +33,16 @@ public class DifficultController : MonoBehaviour
     {
         TileManager.Instance.difficultSO = difficultSOList[0];
         BossController.Instance.difficultSO = difficultSOList[0];
+        GameManager.Instance.startGameAction += DoTimeCor;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.startGameAction -= DoTimeCor;
+    }
+
+    void DoTimeCor()
+    {
         StartCoroutine(TimerCor());
     }
 

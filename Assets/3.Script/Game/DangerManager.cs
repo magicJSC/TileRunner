@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DangerManager : MonoBehaviour
 {
+    [SerializeField] int removeCount;   
+
     [Header("DangerSO")]
     [SerializeField] List<DangerSO> dangerList;
 
@@ -19,8 +21,8 @@ public class DangerManager : MonoBehaviour
     private void Start()
     {
         var timeController = GetComponent<DifficultController>();
-        timeController.levelAction += GetDangerSO;
-        GetDangerSO(timeController.LevelIndex);
+        //timeController.levelAction += GetDangerSO;
+        //GetDangerSO(timeController.LevelIndex);
 
         Instance = this;
     }
@@ -41,23 +43,23 @@ public class DangerManager : MonoBehaviour
     public void Execute(Transform tileTransform)
     {
         // 타일 삭제
-        var coordList = TileManager.Instance.GetRandomActivateCoord(curDangerSO.removeCount);
+        var coordList = TileManager.Instance.GetRandomActivateCoord(removeCount);
         foreach (var coord in coordList)
         {
             TileManager.Instance.DissapearTile(coord);
         }
 
-        // 안개 생성
-        if (curDangerSO.fog)
-        {
-            Instantiate(fog,tileTransform.transform.position,Quaternion.identity);
-        }
+        //// 안개 생성
+        //if (curDangerSO.fog)
+        //{
+        //    Instantiate(fog,tileTransform.transform.position,Quaternion.identity);
+        //}
 
-        // 토네이도 스폰
-        if(curDangerSO.tornadoCount != 0)
-        {
-            StartCoroutine(SpawnTornador(curDangerSO.tornadoCount, tileTransform.transform.position + new Vector3(0, 0.8f,0)));
-        }
+        //// 토네이도 스폰
+        //if(curDangerSO.tornadoCount != 0)
+        //{
+        //    StartCoroutine(SpawnTornador(curDangerSO.tornadoCount, tileTransform.transform.position + new Vector3(0, 0.8f,0)));
+        //}
     }
     
     IEnumerator SpawnTornador(int count, Vector3 tilePos)

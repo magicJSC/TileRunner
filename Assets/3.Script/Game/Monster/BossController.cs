@@ -69,9 +69,13 @@ public class BossController : MonoBehaviour
         }
     }
 
-    // 외부(예: Monster 스크립트)에서 게이지를 줄일 때 호출할 함수
     public void DecreaseGage(float amount)
     {
         BossGage -= amount;
+    }
+
+    public void IncreaseGage(float amount)
+    {
+        BossGage += amount;
     }
 }
