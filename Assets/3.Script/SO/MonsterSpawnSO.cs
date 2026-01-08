@@ -5,6 +5,6 @@ using UnityEngine;
 public class MonsterSpawnSO : ScriptableObject
 {
     public float spawnInterval = 2.0f;
-    public List<GameObject> spawnList;
+    public List<MonsterSO> spawnList;
 }
 

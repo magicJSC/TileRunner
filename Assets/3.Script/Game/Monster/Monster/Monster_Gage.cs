@@ -14,11 +14,15 @@ public class Monster_Gage : Monster
 
     Coroutine gageCor;
 
+    private Animator anim;
+
     private void Start()
     {
-        gageCor = StartCoroutine(FillGageCor());
         controller = GetComponent<CharacterController>();
 
+        anim = GetComponent<Animator>();
+
+        gageCor = StartCoroutine(FillGageCor());
         StartCoroutine(ActCor());
     }
 
@@ -27,9 +31,13 @@ public class Monster_Gage : Monster
         while (true)
         {
             yield return new WaitForSeconds(fillCoolTime);
-
-            BossController.Instance.IncreaseGage(fillAmount); 
+            anim.Play("Skill", -1, 0f);
         }
+    }
+
+    public void FillGage()
+    {
+        BossController.Instance.IncreaseGage(fillAmount);
     }
 
 

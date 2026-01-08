@@ -71,9 +71,11 @@ public class MonsterSpawner : MonoBehaviour
         // 인덱스 제거 (중복 방지)
         availableIndexList.RemoveAt(listIdx);
 
-        GameObject prefab = curMonsterSpawnSO.spawnList[spawnIndex];
+        MonsterSO monsterSO = curMonsterSpawnSO.spawnList[spawnIndex];
 
-        GameObject monsterGO = Instantiate(prefab, GetSpawnPosition(), Quaternion.identity);
+        GameObject prefab = monsterSO.monsterPrefab;
+
+        GameObject monsterGO = Instantiate(prefab, GetSpawnPosition() + monsterSO.spawnPos, Quaternion.identity);
 
         Monster monster = monsterGO.GetComponent<Monster>();
         monster.Init(spawnIndex, DifficultController.Instance.LevelIndex, ReturnSpawnIndex);

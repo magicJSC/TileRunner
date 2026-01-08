@@ -46,6 +46,8 @@ public class Player : MonoBehaviour
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         GameManager.Instance.startGameAction += StartGame;
+
+
     }
 
     private void OnDisable()
@@ -105,8 +107,7 @@ public class Player : MonoBehaviour
         {
             yield return null;
 
-            if (!isSlaming)
-                velocity.y += gravity * Time.deltaTime;
+            velocity.y += gravity * Time.deltaTime;
 
             controller.Move(velocity * Time.deltaTime);
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Monster : MonoBehaviour
 {
     [SerializeField] protected float declineAmount = 15;
+    [SerializeField] protected Vector3 spawnPos;
     protected Action<int,int> dieAction;
 
     protected int spawnIndex;

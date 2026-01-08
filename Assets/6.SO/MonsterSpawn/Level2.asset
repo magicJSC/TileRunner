@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnInterval: 2.6
   spawnList:
-  - {fileID: 3100443681907386048, guid: 49a34a8200f2d67409f46af927f963ac, type: 3}
-  - {fileID: 3100443681907386048, guid: 49a34a8200f2d67409f46af927f963ac, type: 3}
-  - {fileID: 7441045628847793690, guid: c97fd80814018fb4cb48214e73dccc31, type: 3}
+  - {fileID: 11400000, guid: 4ef270f241d1f4542ab62ebf0cda31b1, type: 2}
+  - {fileID: 11400000, guid: 4ef270f241d1f4542ab62ebf0cda31b1, type: 2}
+  - {fileID: 11400000, guid: 04e9e8ef194227e4b8750295aedb4395, type: 2}
