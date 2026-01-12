@@ -12,6 +12,9 @@ public class BossController : MonoBehaviour
     public float bossMaxGage = 100f;
     private float bossGage;
 
+
+    bool isFilled;
+
     // 프로퍼티 수정: 내부 로직에서 Instance를 참조하지 않도록 변경
     public float BossGage
     {
@@ -19,18 +22,32 @@ public class BossController : MonoBehaviour
         set
         {
             // 최대치 도달 시 더 이상 증가하지 않음
-            if (bossGage >= bossMaxGage && value > bossGage)
+            if (isFilled)
                 return;
 
             bossGage = Mathf.Clamp(value, 0, bossMaxGage);
+
+            if (bossGage >= bossMaxGage)
+            {
+                isFilled = true;
+                StartCoroutine(SkillCor());
+            }
+
 
             // UI 업데이트 등을 위한 액션 실행
             bossGageAction?.Invoke(bossGage / bossMaxGage);
         }
     }
 
+    [HideInInspector]
     public DifficultSO difficultSO;
     public Action<float> bossGageAction;
+
+
+    [Header("Skill")]
+    [SerializeField] GameObject skillPrefab;
+    [SerializeField] Transform skillPos;
+    Animator anim;
 
     void Awake()
     {
@@ -43,7 +60,8 @@ public class BossController : MonoBehaviour
     {
         // 내부 변수에 직접 접근하거나 프로퍼티 사용
         BossGage = 0;
-
+        anim = GetComponent<Animator>();
+        
         if (GameManager.Instance != null)
             GameManager.Instance.startGameAction += StartBossGageCor;
     }
@@ -63,7 +81,7 @@ public class BossController : MonoBehaviour
     {
         while (true)
         {
-            // 매 프레임 게이지 상승 (내부 프로퍼티 사용)
+            // 매 프레임 게이지 상승
             BossGage += Time.deltaTime * difficultSO.bossGageAmount;
             yield return null;
         }
@@ -77,5 +95,19 @@ public class BossController : MonoBehaviour
     public void IncreaseGage(float amount)
     {
         BossGage += amount;
+    }
+
+    IEnumerator SkillCor()
+    {
+        while (true)
+        {
+            anim.Play("Skill", -1, 0);
+            yield return new WaitForSeconds(3);
+        }
+    }
+
+    public void Skill()
+    {
+        Instantiate(skillPrefab, skillPos.position, Quaternion.identity);
     }
 }
