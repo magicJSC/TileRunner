@@ -6,15 +6,19 @@ public class UI_GameOver : MonoBehaviour
 {
     private GameObject newScorePanel;
     private GameObject endPanel;
+    private GameObject beforeBestTitle;
 
     private TextMeshProUGUI bestScoreText;
+    private TextMeshProUGUI beforeBestScoreText;
 
     private void Start()
     {
         newScorePanel = Util.FindChild(gameObject, "NewScorePanel");
         endPanel = Util.FindChild(gameObject, "EndPanel");
+        beforeBestTitle = Util.FindChild(gameObject, "BestScoreTitle");
 
         bestScoreText = Util.FindChild<TextMeshProUGUI>(gameObject, "Score");
+        beforeBestScoreText = Util.FindChild<TextMeshProUGUI>(gameObject, "BeforeScore");
 
         if (CheckBestScore())
         {
@@ -23,10 +27,12 @@ public class UI_GameOver : MonoBehaviour
 
             bestScoreText.text = $"{GameManager.Instance.Score}";
             GameManager.Instance.bestScore = GameManager.Instance.Score;
+            beforeBestTitle.SetActive(false);
         }
         else
         {
             CloseBestScorePanel();
+            beforeBestScoreText.text = $"{GameManager.Instance.bestScore}";
         }
     }
 
