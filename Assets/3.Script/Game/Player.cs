@@ -1,16 +1,12 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    public float turnSpeed = 150;
+    public float turnSpeed = 150f;
     public float moveSpeed = 5f;
     public float jumpHeight = 10f;
-
-    private bool leftPressed;
-    private bool rightPressed;
 
     private Vector3 velocity;
 
@@ -19,26 +15,32 @@ public class Player : MonoBehaviour
     private Animator anim;
 
     private bool isGrounded;
-    private bool isJump;
 
-    [Header("Slam Skill")]
-    [SerializeField] private float slamSpeed = 25f;
-    [SerializeField] private float slamDelay = 0.2f;
-    private float jumpTimestamp;
-    public bool isSlaming { get; private set; }
-    private bool canSlam;
+    [Header("Input")]
+    [SerializeField] private InputActionReference moveAction; // Vector2 (조이스틱)
 
-    [Header("Jump Cooldown")]
-    [SerializeField] private float jumpCooldown = 0.5f; // 착지 후 점프 불가 시간
-    private float lastGroundedTime; // 마지막으로 땅에 닿은 시점
+    private Vector2 moveInput;
+
+    [Header("Jump")]
+    [SerializeField] private float jumpCooldown = 0.5f;
+    [SerializeField] Transform jumpCheckPos;
 
     private void Awake()
     {
         GameManager.Instance.player = transform;
-        canSlam = false;
         isGrounded = true;
-        isSlaming = false;
-        lastGroundedTime = -jumpCooldown; // 시작하자마자 바로 점프 가능하게 초기화
+    }
+
+    private void OnEnable()
+    {
+        moveAction.action.Enable();
+    }
+
+    private void OnDisable()
+    {
+        moveAction.action.Disable();
+        if (GameManager.Instance != null)
+            GameManager.Instance.startGameAction -= StartGame;
     }
 
     private void Start()
@@ -46,14 +48,6 @@ public class Player : MonoBehaviour
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         GameManager.Instance.startGameAction += StartGame;
-
-
-    }
-
-    private void OnDisable()
-    {
-        if (GameManager.Instance != null)
-            GameManager.Instance.startGameAction -= StartGame;
     }
 
     private void StartGame()
@@ -72,32 +66,16 @@ public class Player : MonoBehaviour
             if (GameManager.Instance.isGameOver)
                 yield break;
 
-            leftPressed = false;
-            rightPressed = false;
+            moveInput = moveAction.action.ReadValue<Vector2>();
 
-            if (Touchscreen.current != null)
-                HandleTouch();
-            else
-                HandleMouse();
-
-            Forward();
-
-            if (leftPressed && rightPressed)
+            // 조이스틱 입력이 있을 때만 이동
+            if (moveInput.sqrMagnitude > 0.01f)
             {
-                // 수정된 부분: 땅에 있고 + 점프 중이 아니며 + 착지 후 쿨타임이 지났을 때만 점프
-                if (isGrounded && !isJump && (Time.time - lastGroundedTime > jumpCooldown))
-                {
-                    Jump();
-                }
-                else if (canSlam && !isSlaming && (Time.time - jumpTimestamp > slamDelay))
-                {
-                    StartSlam();
-                }
-                continue;
+                RotateByJoystick(moveInput);
             }
 
-            if (leftPressed) TurnLeft();
-            else if (rightPressed) TurnRight();
+            MoveForward();
+            CheckCanJump();
         }
     }
 
@@ -108,21 +86,16 @@ public class Player : MonoBehaviour
             yield return null;
 
             velocity.y += gravity * Time.deltaTime;
-
             controller.Move(velocity * Time.deltaTime);
 
             bool wasGrounded = isGrounded;
             isGrounded = controller.isGrounded;
 
-            // 공중에 있다가 방금 막 땅에 닿았을 때 (착지 순간)
             if (!wasGrounded && isGrounded && velocity.y < 0)
             {
-                lastGroundedTime = Time.time; // 착지 시점 기록
                 velocity.y = -2f;
-                isJump = false;
                 anim.SetBool("keepJump", false);
             }
-            // 이미 땅에 있는 상태 유지 시
             else if (isGrounded && velocity.y < 0)
             {
                 velocity.y = -2f;
@@ -130,33 +103,40 @@ public class Player : MonoBehaviour
         }
     }
 
-    void StartSlam()
+    void RotateByJoystick(Vector2 input)
     {
-        canSlam = false;
-        isSlaming = true;
-        velocity.y = -slamSpeed;
+        float targetAngle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.RotateTowards(
+            transform.rotation,
+            Quaternion.Euler(0, targetAngle, 0),
+            turnSpeed * Time.deltaTime
+        );
     }
 
-    void HandleTouch()
+    void MoveForward()
     {
-        foreach (var t in Touchscreen.current.touches)
+        controller.Move(transform.forward * moveSpeed * Time.deltaTime);
+    }
+
+    void CheckCanJump()
+    {
+        if (isGrounded)
         {
-            if (!t.press.isPressed) continue;
-            Vector2 pos = t.position.ReadValue();
-            if (pos.x < Screen.width * 0.5f) leftPressed = true;
-            else rightPressed = true;
+            bool canJump = true;
+            var cols = Physics.OverlapSphere(jumpCheckPos.position, 0.3f);
+            foreach(var col in cols)
+            {
+                if (col.GetComponent<HexTile>())
+                {
+                    canJump = false;
+                    break;
+                }
+            }
+
+            if (canJump)
+              Jump();
         }
     }
-
-    void HandleMouse()
-    {
-        if (Mouse.current.leftButton.isPressed) leftPressed = true;
-        if (Mouse.current.rightButton.isPressed) rightPressed = true;
-    }
-
-    void TurnLeft() => transform.Rotate(Vector3.up, -turnSpeed * Time.deltaTime);
-    void TurnRight() => transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime);
-    void Forward() => controller.Move(transform.forward * moveSpeed * Time.deltaTime);
 
     void Jump()
     {
@@ -164,12 +144,21 @@ public class Player : MonoBehaviour
         velocity.y = jumpVelocity;
 
         isGrounded = false;
-        canSlam = true;
-        isJump = true;
-        jumpTimestamp = Time.time;
 
         anim.SetTrigger("jump");
         anim.SetBool("keepJump", true);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        HexTile tile = other.GetComponent<HexTile>();
+        if (tile == null) return;
+
+        tile.OnStepped();
+       if(velocity.y < 0)
+        {
+            anim.SetBool("keepJump", false);
+        }
     }
 
     public void Die()
@@ -182,29 +171,5 @@ public class Player : MonoBehaviour
     {
         GameEnder.Instance.EndGame();
         anim.SetTrigger("fall");
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        HexTile tile = other.GetComponent<HexTile>();
-        if (tile != null)
-        {
-            if (isJump && velocity.y < 0)
-            {
-                isJump = false;
-                canSlam = false;
-                anim.SetBool("keepJump", false);
-            }
-
-            if (isSlaming)
-            {
-                tile.OnSlamStepped();
-                isSlaming = false;
-            }
-            else
-            {
-                tile.OnStepped();
-            }
-        }
     }
 }
