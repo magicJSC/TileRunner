@@ -31,6 +31,7 @@ public class UI_GameOver : MonoBehaviour
         }
         else
         {
+            beforeBestTitle.SetActive(true);
             CloseBestScorePanel();
             beforeBestScoreText.text = $"{GameManager.Instance.bestScore}";
         }
