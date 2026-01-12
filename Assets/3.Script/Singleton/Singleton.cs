@@ -38,6 +38,12 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
         // 첫 번째 생성된 싱글톤만 살아남음
         _instance = this as T;
+        Init();
         DontDestroyOnLoad(gameObject);
+    }
+
+    protected virtual void Init()
+    {
+
     }
 }
