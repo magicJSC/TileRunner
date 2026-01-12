@@ -71,12 +71,14 @@ public class MonsterSpawner : MonoBehaviour
         // 인덱스 제거 (중복 방지)
         availableIndexList.RemoveAt(listIdx);
 
-        GameObject prefab = curMonsterSpawnSO.spawnList[spawnIndex];
+        MonsterSO monsterSO = curMonsterSpawnSO.spawnList[spawnIndex];
 
-        GameObject monsterGO = Instantiate(prefab, GetSpawnPosition(), Quaternion.identity);
+        GameObject prefab = monsterSO.monsterPrefab;
+
+        GameObject monsterGO = Instantiate(prefab, GetSpawnPosition() + monsterSO.spawnPos, Quaternion.identity);
 
         Monster monster = monsterGO.GetComponent<Monster>();
-        monster.Init(spawnIndex, ReturnSpawnIndex);
+        monster.Init(spawnIndex, DifficultController.Instance.LevelIndex, ReturnSpawnIndex);
     }
 
     Vector3 GetSpawnPosition()
@@ -85,8 +87,11 @@ public class MonsterSpawner : MonoBehaviour
     }
 
     // 몬스터 사망 시 호출
-    public void ReturnSpawnIndex(int index)
+    public void ReturnSpawnIndex(int index, int level)
     {
+        if (DifficultController.Instance.LevelIndex != level)
+            return;
+
         if (!availableIndexList.Contains(index))
             availableIndexList.Add(index);
     }
