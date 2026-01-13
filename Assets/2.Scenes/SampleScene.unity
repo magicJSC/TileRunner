@@ -5378,34 +5378,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1122823829}
     m_Modifications:
-    - target: {fileID: 3084267440376335446, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3084267440376335446, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: f353d42d1db27ff42b78b28efd86b316, type: 3}
-    - target: {fileID: 4248771175359837488, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 4248771175359837488, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 4248771175359837488, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -367
-      objectReference: {fileID: 0}
     - target: {fileID: 5336959576037008285, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
       propertyPath: m_Name
       value: GamePage
       objectReference: {fileID: 0}
-    - target: {fileID: 6066609309237909189, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: a6c56474666ce0647bdb766e9b4764b3, type: 3}
     - target: {fileID: 6268804837044591924, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5485,18 +5461,6 @@ PrefabInstance:
     - target: {fileID: 6268804837044591924, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7958221602817856120, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 7958221602817856120, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 7958221602817856120, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -367
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

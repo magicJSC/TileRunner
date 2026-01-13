@@ -26,18 +26,22 @@ public class UI_MenuBar : MonoBehaviour
 
     private void Start()
     {
+        shopBtn = Util.FindChild<Image>(gameObject, "ShopBtn");
+        gameBtn = Util.FindChild<Image>(gameObject, "GameBtn");
+        missionBtn = Util.FindChild<Image>(gameObject, "MissionBtn");
+
         pageParent = Util.FindChild<Transform>(gameObject, "PageParent");
         curPage = pageParent.GetChild(0).gameObject;
+
+        shopBtn.sprite = unClickSprite;
+        gameBtn.sprite = clickSprite;
+        missionBtn.sprite = unClickSprite;
 
         AddBtnAction();
     }
 
     void AddBtnAction()
     {
-        shopBtn = Util.FindChild<Image>(gameObject, "ShopBtn");
-        gameBtn = Util.FindChild<Image>(gameObject, "GameBtn");
-        missionBtn = Util.FindChild<Image>(gameObject, "MissionBtn");
-
         UI_EventHandler evt = shopBtn.GetComponent<UI_EventHandler>();
         evt.clickAction = ShopPage;
 
