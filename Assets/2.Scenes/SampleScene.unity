@@ -2243,8 +2243,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb45ec990a6dadd4297dd62ce5ff949d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clickSprite: {fileID: 2696406136083413281, guid: f3e6a4a22e2056f4d88695188bc39a6e, type: 3}
-  unClickSprite: {fileID: 7919194353434859991, guid: b35fcaa46fa9f3e49b71c103f69df698, type: 3}
+  clickSprite: {fileID: -8111322212487550922, guid: 4edd415ab2cd6784ea5e7905122a703d, type: 3}
+  unClickSprite: {fileID: 2696406136083413281, guid: f3e6a4a22e2056f4d88695188bc39a6e, type: 3}
   shopPage: {fileID: 8837022393476275354, guid: 29edeccb4d5496d4687f15df1b229ff4, type: 3}
   gamePage: {fileID: 5336959576037008285, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
   missionPage: {fileID: 8990870619214308124, guid: 3172d483688285347a32f40e62c7c998, type: 3}
