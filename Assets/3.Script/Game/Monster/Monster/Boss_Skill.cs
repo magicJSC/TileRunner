@@ -31,7 +31,7 @@ public class Boss_Skill : MonoBehaviour
             if (!isHited)
             {
                 isHited = true;
-                transform.DOScale(new Vector3(10, 10, 10), 4f).onComplete +=
+                transform.DOScale(new Vector3(15, 15, 15), 4f).onComplete +=
                     () => transform.DOScale(Vector3.zero,1).onComplete += 
                     () => Destroy(gameObject);
                 rigid.linearVelocity = Vector3.zero;
