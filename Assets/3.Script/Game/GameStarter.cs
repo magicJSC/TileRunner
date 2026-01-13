@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 public class GameStarter : MonoBehaviour
 {
     [SerializeField] GameObject scoreUI;
+    [SerializeField] GameObject startUI;
+    [SerializeField] private InputActionReference moveAction; // Vector2 (조이스틱)
+    private Vector2 moveInput;
     private void Start()
     {
         GameManager.Instance.Score = 0;
@@ -17,19 +20,13 @@ public class GameStarter : MonoBehaviour
         while (true)
         {
             yield return null;
-            if (Touchscreen.current != null)
+            moveInput = moveAction.action.ReadValue<Vector2>();
+
+            // 조이스틱 입력이 있을 때만 이동
+            if (moveInput.sqrMagnitude > 0.01f)
             {
-                if (Touchscreen.current.touches.Count != 0)
-                {
-                    StartGame();
-                }
-            }
-            else
-            {
-                if (Mouse.current.leftButton.isPressed)
-                    StartGame();
-                if (Mouse.current.rightButton.isPressed)
-                    StartGame();
+                StartGame();
+                yield break;
             }
         }
     }
@@ -38,6 +35,7 @@ public class GameStarter : MonoBehaviour
     {
         GameManager.Instance.startGameAction?.Invoke();
         Instantiate(scoreUI);
+        Destroy(startUI);
         Destroy(gameObject);
     }
 }
