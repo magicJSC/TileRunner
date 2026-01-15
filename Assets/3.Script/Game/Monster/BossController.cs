@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BossController : MonoBehaviour
@@ -12,8 +13,11 @@ public class BossController : MonoBehaviour
     public float bossMaxGage = 100f;
     private float bossGage;
 
+    [Header("Skill Settings")]
+    [SerializeField] float skillCoolTime = 5f;
+    [SerializeField] List<BossSO> bossSOList;
 
-    bool isFilled;
+    private int curSOIndex = 0;
 
     // 프로퍼티 수정: 내부 로직에서 Instance를 참조하지 않도록 변경
     public float BossGage
@@ -21,18 +25,9 @@ public class BossController : MonoBehaviour
         get => bossGage;
         set
         {
-            // 최대치 도달 시 더 이상 증가하지 않음
-            if (isFilled)
-                return;
-
             bossGage = Mathf.Clamp(value, 0, bossMaxGage);
 
-            if (bossGage >= bossMaxGage)
-            {
-                isFilled = true;
-                StartCoroutine(SkillCor());
-            }
-
+            SetSkillSO();
 
             // UI 업데이트 등을 위한 액션 실행
             bossGageAction?.Invoke(bossGage / bossMaxGage);
@@ -61,20 +56,25 @@ public class BossController : MonoBehaviour
         // 내부 변수에 직접 접근하거나 프로퍼티 사용
         BossGage = 0;
         anim = GetComponent<Animator>();
-        
+
         if (GameManager.Instance != null)
-            GameManager.Instance.startGameAction += StartBossGageCor;
+        {
+            GameManager.Instance.startGameAction += StartAct;
+        }
     }
 
     private void OnDisable()
     {
         if (GameManager.Instance != null)
-            GameManager.Instance.startGameAction -= StartBossGageCor;
+        {
+            GameManager.Instance.startGameAction -= StartAct;
+        }
     }
 
-    void StartBossGageCor()
+    void StartAct()
     {
         StartCoroutine(BossGageCor());
+        StartCoroutine(SkillCor());
     }
 
     IEnumerator BossGageCor()
@@ -87,6 +87,7 @@ public class BossController : MonoBehaviour
         }
     }
 
+
     public void DecreaseGage(float amount)
     {
         BossGage -= amount;
@@ -97,17 +98,31 @@ public class BossController : MonoBehaviour
         BossGage += amount;
     }
 
+    void SetSkillSO()
+    {
+      for(int i = 0; i < bossSOList.Count; i++)
+        {
+            if (BossGage >= bossSOList[i].bossGage)
+            {
+                curSOIndex = i;
+            }
+            else
+                break;
+        }
+    }
+
     IEnumerator SkillCor()
     {
         while (true)
         {
             anim.Play("Skill", -1, 0);
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(skillCoolTime);
         }
     }
 
     public void Skill()
     {
-        Instantiate(skillPrefab, skillPos.position, Quaternion.identity);
+        GameObject skillGO = Instantiate(skillPrefab, skillPos.position, Quaternion.identity);
+        skillGO.GetComponent<Boss_Skill>().skillScale = bossSOList[curSOIndex].skillScale;
     }
 }

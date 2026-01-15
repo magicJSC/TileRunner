@@ -62,7 +62,7 @@ public class DifficultController : MonoBehaviour
     private void CheckTimeAndSetSO()
     {
         // 다음 단계가 없으면 정지
-        if (difficultSOList.Count <= LevelIndex + 1)
+        if (difficultSOList.Count <= LevelIndex - 1)
         {
             return;
         }

@@ -22,7 +22,6 @@ public class Player : MonoBehaviour
     private Vector2 moveInput;
 
     [Header("Jump")]
-    [SerializeField] private float jumpCooldown = 0.5f;
     [SerializeField] Transform jumpCheckPos;
 
     private void Awake()
