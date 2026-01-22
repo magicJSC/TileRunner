@@ -4,8 +4,6 @@ using UnityEngine.InputSystem;
 
 public class GameStarter : MonoBehaviour
 {
-    [SerializeField] GameObject scoreUI;
-    [SerializeField] GameObject startUI;
     [SerializeField] private InputActionReference moveAction; // Vector2 (¡∂¿ÃΩ∫∆Ω)
     private Vector2 moveInput;
     private void Start()
@@ -34,8 +32,6 @@ public class GameStarter : MonoBehaviour
     private void StartGame()
     {
         GameManager.Instance.startGameAction?.Invoke();
-        Instantiate(scoreUI);
-        Destroy(startUI);
         Destroy(gameObject);
     }
 }

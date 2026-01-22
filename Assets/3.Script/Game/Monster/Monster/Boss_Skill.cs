@@ -21,7 +21,7 @@ public class Boss_Skill : MonoBehaviour
 
     void Move()
     {
-        Vector3 dir = (GameManager.Instance.player.position - transform.position).normalized;
+        Vector3 dir = (GameManager.Instance.Player.position - transform.position).normalized;
         rigid.linearVelocity = dir * moveSpeed;
     }
 

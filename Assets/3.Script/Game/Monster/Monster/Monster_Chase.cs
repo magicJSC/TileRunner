@@ -20,7 +20,7 @@ public class Monster_Chase : Monster
     private Vector3 velocity;
     private void Start()
     {
-        playerTransform = GameManager.Instance.player;
+        playerTransform = GameManager.Instance.Player;
         controller = GetComponent<CharacterController>();
 
         StartCoroutine(ActCor());

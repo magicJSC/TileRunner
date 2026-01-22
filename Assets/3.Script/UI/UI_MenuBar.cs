@@ -12,16 +12,16 @@ public class UI_MenuBar : MonoBehaviour
 
     private Image shopBtn;
     private Image gameBtn;
-    private Image missionBtn;
+    private Image rankBtn;
 
     private RectTransform shopBtnRect;
     private RectTransform gameBtnRect;
-    private RectTransform missionBtnRect;
+    private RectTransform rankBtnRect;
 
     [Header("Page")]
     [SerializeField] GameObject shopPage;
     [SerializeField] GameObject gamePage;
-    [SerializeField] GameObject missionPage;
+    [SerializeField] GameObject rankPage;
 
     Transform pageParent;
     int curIndex = 0;
@@ -42,22 +42,22 @@ public class UI_MenuBar : MonoBehaviour
 
         shopBtn = Util.FindChild<Image>(gameObject, "ShopBtn");
         gameBtn = Util.FindChild<Image>(gameObject, "GameBtn");
-        missionBtn = Util.FindChild<Image>(gameObject, "MissionBtn");
+        rankBtn = Util.FindChild<Image>(gameObject, "RankBtn");
 
         shopBtnRect = shopBtn.GetComponent<RectTransform>();
         gameBtnRect = gameBtn.GetComponent<RectTransform>();
-        missionBtnRect = missionBtn.GetComponent<RectTransform>();
+        rankBtnRect = rankBtn.GetComponent<RectTransform>();
 
         pageParent = Util.FindChild<Transform>(gameObject, "PageParent");
         curPage = pageParent.GetChild(0).gameObject;
 
         shopBtn.sprite = unClickSprite;
         gameBtn.sprite = clickSprite;
-        missionBtn.sprite = unClickSprite;
+        rankBtn.sprite = unClickSprite;
 
-        shopBtnRect.anchoredPosition = new Vector2(shopBtnRect.anchoredPosition.x, -870);
-        gameBtnRect.anchoredPosition = new Vector2(gameBtnRect.anchoredPosition.x, -850);
-        missionBtnRect.anchoredPosition = new Vector2(missionBtnRect.anchoredPosition.x, -870);
+        //shopBtnRect.anchoredPosition = new Vector2(shopBtnRect.anchoredPosition.x, -870);
+        //gameBtnRect.anchoredPosition = new Vector2(gameBtnRect.anchoredPosition.x, -850);
+        //rankBtnRect.anchoredPosition = new Vector2(rankBtnRect.anchoredPosition.x, -870);
 
         GameManager.Instance.startGameAction += StartGame;
     }
@@ -75,8 +75,8 @@ public class UI_MenuBar : MonoBehaviour
         evt = gameBtn.GetComponent<UI_EventHandler>();
         evt.clickAction = GamePage;
 
-        evt = missionBtn.GetComponent<UI_EventHandler>();
-        evt.clickAction = MissionPage;
+        evt = rankBtn.GetComponent<UI_EventHandler>();
+        evt.clickAction = RankPage;
     }
 
     /// <summary>
@@ -86,11 +86,11 @@ public class UI_MenuBar : MonoBehaviour
     {
         shopBtn.sprite = clickSprite;
         gameBtn.sprite = unClickSprite;
-        missionBtn.sprite = unClickSprite;
+        rankBtn.sprite = unClickSprite;
 
-        shopBtnRect.anchoredPosition = new Vector2(shopBtnRect.anchoredPosition.x, -850);
-        gameBtnRect.anchoredPosition = new Vector2(gameBtnRect.anchoredPosition.x, -870);
-        missionBtnRect.anchoredPosition = new Vector2(missionBtnRect.anchoredPosition.x, -870);
+        //shopBtnRect.anchoredPosition = new Vector2(shopBtnRect.anchoredPosition.x, -850);
+        //gameBtnRect.anchoredPosition = new Vector2(gameBtnRect.anchoredPosition.x, -870);
+        //rankBtnRect.anchoredPosition = new Vector2(rankBtnRect.anchoredPosition.x, -870);
 
         ChangePage(-1, shopPage);
     }
@@ -102,11 +102,11 @@ public class UI_MenuBar : MonoBehaviour
     {
         shopBtn.sprite = unClickSprite;
         gameBtn.sprite = clickSprite;
-        missionBtn.sprite = unClickSprite;
+        rankBtn.sprite = unClickSprite;
 
-        shopBtnRect.anchoredPosition = new Vector2(shopBtnRect.anchoredPosition.x, -870);
-        gameBtnRect.anchoredPosition = new Vector2(gameBtnRect.anchoredPosition.x, -850);
-        missionBtnRect.anchoredPosition = new Vector2(missionBtnRect.anchoredPosition.x, -870);
+        //shopBtnRect.anchoredPosition = new Vector2(shopBtnRect.anchoredPosition.x, -870);
+        //gameBtnRect.anchoredPosition = new Vector2(gameBtnRect.anchoredPosition.x, -850);
+        //rankBtnRect.anchoredPosition = new Vector2(rankBtnRect.anchoredPosition.x, -870);
 
         ChangePage(0, gamePage);
     }
@@ -114,17 +114,17 @@ public class UI_MenuBar : MonoBehaviour
     /// <summary>
     /// 미션 페이지 클릭 함수
     /// </summary>
-    void MissionPage()
+    void RankPage()
     {
         shopBtn.sprite = unClickSprite;
         gameBtn.sprite = unClickSprite;
-        missionBtn.sprite = clickSprite;
+        rankBtn.sprite = clickSprite;
 
-        shopBtnRect.anchoredPosition = new Vector2(shopBtnRect.anchoredPosition.x, -870);
-        gameBtnRect.anchoredPosition = new Vector2(gameBtnRect.anchoredPosition.x, -870);
-        missionBtnRect.anchoredPosition = new Vector2(missionBtnRect.anchoredPosition.x, -850);
+        //shopBtnRect.anchoredPosition = new Vector2(shopBtnRect.anchoredPosition.x, -870);
+        //gameBtnRect.anchoredPosition = new Vector2(gameBtnRect.anchoredPosition.x, -870);
+        //rankBtnRect.anchoredPosition = new Vector2(rankBtnRect.anchoredPosition.x, -850);
 
-        ChangePage(1, missionPage);
+        ChangePage(1, rankPage);
     }
 
     /// <summary>

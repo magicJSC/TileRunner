@@ -12,12 +12,25 @@ public class StartTile : MonoBehaviour
 
     private Renderer rend;
 
+    private bool isStart;
+
     private void Start()
     {
         rend = transform.GetChild(0).GetComponent<Renderer>();
+
+        GameManager.Instance.startGameAction += StartGame;
     }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.startGameAction -= StartGame;
+    }
+
     private void OnTriggerExit(Collider other)
     {
+        if (!isStart)
+            return;
+
         if(other.TryGetComponent(out Player player))
         {
             TileManager.Instance.RequestTileCollapse(axialCoord);
@@ -29,5 +42,10 @@ public class StartTile : MonoBehaviour
     {
         transform.GetChild(0).DOShakePosition(0.65f, 0.5f).onComplete += () => { transform.GetChild(0).DOScale(Vector3.zero, 0.15f); };
         rend.material = steppedMaterial;
+    }
+
+    void StartGame()
+    {
+        isStart = true;
     }
 }
