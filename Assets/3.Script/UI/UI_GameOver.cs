@@ -18,7 +18,7 @@ public class UI_GameOver : MonoBehaviour
         beforeBestTitle = Util.FindChild(gameObject, "BestScoreTitle");
 
         bestScoreText = Util.FindChild<TextMeshProUGUI>(gameObject, "Score");
-        beforeBestScoreText = Util.FindChild<TextMeshProUGUI>(gameObject, "BeforeScore");
+        beforeBestScoreText = Util.FindChild<TextMeshProUGUI>(gameObject, "BestScore");
 
         if (CheckBestScore())
         {

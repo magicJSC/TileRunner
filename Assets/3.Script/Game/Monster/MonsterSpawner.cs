@@ -16,7 +16,7 @@ public class MonsterSpawner : MonoBehaviour
     private void Start()
     {
         DifficultController.Instance.levelAction += GetSpawnSO;
-        playerTransform = GameManager.Instance.player;
+        playerTransform = GameManager.Instance.Player;
         GetSpawnSO(0);
 
         GameManager.Instance.startGameAction += StartSpawn;

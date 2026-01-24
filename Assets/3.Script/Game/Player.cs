@@ -22,18 +22,12 @@ public class Player : MonoBehaviour
     private Vector2 moveInput;
 
     [Header("Jump")]
-    [SerializeField] private float jumpCooldown = 0.5f;
     [SerializeField] Transform jumpCheckPos;
 
     private void Awake()
     {
-        GameManager.Instance.player = transform;
+        GameManager.Instance.Player = transform;
         isGrounded = true;
-    }
-
-    private void OnEnable()
-    {
-        moveAction.action.Enable();
     }
 
     private void OnDisable()
@@ -45,6 +39,10 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        moveAction.action.Enable();
+
+        jumpCheckPos = Util.FindChild<Transform>(gameObject, "CheckPos");
+
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         GameManager.Instance.startGameAction += StartGame;

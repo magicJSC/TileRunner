@@ -44,5 +44,8 @@ public class GameManager : Singleton<GameManager>
     public Action startGameAction;
     public Action endGameAction;
 
-    public Transform player;
+    private Transform player;
+    public Transform Player { get { return player; } set { player = value; playerAction?.Invoke(); } }
+
+    public Action playerAction;
 }

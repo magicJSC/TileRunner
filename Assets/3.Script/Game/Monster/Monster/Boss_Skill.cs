@@ -4,6 +4,7 @@ using UnityEngine;
 public class Boss_Skill : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
+    public float skillScale = 15;
     Rigidbody rigid;
 
     bool isHited;
@@ -20,7 +21,7 @@ public class Boss_Skill : MonoBehaviour
 
     void Move()
     {
-        Vector3 dir = (GameManager.Instance.player.position - transform.position).normalized;
+        Vector3 dir = (GameManager.Instance.Player.position - transform.position).normalized;
         rigid.linearVelocity = dir * moveSpeed;
     }
 
@@ -31,7 +32,7 @@ public class Boss_Skill : MonoBehaviour
             if (!isHited)
             {
                 isHited = true;
-                transform.DOScale(new Vector3(15, 15, 15), 4f).onComplete +=
+                transform.DOScale(Vector3.one * skillScale, 4f).onComplete +=
                     () => transform.DOScale(Vector3.zero,1).onComplete += 
                     () => Destroy(gameObject);
                 rigid.linearVelocity = Vector3.zero;
