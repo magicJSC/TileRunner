@@ -13,10 +13,12 @@ public class CharacterManger : MonoBehaviour
     public Action changeAction;
 
     [Header("Data")]
-    [SerializeField] List<CharacterData> characterDatas;
+    [SerializeField] public List<CharacterData> characterDatas;
 
     [HideInInspector]
     public List<bool> usableList;
+
+    public int useIndex = 0;
 
     [Header("Player")]
     [SerializeField] Transform playerSpawnPos;
@@ -41,7 +43,7 @@ public class CharacterManger : MonoBehaviour
         usableList[0] = true;
         usableList[1] = true;
 
-        ChangeCharacter(0);
+        ChangeCharacter(useIndex);
     }
 
     public CharacterData GetCharacterData(int index)
@@ -64,6 +66,7 @@ public class CharacterManger : MonoBehaviour
         if(GameManager.Instance.Player != null)
             Destroy(GameManager.Instance.Player.gameObject);  
 
+        useIndex = index;
         Instantiate(characterDatas[index].characterPrefab, playerSpawnPos.position, Quaternion.identity);
     }
 }

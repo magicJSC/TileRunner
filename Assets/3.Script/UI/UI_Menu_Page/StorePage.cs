@@ -11,7 +11,6 @@ public class StorePage : MonoBehaviour
     private Image purchaseBtn;
 
     private int selectIndex = 0;
-    private int usingCharacterIndex = 0;
 
     private GameObject usingBack;
     private GameObject leftArrow;
@@ -71,7 +70,7 @@ public class StorePage : MonoBehaviour
         {
             purchaseBtn.gameObject.SetActive(false);
             characterBtn.gameObject.SetActive(true);
-            if(usingCharacterIndex == selectIndex)
+            if(CharacterManger.Instance.useIndex == selectIndex)
             {
                 usingBack.SetActive(true);
             }
@@ -94,11 +93,11 @@ public class StorePage : MonoBehaviour
     /// </summary>
     void UseCharacter()
     {
-        usingCharacterIndex = selectIndex;
+        CharacterManger.Instance.useIndex = selectIndex;
         usingBack.SetActive(true);
         characterBtn.gameObject.SetActive(false);
 
-        CharacterManger.Instance.ChangeCharacter(usingCharacterIndex);
+        CharacterManger.Instance.ChangeCharacter(CharacterManger.Instance.useIndex);
     }
 
     void SetPrice()
