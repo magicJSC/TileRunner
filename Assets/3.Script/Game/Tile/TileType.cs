@@ -2,7 +2,9 @@ using UnityEngine;
 
 public enum TileType
 {
-  Fog,
-  Wave,
-  Chain
+  Normal,
+  Obstacle,
+  Start,
+  Goal,
+  Empty
 }

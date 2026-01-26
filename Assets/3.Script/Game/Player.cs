@@ -124,7 +124,7 @@ public class Player : MonoBehaviour
             var cols = Physics.OverlapSphere(jumpCheckPos.position, 0.3f);
             foreach(var col in cols)
             {
-                if (col.GetComponent<HexTile>())
+                if (col.GetComponent<ITile>() != null)
                 {
                     canJump = false;
                     break;

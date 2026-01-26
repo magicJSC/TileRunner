@@ -31,7 +31,6 @@ public class DifficultController : MonoBehaviour
 
     private void Start()
     {
-        TileManager.Instance.difficultSO = difficultSOList[0];
         BossController.Instance.difficultSO = difficultSOList[0];
         GameManager.Instance.startGameAction += DoTimeCor;
     }
@@ -71,7 +70,6 @@ public class DifficultController : MonoBehaviour
         if (difficultSOList[LevelIndex + 1].nextLevelTime <= playTime)
         {
             LevelIndex++;
-            TileManager.Instance.difficultSO = difficultSOList[LevelIndex];
             BossController.Instance.difficultSO = difficultSOList[LevelIndex];
         }
     }

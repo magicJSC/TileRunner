@@ -2,7 +2,12 @@ using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
-public class HexTile : MonoBehaviour
+public interface ITile
+{
+
+}
+
+public class HexTile : MonoBehaviour, ITile
 {
     public Vector2Int axialCoord;   // ÀÌ Å¸ÀÏÀÇ À°°¢ ÁÂÇ¥
     public Material steppedMaterial;
@@ -40,13 +45,15 @@ public class HexTile : MonoBehaviour
             return;
 
         StepAnimation();
-        TileManager.Instance.RequestTileCollapse(axialCoord);
         isDisappear = true;
     }
 
     public virtual void StepAnimation()
     {
-        transform.GetChild(0).DOShakePosition(0.65f, 0.5f).onComplete += () => { transform.GetChild(0).DOScale(Vector3.zero, 0.15f); };
+        transform.GetChild(0).DOShakePosition(0.65f, 0.5f).onComplete += () => 
+        {
+            transform.GetChild(0).DOScale(Vector3.zero, 0.15f).onComplete += () => TileManager.Instance.RemoveTile(axialCoord);
+        };
         rend.material = steppedMaterial;
     }
 

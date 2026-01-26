@@ -49,7 +49,6 @@ public class Meteor : MonoBehaviour
         }
         else if (other.TryGetComponent(out HexTile tile))
         {
-            TileManager.Instance.RequestTileCollapse(tile.axialCoord);
             tile.StepAnimation();
             Destroy(gameObject);
         }

@@ -7,9 +7,5 @@ public class Monster_Danger : Monster_Chase
     public override void Die()
     {
         base.Die();
-        for (int i = 0; i < dangerTileCount; i++)
-        {
-            TileManager.Instance.RandomTileChangeDanger();
-        }
     }
 }
