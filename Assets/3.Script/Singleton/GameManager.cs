@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
@@ -40,9 +41,13 @@ public class GameManager : Singleton<GameManager>
 
 
     public bool isGameOver = false;
+    public bool isStart;
+
 
     public Action startGameAction;
     public Action endGameAction;
+    public Action resetAction;
+    public Action restartAction;
 
     private Transform player;
     public Transform Player { get { return player; } set { player = value; playerAction?.Invoke(); } }

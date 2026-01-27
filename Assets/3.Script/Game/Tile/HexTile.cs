@@ -19,6 +19,8 @@ public class HexTile : MonoBehaviour, ITile
     private void Start()
     {
         rend = transform.GetChild(0).GetComponent<Renderer>();
+        transform.localScale = Vector3.zero;
+        transform.DOScale(Vector3.one * 0.35f, 0.5f);
         Init();
     }
 

@@ -9,7 +9,6 @@ public class PlayerSign : MonoBehaviour
     private void Start()
     {
         playerSign.parent = null;
-        playerSign = Util.FindChild<Transform>(gameObject, "PlayerSign");
 
         StartCoroutine(MoveCor());
         GameManager.Instance.endGameAction += Dissapear;

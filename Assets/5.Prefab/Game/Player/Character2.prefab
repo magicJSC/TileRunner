@@ -1094,7 +1094,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSign: {fileID: 7858101913649005315}
-  signPos: {x: 0, y: 0, z: 0}
+  signPos: {x: 0, y: 0.4, z: 0}
 --- !u!95 &6807589175016176945
 Animator:
   serializedVersion: 7

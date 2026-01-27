@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -45,12 +46,12 @@ public class TileManager : MonoBehaviour
 
     static readonly Vector2Int[] Corners =
     {
-    new Vector2Int(-4,  4), // 4
-    new Vector2Int(-4,  0), // 5
-    new Vector2Int( 0, -4), // 0
-    new Vector2Int( 4, -4), // 1
-    new Vector2Int( 4,  0), // 2
-    new Vector2Int( 0,  4), // 3
+    new Vector2Int(-4,  4), // 0
+    new Vector2Int(-4,  0), // 1
+    new Vector2Int( 0, -4), // 2
+    new Vector2Int( 4, -4), // 3
+    new Vector2Int( 4,  0), // 4
+    new Vector2Int( 0,  4), // 5
 };
 
     public static TileManager Instance { get { if (instance == null) Init(); return instance; } set { instance = value; } }
@@ -109,8 +110,27 @@ public class TileManager : MonoBehaviour
             MapDatabase.Instance.GetMapByScore(GameManager.Instance.Score);
 
         int rotation = GetRotationFromGoal(goalCoord);
+        GameManager.Instance.isStart = false;
+
+        SetPlayer(goalCoord ,rotation);
 
         LoadMap(nextMap, rotation);
+    }
+
+    public void SetPlayer(Vector2Int goalCoord, int rotation)
+    {
+        Transform player = GameManager.Instance.Player;
+
+        GameManager.Instance.resetAction.Invoke();
+        player.DOScale(Vector3.zero, 0.5f).onComplete += () =>
+        {
+            player.rotation = Quaternion.Euler(0, 160 - rotation * 60, 0);
+            player.DOScale(Vector3.one * 2, 0.5f).onComplete += () => { GameManager.Instance.restartAction.Invoke(); };
+
+            GameObject goal = activeTiles[goalCoord];
+            player.transform.position = new Vector3(goal.transform.position.x, player.transform.position.y, goal.transform.position.z);
+
+        };
     }
 
     public void LoadMap(HexMapSO mapData, int rotationStep)

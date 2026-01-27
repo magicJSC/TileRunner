@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa37398ffd8049846912c0190025086d, type: 3}
-  m_Name: Map1_1
+  m_Name: Map1_2
   m_EditorClassIdentifier: 
   difficulty: 1
   tiles:
@@ -28,15 +28,9 @@ MonoBehaviour:
     type: 0
   - coord: {x: -2, y: -2}
     type: 0
-  - coord: {x: -2, y: 1}
-    type: 0
-  - coord: {x: -2, y: 2}
-    type: 0
   - coord: {x: -2, y: 3}
     type: 0
   - coord: {x: -2, y: 4}
-    type: 0
-  - coord: {x: -1, y: -3}
     type: 0
   - coord: {x: -1, y: -2}
     type: 0
@@ -46,27 +40,15 @@ MonoBehaviour:
     type: 0
   - coord: {x: -1, y: 1}
     type: 0
-  - coord: {x: -1, y: 2}
-    type: 0
-  - coord: {x: -1, y: 3}
-    type: 0
   - coord: {x: -1, y: 4}
     type: 0
   - coord: {x: 0, y: -4}
-    type: 3
-  - coord: {x: 0, y: -2}
-    type: 0
-  - coord: {x: 0, y: -1}
     type: 0
   - coord: {x: 0, y: 0}
     type: 0
   - coord: {x: 0, y: 1}
     type: 0
   - coord: {x: 0, y: 2}
-    type: 0
-  - coord: {x: 0, y: 3}
-    type: 0
-  - coord: {x: 0, y: 4}
     type: 0
   - coord: {x: 1, y: -4}
     type: 0
@@ -92,15 +74,29 @@ MonoBehaviour:
     type: 0
   - coord: {x: 3, y: -3}
     type: 0
-  - coord: {x: 3, y: 0}
-    type: 0
-  - coord: {x: 3, y: 1}
-    type: 0
   - coord: {x: 4, y: -4}
-    type: 0
+    type: 3
   - coord: {x: 4, y: -3}
     type: 0
   - coord: {x: 4, y: -2}
     type: 0
   - coord: {x: 4, y: -1}
+    type: 0
+  - coord: {x: -3, y: -1}
+    type: 0
+  - coord: {x: -4, y: 1}
+    type: 0
+  - coord: {x: -2, y: 0}
+    type: 0
+  - coord: {x: -2, y: -1}
+    type: 0
+  - coord: {x: 2, y: -2}
+    type: 0
+  - coord: {x: 3, y: -2}
+    type: 0
+  - coord: {x: 3, y: -1}
+    type: 0
+  - coord: {x: 4, y: 0}
+    type: 0
+  - coord: {x: 1, y: 0}
     type: 0

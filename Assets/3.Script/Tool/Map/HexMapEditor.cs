@@ -9,7 +9,7 @@ public class HexMapEditor : EditorWindow
 
     [Header("Grid")]
     int radius = 5;
-    float hexSize = 28f;
+    float hexSize = 25f;
 
     Texture2D hexNormal;
 
@@ -144,8 +144,8 @@ public class HexMapEditor : EditorWindow
                 Rect rect = new Rect(
                     center.x + pos.x - hexSize,
                     center.y + pos.y - hexSize,
-                    hexSize * 2,
-                    hexSize * 2);
+                    hexSize * 1.8f,
+                    hexSize * 1.8f);
 
                 DrawHexButton(rect, coord, e);
             }
@@ -163,7 +163,7 @@ public class HexMapEditor : EditorWindow
         Color prevColor = GUI.color;
 
         GUI.color = GetColorByType(tileType);
-        GUI.DrawTexture(rect, tex,ScaleMode.ScaleAndCrop, true,1);
+        GUI.DrawTexture(rect, tex);
         GUI.color = prevColor;
 
         if (e.type == EventType.MouseDown &&

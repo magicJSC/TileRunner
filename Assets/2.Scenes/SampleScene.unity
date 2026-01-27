@@ -3756,6 +3756,8 @@ MonoBehaviour:
   startMap: {fileID: 11400000, guid: 6ad656c2dece2f34293f03cf9580f712, type: 2}
   mapList:
   - {fileID: 11400000, guid: bbbde684fd1a1e149b66d878619fa17e, type: 2}
+  - {fileID: 11400000, guid: 364bcf13f22850a489ee7d2ed54adab5, type: 2}
+  - {fileID: 11400000, guid: 896eb576d31ca7842a56a62cf4f9778c, type: 2}
 --- !u!1 &522685732
 GameObject:
   m_ObjectHideFlags: 0
@@ -8036,7 +8038,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1890841929}
   - {fileID: 254973893}
@@ -17235,9 +17237,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1122823829}
     m_Modifications:
+    - target: {fileID: 1369956114095539109, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2039231461694449001, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
       propertyPath: m_Name
       value: GamePage
+      objectReference: {fileID: 0}
+    - target: {fileID: 2801891145947709658, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3545100831425052012, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
       propertyPath: m_Pivot.x
@@ -17334,6 +17344,10 @@ PrefabInstance:
     - target: {fileID: 6760560640458933018, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 755.3259
+      objectReference: {fileID: 0}
+    - target: {fileID: 6890757912295048191, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7346497498442282111, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
       propertyPath: m_AnchoredPosition.x
