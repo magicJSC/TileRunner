@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
             if (GameManager.Instance.isGameOver)
                 yield break;
 
-            
+
 
             moveInput = moveAction.action.ReadValue<Vector2>();
 
@@ -150,14 +150,14 @@ public class Player : MonoBehaviour
         {
             bool canJump = true;
             var cols = Physics.OverlapSphere(jumpCheckPos.position, 0.4f);
-            foreach(var col in cols)
+            foreach (var col in cols)
             {
                 canJump = false;
                 break;
             }
 
             if (canJump)
-              Jump();
+                Jump();
         }
     }
 
@@ -177,7 +177,7 @@ public class Player : MonoBehaviour
         HexTile tile = other.GetComponent<HexTile>();
         if (tile == null) return;
 
-        if (!GameManager.Instance.isStart)
+        if (!GameManager.Instance.isStart || GameManager.Instance.isGameOver)
             return;
         tile.OnStepped();
        if(velocity.y < 0)

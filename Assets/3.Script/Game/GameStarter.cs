@@ -11,6 +11,8 @@ public class GameStarter : MonoBehaviour
         GameManager.Instance.Score = 0;
         GameManager.Instance.isGameOver = false;
 
+        GameManager.Instance.isStart = false;
+
         GameManager.Instance.restartAction += ReStartAction;
 
         StartCoroutine(CheckTouch());
@@ -24,6 +26,8 @@ public class GameStarter : MonoBehaviour
 
             moveInput = moveAction.action.ReadValue<Vector2>();
 
+            if (GameManager.Instance.isStart)
+                yield break;
             // 조이스틱 입력이 있을 때만 이동
             if (moveInput.sqrMagnitude > 0.01f)
             {
@@ -45,5 +49,6 @@ public class GameStarter : MonoBehaviour
     private void StartGame()
     {
         GameManager.Instance.startGameAction?.Invoke();
+        Debug.Log("스타트 게임");
     }
 }

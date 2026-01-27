@@ -3,8 +3,9 @@ using UnityEngine;
 public enum TileType
 {
   Normal,
-  Obstacle,
+  Monster,
   Start,
   Goal,
+  Coin,
   Empty
 }

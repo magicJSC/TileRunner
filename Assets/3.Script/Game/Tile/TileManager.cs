@@ -14,7 +14,7 @@ public class TileManager : MonoBehaviour
     [Header("타일 설정")]
     public GameObject tilePrefab;
     public GameObject startTilePrefab;
-    public GameObject goalPrefab;
+    public GameObject goalTile;
     public int radius = 5;
     public float tileSize = 1f;
     public Transform playerTransform;
@@ -22,8 +22,7 @@ public class TileManager : MonoBehaviour
 
     [Header("특별 타일")]
     public GameObject dangerTile;
-    public GameObject scoreTilePrefab;
-    public float scoreInterval;
+    public GameObject coinTile;
 
     [Header("맵 데이터")]
     public HexMapSO currentMap;
@@ -153,7 +152,7 @@ public class TileManager : MonoBehaviour
                     SpawnStartTile(rotatedCoord);
                     break;
 
-                case TileType.Obstacle:
+                case TileType.Monster:
                     SpawnTile(rotatedCoord, dangerTile);
                     break;
 
@@ -162,7 +161,10 @@ public class TileManager : MonoBehaviour
                     break;
 
                 case TileType.Goal:
-                    SpawnTile(rotatedCoord, goalPrefab);
+                    SpawnTile(rotatedCoord, goalTile);
+                    break;
+                case TileType.Coin:
+                    SpawnTile(rotatedCoord, coinTile);
                     break;
             }
         }

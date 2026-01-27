@@ -2,13 +2,14 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RocketTile : SpecialTile
+public class CoinTile : HexTile
 {
+    [SerializeField] GameObject coin;
+
     public override void OnStepped()
     {
-        if(curTime <= 0 || isDisappear) return;
-
         base.OnStepped();
-        GameManager.Instance.Score++;
+        GameManager.Instance.Coin++;
+        coin.SetActive(false);
     }
 }

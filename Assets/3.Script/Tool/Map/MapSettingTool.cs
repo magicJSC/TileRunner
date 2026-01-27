@@ -5,6 +5,7 @@ using UnityEngine;
 /// </summary>
 public class MapSettingTool : MonoBehaviour
 {
+    [SerializeField] Color color;
     [SerializeField] HexMapSO hexMapSO;
     [SerializeField] int rotationStep = 0;
 

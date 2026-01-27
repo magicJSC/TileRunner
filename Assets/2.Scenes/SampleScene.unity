@@ -3758,6 +3758,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bbbde684fd1a1e149b66d878619fa17e, type: 2}
   - {fileID: 11400000, guid: 364bcf13f22850a489ee7d2ed54adab5, type: 2}
   - {fileID: 11400000, guid: 896eb576d31ca7842a56a62cf4f9778c, type: 2}
+  - {fileID: 11400000, guid: f2706111e6e3a24458ba7a7a6f5fd41c, type: 2}
 --- !u!1 &522685732
 GameObject:
   m_ObjectHideFlags: 0
@@ -5520,14 +5521,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 661439313910053398, guid: 06baa38fe6748714ca0b6c547d8e1ddf, type: 3}
   startTilePrefab: {fileID: 661439313910053398, guid: a4be046e14e235444ab8b7ee3d4f0325, type: 3}
-  goalPrefab: {fileID: 661439313910053398, guid: 31077984b7d822640b28d7fc65f7636c, type: 3}
+  goalTile: {fileID: 661439313910053398, guid: 31077984b7d822640b28d7fc65f7636c, type: 3}
   radius: 6
   tileSize: 1
   playerTransform: {fileID: 1136252523}
   tileMapParent: {fileID: 1123676052}
   dangerTile: {fileID: 661439313910053398, guid: 877f4c8c4fb9f854fbee4b2b06996204, type: 3}
-  scoreTilePrefab: {fileID: 661439313910053398, guid: 78957d7afba646140a36889d50e9b656, type: 3}
-  scoreInterval: 3
+  coinTile: {fileID: 661439313910053398, guid: 78957d7afba646140a36889d50e9b656, type: 3}
   currentMap: {fileID: 11400000, guid: 6ad656c2dece2f34293f03cf9580f712, type: 2}
 --- !u!1 &767621799
 GameObject:
@@ -13343,6 +13343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34c4c6390d40db42a1772798c028e37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  color: {r: 0.9899497, g: 1, b: 0, a: 0}
   hexMapSO: {fileID: 11400000, guid: 6ad656c2dece2f34293f03cf9580f712, type: 2}
   rotationStep: 1
 --- !u!114 &1847926331

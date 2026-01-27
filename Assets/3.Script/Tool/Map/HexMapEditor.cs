@@ -231,15 +231,17 @@ public class HexMapEditor : EditorWindow
         switch (type)
         {
             case TileType.Start:
-                return new Color(1, 0.7f, 0);
+                return new Color(1, 0.28f, 0);
             case TileType.Normal:
                 return Color.white;
             case TileType.Goal:
                 return Color.green;
-            case TileType.Obstacle:
+            case TileType.Monster:
                 return Color.red;
             case TileType.Empty:
                 return new Color(1,1,1, 0.2f);
+            case TileType.Coin:
+                return Color.yellow;
             default:
                 return Color.white;
         }
