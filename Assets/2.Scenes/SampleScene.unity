@@ -3606,6 +3606,29 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 364bcf13f22850a489ee7d2ed54adab5, type: 2}
   - {fileID: 11400000, guid: 896eb576d31ca7842a56a62cf4f9778c, type: 2}
   - {fileID: 11400000, guid: f2706111e6e3a24458ba7a7a6f5fd41c, type: 2}
+  - {fileID: 11400000, guid: 203a7fc60f2772c4286c0f5a912ec9d6, type: 2}
+  - {fileID: 11400000, guid: 3f1180f160eb4a4488db0dbb7896d3ee, type: 2}
+  - {fileID: 11400000, guid: 7af5fea6324d6624a914a467c1bd8827, type: 2}
+  - {fileID: 11400000, guid: 436ec1986523dd341ad717c809abed5f, type: 2}
+  - {fileID: 11400000, guid: 331871935adbf99418151debc3d8a865, type: 2}
+  - {fileID: 11400000, guid: a3834d1c786391a4e8714dc49d98dbae, type: 2}
+  - {fileID: 11400000, guid: 6ef97d65b68ae5946a4508cc3c668c38, type: 2}
+  - {fileID: 11400000, guid: 8bf350de3173eb842bdc598db1522e6b, type: 2}
+  difficultyTable:
+  - minScore: 0
+    weights:
+    - difficulty: 1
+      weight: 100
+  - minScore: 300
+    weights:
+    - difficulty: 1
+      weight: 40
+    - difficulty: 1
+      weight: 60
+  - minScore: 600
+    weights:
+    - difficulty: 2
+      weight: 100
 --- !u!1 &522685732
 GameObject:
   m_ObjectHideFlags: 0
@@ -16825,17 +16848,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1122823829}
     m_Modifications:
-    - target: {fileID: 1369956114095539109, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2039231461694449001, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
       propertyPath: m_Name
       value: GamePage
-      objectReference: {fileID: 0}
-    - target: {fileID: 2801891145947709658, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3545100831425052012, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
       propertyPath: m_Pivot.x
@@ -16917,37 +16932,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4300419421012812766, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 226
-      objectReference: {fileID: 0}
-    - target: {fileID: 4300419421012812766, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 762
-      objectReference: {fileID: 0}
-    - target: {fileID: 6760560640458933018, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 476.33276
-      objectReference: {fileID: 0}
-    - target: {fileID: 6760560640458933018, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 755.3259
-      objectReference: {fileID: 0}
-    - target: {fileID: 6890757912295048191, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7346497498442282111, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 343
-      objectReference: {fileID: 0}
-    - target: {fileID: 7346497498442282111, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 877
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 2644760590265438028, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e27bdd4e07a8ae94aadb0b2c371f2379, type: 3}
