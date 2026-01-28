@@ -7,9 +7,9 @@ public class Monster_Danger : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void OnTriggerEnter(Collider other)
     {
-        if(collision.transform.TryGetComponent<Player>(out var player))
+        if (other.TryGetComponent<Player>(out var player))
         {
             player.Die();
         }
