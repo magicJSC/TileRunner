@@ -120,15 +120,34 @@ public class TileManager : MonoBehaviour
     {
         Transform player = GameManager.Instance.Player;
 
-        GameManager.Instance.resetAction.Invoke();
-        player.DOScale(Vector3.zero, 0.5f).OnComplete(() =>
+        GameManager.Instance.resetAction?.Invoke();
+
+        player.DOKill();
+
+        DG.Tweening.Sequence seq = DOTween.Sequence()
+            .SetLink(player.gameObject);
+
+        seq.Append(player.DOScale(Vector3.zero, 0.5f));
+
+        seq.AppendCallback(() =>
         {
+            if (player == null) return;
+
             player.rotation = Quaternion.Euler(0, 160 - rotation * 60, 0);
-            player.DOScale(Vector3.one * 2, 0.5f).OnComplete(() => { GameManager.Instance.restartAction.Invoke(); });
 
             GameObject goal = activeTiles[goalCoord];
-            player.transform.position = new Vector3(goal.transform.position.x, player.transform.position.y, goal.transform.position.z);
+            player.position = new Vector3(
+                goal.transform.position.x,
+                player.position.y,
+                goal.transform.position.z);
+        });
 
+        seq.Append(player.DOScale(Vector3.one * 2, 0.5f));
+
+        seq.OnComplete(() =>
+        {
+            if (GameManager.Instance == null) return;
+            GameManager.Instance.restartAction?.Invoke();
         });
     }
 

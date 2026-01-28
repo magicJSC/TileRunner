@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa37398ffd8049846912c0190025086d, type: 3}
   m_Name: Map2_1
   m_EditorClassIdentifier: 
-  difficulty: 0
+  difficulty: 2
   tiles:
   - coord: {x: -4, y: 2}
     type: 0
