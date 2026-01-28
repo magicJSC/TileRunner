@@ -121,15 +121,15 @@ public class TileManager : MonoBehaviour
         Transform player = GameManager.Instance.Player;
 
         GameManager.Instance.resetAction.Invoke();
-        player.DOScale(Vector3.zero, 0.5f).onComplete += () =>
+        player.DOScale(Vector3.zero, 0.5f).OnComplete(() =>
         {
             player.rotation = Quaternion.Euler(0, 160 - rotation * 60, 0);
-            player.DOScale(Vector3.one * 2, 0.5f).onComplete += () => { GameManager.Instance.restartAction.Invoke(); };
+            player.DOScale(Vector3.one * 2, 0.5f).OnComplete(() => { GameManager.Instance.restartAction.Invoke(); });
 
             GameObject goal = activeTiles[goalCoord];
             player.transform.position = new Vector3(goal.transform.position.x, player.transform.position.y, goal.transform.position.z);
 
-        };
+        });
     }
 
     public void LoadMap(HexMapSO mapData, int rotationStep)
