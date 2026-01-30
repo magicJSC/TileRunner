@@ -103,6 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 0, y: 0}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 8300000, guid: 905810e051ff69d4bb9606417c7c8d50, type: 3}
 --- !u!64 &5491885269626657951
 MeshCollider:
   m_ObjectHideFlags: 0

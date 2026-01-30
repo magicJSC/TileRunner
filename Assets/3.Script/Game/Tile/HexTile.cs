@@ -15,6 +15,7 @@ public class HexTile : MonoBehaviour, ITile
     private Renderer rend;
 
     protected bool isDisappear;
+    [SerializeField] AudioClip stepSound;
 
     private void Start()
     {
@@ -28,6 +29,9 @@ public class HexTile : MonoBehaviour, ITile
     public virtual void OnStepped()
     {
         Disappear();
+        if (stepSound != null)
+            SoundManager.Instance.PlaySFX(stepSound);
+
         GameManager.Instance.Score++;
     }
 

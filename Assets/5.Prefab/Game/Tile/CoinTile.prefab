@@ -215,7 +215,7 @@ MonoBehaviour:
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
   coin: {fileID: 8306430755029535070}
   effect: {fileID: 8771972552311404799, guid: bbf9e36a48d6c5648a13889afab076fd, type: 3}
-  coinSound: {fileID: 8300000, guid: f6c1184f25911044d86f1591ed4641b2, type: 3}
+  coinSound: {fileID: 8300000, guid: 49f43c872962d424ca5d71a56e5d216a, type: 3}
 --- !u!1 &3757273092181507830
 GameObject:
   m_ObjectHideFlags: 0

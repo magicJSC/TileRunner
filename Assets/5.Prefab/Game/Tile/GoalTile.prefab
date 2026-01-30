@@ -125,7 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 0, y: 0}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
-  goalSound: {fileID: 8300000, guid: 4ed3983afac68bf4196fddf17a70a4e8, type: 3}
+  goalSound: {fileID: 8300000, guid: a12bc26c91ac09448ab83d235fe28c11, type: 3}
 --- !u!1 &3568921899076193372
 GameObject:
   m_ObjectHideFlags: 0

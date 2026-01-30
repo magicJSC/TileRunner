@@ -35,9 +35,12 @@ public class UI_Setting : MonoBehaviour
         languageFade.TurnOff();
         audioFade.TurnOff();
 
-        settingFade.FadeIn();
     }
 
+    private void OnEnable()
+    {
+        settingFade.FadeIn(); 
+    }
 
     void ClickSettingBack()
     {
