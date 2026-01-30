@@ -101,8 +101,8 @@ public class UI_Setting : MonoBehaviour
         SoundManager.Instance.PlayUI(clickClip);
     }
 
-    public void Disappear()
+    void Disappear()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

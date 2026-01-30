@@ -4,7 +4,9 @@ public class GamePage : MonoBehaviour
 {
     [SerializeField] UI_EventHandler settingBtn;
 
-    [SerializeField] GameObject settingUIPrefab;
+
+
+    [SerializeField] GameObject settingUI;
     [SerializeField] AudioClip clickSound;
 
     Animator anim;
@@ -15,6 +17,8 @@ public class GamePage : MonoBehaviour
         anim = GetComponent<Animator>();
 
         settingBtn.clickAction = ClickSettingBtn;
+
+        settingUI.SetActive(false);
 
         GameManager.Instance.closeSettingAction += BackAnimation;
         GameManager.Instance.startGameAction += StartGame;
@@ -34,7 +38,7 @@ public class GamePage : MonoBehaviour
     void ClickSettingBtn()
     {
         anim.Play("Setting");
-        Instantiate(settingUIPrefab);
+        settingUI.SetActive(true);
         GameManager.Instance.openSettingAction.Invoke();
         SoundManager.Instance.PlayUI(clickSound);
     }
