@@ -57,4 +57,6 @@ public class GameManager : Singleton<GameManager>
     public Transform Player { get { return player; } set { player = value; playerAction?.Invoke(); } }
 
     public Action playerAction;
+
+    public bool revived;
 }

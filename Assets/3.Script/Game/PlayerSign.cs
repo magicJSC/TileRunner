@@ -11,12 +11,6 @@ public class PlayerSign : MonoBehaviour
         playerSign.parent = null;
 
         StartCoroutine(MoveCor());
-        GameManager.Instance.endGameAction += Dissapear;
-    }
-
-    private void OnDisable()
-    {
-        GameManager.Instance.endGameAction -= Dissapear;
     }
 
     IEnumerator MoveCor()
@@ -37,8 +31,4 @@ public class PlayerSign : MonoBehaviour
         playerSign.position = new Vector3(totalPos.x, signPos.y, totalPos.z);
     }
     
-    void Dissapear()
-    {
-        Destroy(playerSign.gameObject);
-    }
 }

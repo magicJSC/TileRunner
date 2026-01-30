@@ -31,7 +31,7 @@ public class TileManager : MonoBehaviour
     Dictionary<Vector2Int, GameObject> activeTiles =
         new Dictionary<Vector2Int, GameObject>();
 
-
+    public Vector2Int startPos;
 
     private static readonly Vector2Int[] HexDirections =
 {
@@ -111,9 +111,15 @@ public class TileManager : MonoBehaviour
         int rotation = GetRotationFromGoal(goalCoord);
         GameManager.Instance.isStart = false;
 
-        SetPlayer(goalCoord ,rotation);
-
         LoadMap(nextMap, rotation);
+        SetPlayer(startPos ,rotation);
+    }
+
+
+
+    public void ResetMap()
+    {
+        OnReachGoal(startPos);
     }
 
     public void SetPlayer(Vector2Int goalCoord, int rotation)
@@ -121,6 +127,7 @@ public class TileManager : MonoBehaviour
         Transform player = GameManager.Instance.Player;
 
         GameManager.Instance.resetAction?.Invoke();
+        StartCoroutine(RestartAction());
 
         player.DOKill();
 
@@ -138,18 +145,25 @@ public class TileManager : MonoBehaviour
             GameObject goal = activeTiles[goalCoord];
             player.position = new Vector3(
                 goal.transform.position.x,
-                player.position.y,
+                playerTransform.position.y,
                 goal.transform.position.z);
         });
 
         seq.Append(player.DOScale(Vector3.one * 2, 0.5f));
 
-        seq.OnComplete(() =>
-        {
-            if (GameManager.Instance == null) return;
-            GameManager.Instance.restartAction?.Invoke();
-        });
+        //seq.OnComplete(() =>
+        //{
+        //    if (GameManager.Instance == null) return;
+        //    GameManager.Instance.restartAction?.Invoke();
+        //});
     }
+
+    IEnumerator RestartAction()
+    {
+        yield return new WaitForSeconds(1);
+        GameManager.Instance.restartAction?.Invoke();
+    }
+
 
     public void LoadMap(HexMapSO mapData, int rotationStep)
     {
@@ -245,6 +259,7 @@ public class TileManager : MonoBehaviour
         GameObject tile = Instantiate(startTilePrefab, pos, Quaternion.identity, tileMapParent.transform);
 
         tile.GetComponent<StartTile>().axialCoord = coord;
+        startPos = coord;
         activeTiles.Add(coord, tile);
     }
 

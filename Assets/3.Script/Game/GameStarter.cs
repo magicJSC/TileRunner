@@ -43,12 +43,12 @@ public class GameStarter : MonoBehaviour
     /// </summary>
     private void ReStartAction()
     {
+        Debug.Log("리스타트");
         StartCoroutine(CheckTouch());
     }
 
     private void StartGame()
     {
         GameManager.Instance.startGameAction?.Invoke();
-        Debug.Log("스타트 게임");
     }
 }
