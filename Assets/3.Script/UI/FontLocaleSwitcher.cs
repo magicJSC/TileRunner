@@ -10,6 +10,7 @@ public class FontLocaleSwitcher : MonoBehaviour
     {
         LocalizationManager.Instance.OnLanguageChanged += OnLocaleChanged;
         text = GetComponent<TextMeshProUGUI>();
+        OnLocaleChanged();
     }
 
     void OnLocaleChanged()

@@ -478,9 +478,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6e94d13df209c54797c2b7e20d0ed42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  koreanImage: {fileID: 2437321957127366826}
+  englishImage: {fileID: 4841566717225121206}
+  japaneseImage: {fileID: 3869134669659677027}
+  onSprite: {fileID: -3327971419932107721, guid: 7c8ff58917aad254bbee16daeba7b32b, type: 3}
+  offSprite: {fileID: 7919194353434859991, guid: b35fcaa46fa9f3e49b71c103f69df698, type: 3}
   koreanClick: {fileID: 2372722712164466948}
   englishClick: {fileID: 6513539501471633219}
   japaneseClick: {fileID: 7910510363602382270}
+  clickSound: {fileID: 8300000, guid: 17dfdcf1c8dc0af4f8d9d8a30d34c2c1, type: 3}
 --- !u!1 &2309048312834780047
 GameObject:
   m_ObjectHideFlags: 0
@@ -2059,7 +2065,7 @@ MonoBehaviour:
   settingFade: {fileID: 4304506901834529469}
   languageFade: {fileID: 3428727921728398862}
   audioFade: {fileID: 7892328629463704735}
-  clickClip: {fileID: 0}
+  clickClip: {fileID: 8300000, guid: 17dfdcf1c8dc0af4f8d9d8a30d34c2c1, type: 3}
 --- !u!95 &6683040617603782917
 Animator:
   serializedVersion: 7
@@ -3575,6 +3581,7 @@ MonoBehaviour:
   bgmBtn: {fileID: 615435142106362391}
   sfxBtn: {fileID: 4956151672598386435}
   uiBtn: {fileID: 2433647153680881940}
+  clickSound: {fileID: 8300000, guid: 17dfdcf1c8dc0af4f8d9d8a30d34c2c1, type: 3}
   masterImg: {fileID: 5350866306050904671}
   bgmImg: {fileID: 749142553379655009}
   sfxImg: {fileID: 3996589089639209713}
@@ -3873,7 +3880,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 38.5
+  m_fontSize: 33.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

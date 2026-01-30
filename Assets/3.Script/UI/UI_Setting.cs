@@ -44,7 +44,10 @@ public class UI_Setting : MonoBehaviour
     {
         backAction?.Invoke();
         settingFade.FadeOut();
+
+        SoundManager.Instance.PlayUI(clickClip);
         anim.Play("Back");
+
     }
 
     void ClickLauguageBack()
@@ -55,6 +58,8 @@ public class UI_Setting : MonoBehaviour
         settingFade.FadeIn();
         languageFade.FadeOut();
         backBtn.clickAction = ClickSettingBack;
+
+        SoundManager.Instance.PlayUI(clickClip);
     }
 
     void ClickAudioBack()
@@ -65,6 +70,8 @@ public class UI_Setting : MonoBehaviour
         settingFade.FadeIn();
         audioFade.FadeOut();
         backBtn.clickAction = ClickSettingBack;
+
+        SoundManager.Instance.PlayUI(clickClip);
     }
 
     void ClickLanguageBtn()
@@ -75,6 +82,8 @@ public class UI_Setting : MonoBehaviour
         languageFade.FadeIn();
         settingFade.FadeOut();
         backBtn.clickAction = ClickLauguageBack;
+
+        SoundManager.Instance.PlayUI(clickClip);
     }
 
     void ClickAudioBtn()
@@ -85,10 +94,12 @@ public class UI_Setting : MonoBehaviour
         audioFade.FadeIn();
         settingFade.FadeOut();
         backBtn.clickAction = ClickAudioBack;
+
+        SoundManager.Instance.PlayUI(clickClip);
     }
     void ClickAchieveBtn()
     {
-
+        SoundManager.Instance.PlayUI(clickClip);
     }
 
     public void Disappear()

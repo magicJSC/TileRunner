@@ -5,6 +5,7 @@ public class GamePage : MonoBehaviour
     [SerializeField] UI_EventHandler settingBtn;
 
     [SerializeField] GameObject settingUIPrefab;
+    [SerializeField] AudioClip clickSound;
 
     Animator anim;
 
@@ -32,6 +33,7 @@ public class GamePage : MonoBehaviour
     {
         anim.Play("Setting");
         Instantiate(settingUIPrefab).GetComponent<UI_Setting>().backAction += BackAnimation;
+        SoundManager.Instance.PlayUI(clickSound);
     }
 
     void BackAnimation()

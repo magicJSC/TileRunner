@@ -4,14 +4,12 @@ using UnityEngine.UI;
 
 public class SoundSetting : MonoBehaviour
 {
-    [Header("Audio Mixer")]
-    public AudioMixer mixer;
-
     [Header("Buttons")]
     public UI_EventHandler masterBtn;
     public UI_EventHandler bgmBtn;
     public UI_EventHandler sfxBtn;
     public UI_EventHandler uiBtn;
+    [SerializeField] AudioClip clickSound;
 
     [Header("Button Images")]
     public Image masterImg;
@@ -29,13 +27,7 @@ public class SoundSetting : MonoBehaviour
     public Sprite onIcon;
     public Sprite offIcon;
 
-    const float ON = 0f;
-    const float OFF = -80f;
-
-    bool masterOn = true;
-    bool bgmOn = true;
-    bool sfxOn = true;
-    bool uiOn = true;
+    
 
     void Start()
     {
@@ -51,70 +43,51 @@ public class SoundSetting : MonoBehaviour
 
     void OnMasterClick()
     {
-        masterOn = !masterOn;
+        SoundManager.Instance.masterOn = !SoundManager.Instance.masterOn;
 
-        bgmOn = masterOn;
-        sfxOn = masterOn;
-        uiOn = masterOn;
+        SoundManager.Instance.bgmOn = SoundManager.Instance.masterOn;
+        SoundManager.Instance.sfxOn = SoundManager.Instance.masterOn;
+        SoundManager.Instance.uiOn = SoundManager.Instance.masterOn;
 
         ApplyAll();
+        SoundManager.Instance.PlayUI(clickSound);
     }
 
     void OnBGMClick()
     {
-        ToggleSingle(ref bgmOn, "BGMVol");
+        ToggleSingle(ref SoundManager.Instance.bgmOn, "BGMVol");
+        SoundManager.Instance.PlayUI(clickSound);
     }
 
     void OnSFXClick()
     {
-        ToggleSingle(ref sfxOn, "SFXVol");
+        ToggleSingle(ref SoundManager.Instance.sfxOn, "SFXVol");
+        SoundManager.Instance.PlayUI(clickSound);
     }
 
     void OnUIClick()
     {
-        ToggleSingle(ref uiOn, "UIVol");
+        ToggleSingle(ref SoundManager.Instance.uiOn, "UIVol");
+        SoundManager.Instance.PlayUI(clickSound);
     }
 
     #endregion
 
     #region Core Logic
 
-    void ToggleSingle(ref bool target, string param)
-    {
-        target = !target;
-
-        if (target)
-        {
-            // 전체 OFF 상태에서 하나 켜면
-            masterOn = true;
-        }
-        else
-        {
-            // 전부 OFF면 Master도 OFF
-            if (!bgmOn && !sfxOn && !uiOn)
-                masterOn = false;
-        }
-
-        ApplyAll();
-    }
+    
 
     void ApplyAll()
     {
-        SetVolume("MasterVol", masterOn);
-        SetVolume("BGMVol", bgmOn);
-        SetVolume("SFXVol", sfxOn);
-        SetVolume("UIVol", uiOn);
+        SoundManager.Instance.SetAllVolume();
 
-        UpdateIcon(masterImg,masterIcon, masterOn);
-        UpdateIcon(bgmImg, bgmIcon, bgmOn);
-        UpdateIcon(sfxImg, sfxIcon,sfxOn);
-        UpdateIcon(uiImg, uiIcon,uiOn);
+        UpdateIcon(masterImg,masterIcon, SoundManager.Instance.masterOn);
+        UpdateIcon(bgmImg, bgmIcon, SoundManager.Instance.bgmOn);
+        UpdateIcon(sfxImg, sfxIcon,SoundManager.Instance.sfxOn);
+        UpdateIcon(uiImg, uiIcon,SoundManager.Instance.uiOn);
     }
 
-    void SetVolume(string param, bool isOn)
-    {
-        mixer.SetFloat(param, isOn ? ON : OFF);
-    }
+   
 
     void UpdateIcon(Image img,Image icon, bool isOn)
     {
@@ -122,5 +95,23 @@ public class SoundSetting : MonoBehaviour
         icon.sprite = isOn ? onIcon : offIcon;
     }
 
+    public void ToggleSingle(ref bool target, string param)
+    {
+        target = !target;
+
+        if (target)
+        {
+            // 전체 OFF 상태에서 하나 켜면
+            SoundManager.Instance.masterOn = true;
+        }
+        else
+        {
+            // 전부 OFF면 Master도 OFF
+            if (!SoundManager.Instance.bgmOn && !SoundManager.Instance.sfxOn && !SoundManager.Instance.uiOn)
+                SoundManager.Instance.masterOn = false;
+        }
+
+        ApplyAll();
+    }
     #endregion
 }

@@ -899,6 +899,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settingBtn: {fileID: 6689859512114671614}
   settingUIPrefab: {fileID: 4811645939086014259, guid: b227e9dc91a3d734baf0de8163d38952, type: 3}
+  clickSound: {fileID: 8300000, guid: 17dfdcf1c8dc0af4f8d9d8a30d34c2c1, type: 3}
 --- !u!95 &7235116813017010039
 Animator:
   serializedVersion: 7

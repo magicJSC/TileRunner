@@ -18,6 +18,8 @@ public class UI_MenuBar : MonoBehaviour
     private RectTransform gameBtnRect;
     private RectTransform rankBtnRect;
 
+    [SerializeField] AudioClip clickSound;
+
     [Header("Page")]
     [SerializeField] GameObject shopPage;
     [SerializeField] GameObject gamePage;
@@ -88,9 +90,7 @@ public class UI_MenuBar : MonoBehaviour
         gameBtn.sprite = unClickSprite;
         rankBtn.sprite = unClickSprite;
 
-        //shopBtnRect.anchoredPosition = new Vector2(shopBtnRect.anchoredPosition.x, -850);
-        //gameBtnRect.anchoredPosition = new Vector2(gameBtnRect.anchoredPosition.x, -870);
-        //rankBtnRect.anchoredPosition = new Vector2(rankBtnRect.anchoredPosition.x, -870);
+        SoundManager.Instance.PlayUI(clickSound);
 
         ChangePage(-1, shopPage);
     }
@@ -104,9 +104,7 @@ public class UI_MenuBar : MonoBehaviour
         gameBtn.sprite = clickSprite;
         rankBtn.sprite = unClickSprite;
 
-        //shopBtnRect.anchoredPosition = new Vector2(shopBtnRect.anchoredPosition.x, -870);
-        //gameBtnRect.anchoredPosition = new Vector2(gameBtnRect.anchoredPosition.x, -850);
-        //rankBtnRect.anchoredPosition = new Vector2(rankBtnRect.anchoredPosition.x, -870);
+        SoundManager.Instance.PlayUI(clickSound);
 
         ChangePage(0, gamePage);
     }
@@ -120,9 +118,7 @@ public class UI_MenuBar : MonoBehaviour
         gameBtn.sprite = unClickSprite;
         rankBtn.sprite = clickSprite;
 
-        //shopBtnRect.anchoredPosition = new Vector2(shopBtnRect.anchoredPosition.x, -870);
-        //gameBtnRect.anchoredPosition = new Vector2(gameBtnRect.anchoredPosition.x, -870);
-        //rankBtnRect.anchoredPosition = new Vector2(rankBtnRect.anchoredPosition.x, -850);
+        SoundManager.Instance.PlayUI(clickSound);
 
         ChangePage(1, rankPage);
     }
