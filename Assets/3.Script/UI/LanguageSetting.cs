@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LanguageSetting : MonoBehaviour
@@ -16,6 +17,8 @@ public class LanguageSetting : MonoBehaviour
     [SerializeField] UI_EventHandler englishClick;
     [SerializeField] UI_EventHandler japaneseClick;
 
+    private string changeLanguage;
+
     [SerializeField] AudioClip clickSound;
     private void Start()
     {
@@ -23,28 +26,36 @@ public class LanguageSetting : MonoBehaviour
         englishClick.clickAction = OnClickEnglish;
         japaneseClick.clickAction = OnClickJapanese;
 
+        GameManager.Instance.changeSettingAction += ChangeSetting;
+
         SetSprite();
     }
 
     public void OnClickKorean()
     {
-        LocalizationManager.Instance.SetLanguage("ko");
+        changeLanguage = "ko";
         SoundManager.Instance.PlayUI(clickSound);
-        SetSprite();
+        GameManager.Instance.beforeChangeSettingAction?.Invoke();
     }
 
     public void OnClickEnglish()
     {
-        LocalizationManager.Instance.SetLanguage("en");
+        changeLanguage = "en";
         SoundManager.Instance.PlayUI(clickSound);
-        SetSprite();
+        GameManager.Instance.beforeChangeSettingAction?.Invoke();
     }
 
     public void OnClickJapanese()
     {
-        LocalizationManager.Instance.SetLanguage("ja");
+        changeLanguage = "ja";
         SoundManager.Instance.PlayUI(clickSound);
-        SetSprite();
+        GameManager.Instance.beforeChangeSettingAction?.Invoke();
+    }
+
+    void ChangeSetting()
+    {
+        LocalizationManager.Instance.SetLanguage(changeLanguage);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     void SetSprite()

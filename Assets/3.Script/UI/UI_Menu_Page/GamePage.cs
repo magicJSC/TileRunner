@@ -16,12 +16,14 @@ public class GamePage : MonoBehaviour
 
         settingBtn.clickAction = ClickSettingBtn;
 
+        GameManager.Instance.closeSettingAction += BackAnimation;
         GameManager.Instance.startGameAction += StartGame;
     }
 
     private void OnDisable()
     {
         GameManager.Instance.startGameAction -= StartGame;
+        GameManager.Instance.closeSettingAction -= BackAnimation;
     }
 
     void StartGame()
@@ -32,7 +34,8 @@ public class GamePage : MonoBehaviour
     void ClickSettingBtn()
     {
         anim.Play("Setting");
-        Instantiate(settingUIPrefab).GetComponent<UI_Setting>().backAction += BackAnimation;
+        Instantiate(settingUIPrefab);
+        GameManager.Instance.openSettingAction.Invoke();
         SoundManager.Instance.PlayUI(clickSound);
     }
 

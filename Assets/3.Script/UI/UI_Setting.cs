@@ -21,8 +21,6 @@ public class UI_Setting : MonoBehaviour
 
     [SerializeField] AudioClip clickClip;
 
-    public Action backAction;
-
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -40,9 +38,10 @@ public class UI_Setting : MonoBehaviour
         settingFade.FadeIn();
     }
 
+
     void ClickSettingBack()
     {
-        backAction?.Invoke();
+        GameManager.Instance.closeSettingAction?.Invoke();
         settingFade.FadeOut();
 
         SoundManager.Instance.PlayUI(clickClip);
