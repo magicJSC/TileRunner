@@ -2,7 +2,12 @@ using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
-public class HexTile : MonoBehaviour
+public interface ITile
+{
+
+}
+
+public class HexTile : MonoBehaviour, ITile
 {
     public Vector2Int axialCoord;   // ¿Ã ≈∏¿œ¿« ¿∞∞¢ ¡¬«•
     public Material steppedMaterial;
@@ -10,10 +15,13 @@ public class HexTile : MonoBehaviour
     private Renderer rend;
 
     protected bool isDisappear;
+    [SerializeField] AudioClip stepSound;
 
     private void Start()
     {
         rend = transform.GetChild(0).GetComponent<Renderer>();
+        transform.localScale = Vector3.zero;
+        transform.DOScale(Vector3.one * 0.35f, 0.5f);
         Init();
     }
 
@@ -21,6 +29,9 @@ public class HexTile : MonoBehaviour
     public virtual void OnStepped()
     {
         Disappear();
+        if (stepSound != null)
+            SoundManager.Instance.PlaySFX(stepSound);
+
         GameManager.Instance.Score++;
     }
 
@@ -40,18 +51,39 @@ public class HexTile : MonoBehaviour
             return;
 
         StepAnimation();
-        TileManager.Instance.RequestTileCollapse(axialCoord);
         isDisappear = true;
     }
 
     public virtual void StepAnimation()
     {
-        transform.GetChild(0).DOShakePosition(0.65f, 0.5f).onComplete += () => { transform.GetChild(0).DOScale(Vector3.zero, 0.15f); };
+        var body = transform.GetChild(0);
+
+        body.DOKill();
+
+        body
+            .DOShakePosition(0.65f, 0.5f)
+            .SetLink(gameObject)
+            .OnComplete(() =>
+            {
+                if (this == null) return;
+
+                body
+                    .DOScale(Vector3.zero, 0.15f)
+                    .SetLink(gameObject)
+                    .OnComplete(() =>
+                        TileManager.Instance.RemoveTile(axialCoord)
+                    );
+            });
         rend.material = steppedMaterial;
     }
 
     protected virtual void Init()
     {
 
+    }
+
+    protected virtual void OnDestroy()
+    {
+        transform.DOKill();
     }
 }

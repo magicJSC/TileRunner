@@ -8,7 +8,6 @@ public class UI_Boss : MonoBehaviour
     {
         fillImage = Util.FindChild<Image>(gameObject, "Fill");
 
-        BossController.Instance.bossGageAction += UpdateBossGage;
         UpdateBossGage(0f);
     }
 

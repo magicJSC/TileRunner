@@ -21,7 +21,7 @@ public class CharacterManger : MonoBehaviour
     public int useIndex = 0;
 
     [Header("Player")]
-    [SerializeField] Transform playerSpawnPos;
+    [SerializeField]public Transform playerSpawnPos;
 
     void Awake()
     {

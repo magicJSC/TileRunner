@@ -21,6 +21,9 @@ public class Player : MonoBehaviour
 
     private Vector2 moveInput;
 
+    Coroutine moveCor;
+    Coroutine jumpCor;
+
     [Header("Jump")]
     [SerializeField] Transform jumpCheckPos;
 
@@ -34,7 +37,10 @@ public class Player : MonoBehaviour
     {
         moveAction.action.Disable();
         if (GameManager.Instance != null)
+        {
             GameManager.Instance.startGameAction -= StartGame;
+            GameManager.Instance.resetAction -= ResetAction;
+        }
     }
 
     private void Start()
@@ -46,13 +52,21 @@ public class Player : MonoBehaviour
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         GameManager.Instance.startGameAction += StartGame;
+        GameManager.Instance.resetAction += ResetAction;
     }
 
     private void StartGame()
     {
-        StartCoroutine(CheckInputCor());
-        StartCoroutine(SetVelocityToCharacter());
+        moveCor = StartCoroutine(CheckInputCor());
+        jumpCor = StartCoroutine(SetVelocityToCharacter());
         anim.SetTrigger("run");
+    }
+
+    private void ResetAction()
+    {
+        anim.Play("Idle");
+        StopCoroutine(moveCor);
+        StopCoroutine(jumpCor);
     }
 
     IEnumerator CheckInputCor()
@@ -63,6 +77,8 @@ public class Player : MonoBehaviour
 
             if (GameManager.Instance.isGameOver)
                 yield break;
+
+
 
             moveInput = moveAction.action.ReadValue<Vector2>();
 
@@ -103,13 +119,25 @@ public class Player : MonoBehaviour
 
     void RotateByJoystick(Vector2 input)
     {
+        // 데드존
+        if (input.sqrMagnitude < 0.1f)
+            return;
+
+        //// 이동 중일 때만 회전
+        //if (!isMoving)
+        //    return;
+
         float targetAngle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg;
+
+        Quaternion targetRot = Quaternion.Euler(0, targetAngle, 0);
+
         transform.rotation = Quaternion.RotateTowards(
             transform.rotation,
-            Quaternion.Euler(0, targetAngle, 0),
+            targetRot,
             turnSpeed * Time.deltaTime
         );
     }
+
 
     void MoveForward()
     {
@@ -121,18 +149,15 @@ public class Player : MonoBehaviour
         if (isGrounded)
         {
             bool canJump = true;
-            var cols = Physics.OverlapSphere(jumpCheckPos.position, 0.3f);
-            foreach(var col in cols)
+            var cols = Physics.OverlapSphere(jumpCheckPos.position, 0.4f);
+            foreach (var col in cols)
             {
-                if (col.GetComponent<HexTile>())
-                {
-                    canJump = false;
-                    break;
-                }
+                canJump = false;
+                break;
             }
 
             if (canJump)
-              Jump();
+                Jump();
         }
     }
 
@@ -152,6 +177,8 @@ public class Player : MonoBehaviour
         HexTile tile = other.GetComponent<HexTile>();
         if (tile == null) return;
 
+        if (!GameManager.Instance.isStart || GameManager.Instance.isGameOver)
+            return;
         tile.OnStepped();
        if(velocity.y < 0)
         {

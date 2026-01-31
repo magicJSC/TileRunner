@@ -23,7 +23,7 @@ public class StoreSwipe : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
         cam = CharacterManger.Instance.storeCam;
         characterPoints = CharacterManger.Instance.characterPoints;
 
-        cam.transform.position = GetCamPos(0);
+        cam.transform.position = GetCamPos(CharacterManger.Instance.useIndex);
         distancePerChar = characterPoints[1].position.x - characterPoints[0].position.x;
     }
 

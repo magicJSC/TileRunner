@@ -30,7 +30,7 @@ public class StorePage : MonoBehaviour
         purchaseBtn = Util.FindChild<Image>(gameObject, "PurchaseBtn");
         usingBack = Util.FindChild(gameObject, "UsingBack");
 
-        ChangeUI();
+        SwipeAction(CharacterManger.Instance.useIndex);
         InitAction();
     }
 
@@ -58,7 +58,7 @@ public class StorePage : MonoBehaviour
             rightArrow.SetActive(true);
         }
 
-            ChangeUI();
+        ChangeUI();
     }
 
     /// <summary>

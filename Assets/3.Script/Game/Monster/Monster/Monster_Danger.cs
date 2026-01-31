@@ -1,15 +1,17 @@
 using UnityEngine;
 
-public class Monster_Danger : Monster_Chase
+public class Monster_Danger : MonoBehaviour
 {
-    [SerializeField] int dangerTileCount = 2;
-
-    public override void Die()
+    private void Start()
     {
-        base.Die();
-        for (int i = 0; i < dangerTileCount; i++)
+        transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<Player>(out var player))
         {
-            TileManager.Instance.RandomTileChangeDanger();
+            player.Die();
         }
     }
 }

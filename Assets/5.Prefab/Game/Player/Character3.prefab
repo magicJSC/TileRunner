@@ -796,7 +796,7 @@ MonoBehaviour:
   jumpHeight: 3
   gravity: -12
   moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  jumpCheckPos: {fileID: 0}
+  jumpCheckPos: {fileID: 4836002134106184855}
 --- !u!143 &4019299029873676989
 CharacterController:
   m_ObjectHideFlags: 0
@@ -834,8 +834,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bf30af7c5a015b4dbb272526bdc3ec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSign: {fileID: 0}
-  signPos: {x: 0, y: 0, z: 0}
+  playerSign: {fileID: 7495300800713399205}
+  signPos: {x: 0, y: 0.4, z: 0}
 --- !u!95 &4115167690535406634
 Animator:
   serializedVersion: 7

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,23 +14,24 @@ public class TileManager : MonoBehaviour
     [Header("타일 설정")]
     public GameObject tilePrefab;
     public GameObject startTilePrefab;
+    public GameObject goalTile;
     public int radius = 5;
     public float tileSize = 1f;
     public Transform playerTransform;
-    private Vector3 startPlayerPos;
-
-    [Header("시간 설정")]
-    public DifficultSO difficultSO;
+    public GameObject tileMapParent;
 
     [Header("특별 타일")]
     public GameObject dangerTile;
-    public GameObject scoreTilePrefab;
-    public float scoreInterval;
+    public GameObject coinTile;
+
+    [Header("맵 데이터")]
+    public HexMapSO currentMap;
 
     // 현재 존재하는 타일
     Dictionary<Vector2Int, GameObject> activeTiles =
         new Dictionary<Vector2Int, GameObject>();
 
+    public Vector2Int startPos;
 
     private static readonly Vector2Int[] HexDirections =
 {
@@ -41,24 +43,33 @@ public class TileManager : MonoBehaviour
     new Vector2Int(-1,  1)
 };
 
+    static readonly Vector2Int[] Corners =
+    {
+    new Vector2Int(-4,  4), // 0
+    new Vector2Int(-4,  0), // 1
+    new Vector2Int( 0, -4), // 2
+    new Vector2Int( 4, -4), // 3
+    new Vector2Int( 4,  0), // 4
+    new Vector2Int( 0,  4), // 5
+};
+
     public static TileManager Instance { get { if (instance == null) Init(); return instance; } set { instance = value; } }
     private static TileManager instance;
 
     private void Awake()
     {
-        if(Instance == null)
+        if(instance == null)
             Instance = this;
     }
 
     private static void Init()
     {
-        Instance = FindFirstObjectByType<TileManager>();
+        instance = FindFirstObjectByType<TileManager>();
     }
 
     void Start()
     {
-        startPlayerPos = playerTransform.position;
-        GenerateInitialMap();
+        LoadMap(MapDatabase.Instance.startMap ,0);
         
         GameManager.Instance.startGameAction += StartGame;
     }
@@ -75,26 +86,147 @@ public class TileManager : MonoBehaviour
         //StartCoroutine(RandomTileChangeScore());
     }
 
-    // =========================
-    // 초기 육각 맵 생성
-    // =========================
-    void GenerateInitialMap()
+    public void DeleteMap()
     {
-        for (int q = -radius; q <= radius; q++)
+        if (tileMapParent == null)
+            return;
+
+        if (Application.isPlaying)
+            Destroy(tileMapParent);
+#if UNITY_EDITOR
+        else
+            DestroyImmediate(tileMapParent);
+#endif
+
+        tileMapParent = null;
+        activeTiles.Clear();
+    }
+
+
+    public void OnReachGoal(Vector2Int goalCoord)
+    {
+        HexMapSO nextMap =
+            MapDatabase.Instance.GetMapByScore(GameManager.Instance.Score);
+
+        int rotation = GetRotationFromGoal(goalCoord);
+        GameManager.Instance.isStart = false;
+
+        LoadMap(nextMap, rotation);
+        SetPlayer(startPos ,rotation);
+    }
+
+
+
+    public void ResetMap()
+    {
+        OnReachGoal(startPos);
+    }
+
+    public void SetPlayer(Vector2Int goalCoord, int rotation)
+    {
+        Transform player = GameManager.Instance.Player;
+
+        GameManager.Instance.resetAction?.Invoke();
+        StartCoroutine(RestartAction());
+
+        player.DOKill();
+
+        DG.Tweening.Sequence seq = DOTween.Sequence()
+            .SetLink(player.gameObject);
+
+        seq.Append(player.DOScale(Vector3.zero, 0.5f));
+
+        seq.AppendCallback(() =>
         {
-            int r1 = Mathf.Max(-radius, -q - radius);
-            int r2 = Mathf.Min(radius, -q + radius);
+            if (player == null) return;
 
-            for (int r = r1; r <= r2; r++)
+            player.rotation = Quaternion.Euler(0, 160 - rotation * 60, 0);
+
+            GameObject goal = activeTiles[goalCoord];
+            player.position = new Vector3(
+                goal.transform.position.x,
+                playerTransform.position.y,
+                goal.transform.position.z);
+        });
+
+        seq.Append(player.DOScale(Vector3.one * 2, 0.5f));
+
+        //seq.OnComplete(() =>
+        //{
+        //    if (GameManager.Instance == null) return;
+        //    GameManager.Instance.restartAction?.Invoke();
+        //});
+    }
+
+    IEnumerator RestartAction()
+    {
+        yield return new WaitForSeconds(1);
+        GameManager.Instance.restartAction?.Invoke();
+    }
+
+
+    public void LoadMap(HexMapSO mapData, int rotationStep)
+    {
+        DeleteMap();
+
+        currentMap = mapData;
+
+        if (tileMapParent == null)
+            tileMapParent = new GameObject("TileMap");
+
+        foreach (var tile in mapData.tiles)
+        {
+            Vector2Int rotatedCoord =
+                RotateCoord(tile.coord, rotationStep);
+
+            switch (tile.type)
             {
-                Vector2Int coord = new Vector2Int(q, r);
+                case TileType.Start:
+                    SpawnStartTile(rotatedCoord);
+                    break;
 
-                if(coord != new Vector2Int(0,0))
-                    SpawnTile(coord);
-                else
-                    SpawnStartTile(coord);
+                case TileType.Monster:
+                    SpawnTile(rotatedCoord, dangerTile);
+                    break;
+
+                case TileType.Normal:
+                    SpawnTile(rotatedCoord);
+                    break;
+
+                case TileType.Goal:
+                    SpawnTile(rotatedCoord, goalTile);
+                    break;
+                case TileType.Coin:
+                    SpawnTile(rotatedCoord, coinTile);
+                    break;
             }
         }
+    }
+
+    int GetRotationFromGoal(Vector2Int goalCoord)
+    {
+        for (int i = 0; i < Corners.Length; i++)
+        {
+            if (Corners[i] == goalCoord)
+                return i;   // i번 = i * 60도 회전
+        }
+
+        return 0; // fallback
+    }
+
+    Vector2Int RotateCoord(Vector2Int coord, int times)
+    {
+        Vector2Int result = coord;
+
+        for (int i = 0; i < times; i++)
+        {
+            result = new Vector2Int(
+                -result.y,
+                result.x + result.y
+            );
+        }
+
+        return result;
     }
 
     // =========================
@@ -111,8 +243,8 @@ public class TileManager : MonoBehaviour
         else
             tileGo = tilePrefab;
 
-        Vector3 pos = AxialToWorld(coord) + new Vector3(startPlayerPos.x,0, startPlayerPos.z);
-        GameObject tile = Instantiate(tileGo, pos, Quaternion.identity, transform);
+        Vector3 pos = AxialToWorld(coord) + new Vector3(playerTransform.transform.position.x,0, playerTransform.transform.position.z);
+        GameObject tile = Instantiate(tileGo, pos, Quaternion.identity, tileMapParent.transform);
 
         tile.GetComponent<HexTile>().axialCoord = coord;
         activeTiles.Add(coord, tile);
@@ -123,103 +255,24 @@ public class TileManager : MonoBehaviour
         if (activeTiles.ContainsKey(coord))
             return;
         
-        Vector3 pos = AxialToWorld(coord) + new Vector3(startPlayerPos.x, 0, startPlayerPos.z);
-        GameObject tile = Instantiate(startTilePrefab, pos, Quaternion.identity, transform);
+        Vector3 pos = AxialToWorld(coord) + new Vector3(playerTransform.transform.position.x, 0, playerTransform.transform.position.z);
+        GameObject tile = Instantiate(startTilePrefab, pos, Quaternion.identity, tileMapParent.transform);
 
         tile.GetComponent<StartTile>().axialCoord = coord;
+        startPos = coord;
         activeTiles.Add(coord, tile);
     }
 
     // =========================
     // 타일 삭제
     // =========================
-    void RemoveTile(Vector2Int coord)
+    public void RemoveTile(Vector2Int coord)
     {
         if (!activeTiles.ContainsKey(coord))
             return;
 
         Destroy(activeTiles[coord]);
         activeTiles.Remove(coord);
-    }
-
-    /// <summary>
-    /// 점수 타일 생성
-    /// </summary>
-    /// <param name="coord"></param>
-    void SpawnScoreTile(Vector2Int coord)
-    {
-        if (activeTiles.ContainsKey(coord))
-            return;
-
-        Vector3 pos = AxialToWorld(coord) + new Vector3(startPlayerPos.x, 0, startPlayerPos.z);
-        GameObject tile = Instantiate(scoreTilePrefab, pos, Quaternion.identity, transform);
-
-        var scoreTile = tile.GetComponent<RocketTile>();
-        scoreTile.axialCoord = coord;
-        //scoreTile.InitTrial(TrialPicker.Instance.PickTrial());
-        activeTiles.Add(coord, tile);
-    }
-
-    // =========================
-    // 플레이어가 밟았을 때 호출
-    // =========================
-    public void RequestTileCollapse(Vector2Int coord)
-    {
-        if (!activeTiles.ContainsKey(coord))
-            return;
-
-        StartCoroutine(CollapseRoutine(coord));
-    }
-
-    IEnumerator CollapseRoutine(Vector2Int coord)
-    {
-        yield return new WaitForSeconds(difficultSO.collapseDelay);
-
-        RemoveTile(coord);
-
-        yield return new WaitForSeconds(difficultSO.respawnDelay);
-
-        SpawnTile(coord);
-    }
-
-    // =========================
-    // 시간마다 랜덤 타일 위험타일로 변경
-    // =========================
-    public void RandomTileChangeDanger()
-    {
-        List<Vector2Int> keys = new List<Vector2Int>(activeTiles.Keys);
-
-        for (int i = 0; i < difficultSO.dangerCount && keys.Count > 0; i++)
-        {
-            int idx = UnityEngine.Random.Range(0, keys.Count);
-            Vector2Int coord = keys[idx];
-
-            RemoveTile(coord);
-            keys.RemoveAt(idx);
-
-            // 랜덤으로 특별 타일 생성
-            SpawnTile(coord, dangerTile);
-        }
-    }
-
-    /// <summary>
-    /// 시간마다 랜덤 타일 점수타일로 변경
-    /// </summary>
-    IEnumerator RandomTileChangeScore()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(scoreInterval);
-
-            List<Vector2Int> keys = new List<Vector2Int>(activeTiles.Keys);
-
-            int idx = UnityEngine.Random.Range(0, keys.Count);
-            Vector2Int coord = keys[idx];
-
-            RemoveTile(coord);
-
-            SpawnScoreTile(coord);
-        }
     }
 
     // =========================
@@ -311,7 +364,7 @@ public class TileManager : MonoBehaviour
        foreach(var coord in activeTiles.Keys)
         {
             Vector3 worldPos =
-                AxialToWorld(coord) + new Vector3(startPlayerPos.x, 0, startPlayerPos.z);
+                AxialToWorld(coord) + new Vector3(playerTransform.transform.position.x, 0, playerTransform.transform.position.z);
 
             float dist = Vector3.Distance(targetPos, worldPos);
 
