@@ -18,6 +18,11 @@ public class GameStarter : MonoBehaviour
         StartCoroutine(CheckTouch());
     }
 
+    private void OnDisable()
+    {
+        GameManager.Instance.restartAction -= ReStartAction;
+    }
+
     private IEnumerator CheckTouch()
     {
         while (true)

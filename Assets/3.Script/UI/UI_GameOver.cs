@@ -123,6 +123,7 @@ public class UI_GameOver : MonoBehaviour
     {
         GameManager.Instance.revived = true;
         GameManager.Instance.isGameOver = false;
+        GameManager.Instance.showAds = true;
         TileManager.Instance.ResetMap();
         Destroy(gameObject);
     }
