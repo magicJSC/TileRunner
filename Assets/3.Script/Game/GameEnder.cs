@@ -15,6 +15,11 @@ public class GameEnder : MonoBehaviour
     {
         if (GameManager.Instance.isGameOver) return;
 
+        if (GameManager.Instance.showAds)
+        {
+            AdsManager.Instance.ShowAd();
+            GameManager.Instance.showAds = false;
+        }
         GameManager.Instance.isGameOver = true;
         GameManager.Instance.endGameAction?.Invoke();
         Instantiate(gameOverUI);

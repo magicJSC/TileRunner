@@ -42,6 +42,7 @@ public class GameManager : Singleton<GameManager>
 
     public bool isGameOver = false;
     public bool isStart;
+    public bool showAds;
 
     public Action openSettingAction;
     public Action changeSettingAction;
