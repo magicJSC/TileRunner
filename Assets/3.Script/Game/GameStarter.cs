@@ -48,7 +48,6 @@ public class GameStarter : MonoBehaviour
     /// </summary>
     private void ReStartAction()
     {
-        Debug.Log("리스타트");
         StartCoroutine(CheckTouch());
     }
 

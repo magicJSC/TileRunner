@@ -14,10 +14,6 @@ public class UI_MenuBar : MonoBehaviour
     private Image gameBtn;
     private Image rankBtn;
 
-    private RectTransform shopBtnRect;
-    private RectTransform gameBtnRect;
-    private RectTransform rankBtnRect;
-
     [SerializeField] AudioClip clickSound;
 
     [Header("Page")]
@@ -25,9 +21,9 @@ public class UI_MenuBar : MonoBehaviour
     [SerializeField] GameObject gamePage;
     [SerializeField] GameObject rankPage;
 
-    Transform pageParent;
+    [SerializeField] Transform pageParent;
     int curIndex = 0;
-    GameObject curPage;
+    [SerializeField] GameObject curPage;
     bool isChanging = false;
 
 
@@ -46,20 +42,9 @@ public class UI_MenuBar : MonoBehaviour
         gameBtn = Util.FindChild<Image>(gameObject, "GameBtn");
         rankBtn = Util.FindChild<Image>(gameObject, "RankBtn");
 
-        shopBtnRect = shopBtn.GetComponent<RectTransform>();
-        gameBtnRect = gameBtn.GetComponent<RectTransform>();
-        rankBtnRect = rankBtn.GetComponent<RectTransform>();
-
-        pageParent = Util.FindChild<Transform>(gameObject, "PageParent");
-        curPage = pageParent.GetChild(0).gameObject;
-
         shopBtn.sprite = unClickSprite;
         gameBtn.sprite = clickSprite;
         rankBtn.sprite = unClickSprite;
-
-        //shopBtnRect.anchoredPosition = new Vector2(shopBtnRect.anchoredPosition.x, -870);
-        //gameBtnRect.anchoredPosition = new Vector2(gameBtnRect.anchoredPosition.x, -850);
-        //rankBtnRect.anchoredPosition = new Vector2(rankBtnRect.anchoredPosition.x, -870);
 
         GameManager.Instance.startGameAction += StartGame;
     }
