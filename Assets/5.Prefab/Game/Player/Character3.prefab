@@ -816,12 +816,12 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 2.11
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.09, z: 0.02}
+  m_Center: {x: 0, y: 1.09, z: 0}
 --- !u!114 &5353037332492045119
 MonoBehaviour:
   m_ObjectHideFlags: 0
