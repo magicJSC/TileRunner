@@ -484,6 +484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 2, y: 2}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &47122529
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -609,6 +610,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 0, y: 2}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &52780373
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -734,6 +736,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 0, y: -3}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &67021849
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -945,6 +948,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 0, y: 1}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &164543613
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1407,6 +1411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: -3, y: 1}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &224929733
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1532,6 +1537,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: -3, y: 4}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &224976436
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1657,6 +1663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 2, y: 0}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &250617083
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1782,6 +1789,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 3, y: -3}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &254973896
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1946,6 +1954,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 2, y: -3}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &285381027
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2071,6 +2080,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 1, y: -1}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &310684259
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2174,6 +2184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 0, y: 4}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
   goalSound: {fileID: 0}
 --- !u!64 &323648938
 MeshCollider:
@@ -2492,6 +2503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 3, y: 0}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &358280394
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2789,6 +2801,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 4, y: -2}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &398662215
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3379,6 +3392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 2, y: -4}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &471203779
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3504,6 +3518,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: -2, y: 3}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &472657883
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3863,6 +3878,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 1, y: -2}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &538203392
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4129,6 +4145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: -4, y: 1}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &576366955
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4776,6 +4793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: -2, y: 2}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &645151797
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4993,6 +5011,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b7fdd185e4fe341964e19f4452d1e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &652811339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 652811341}
+  - component: {fileID: 652811340}
+  m_Layer: 0
+  m_Name: AdsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &652811340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652811339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75ef554fdfc0d2a4d9644ae268a6058e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &652811341
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652811339}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 204.26793, y: 1451.546, z: -804.3847}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &654440159
 GameObject:
   m_ObjectHideFlags: 0
@@ -5103,6 +5165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: -1, y: 1}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &657792038
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5432,6 +5495,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: -1, y: -2}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &729421123
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5584,6 +5648,7 @@ MonoBehaviour:
   dangerTile: {fileID: 661439313910053398, guid: 877f4c8c4fb9f854fbee4b2b06996204, type: 3}
   coinTile: {fileID: 661439313910053398, guid: 78957d7afba646140a36889d50e9b656, type: 3}
   currentMap: {fileID: 11400000, guid: 6ad656c2dece2f34293f03cf9580f712, type: 2}
+  startPos: {x: 0, y: 0}
 --- !u!1 &767621799
 GameObject:
   m_ObjectHideFlags: 0
@@ -5828,6 +5893,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 2, y: -2}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &788092176
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6002,6 +6068,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: -2, y: 0}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &856422357
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6127,6 +6194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 1, y: 2}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &869968193
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6469,6 +6537,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: -3, y: -1}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &915709101
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6572,6 +6641,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 0, y: -4}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
   goalSound: {fileID: 0}
 --- !u!64 &927897630
 MeshCollider:
@@ -6806,6 +6876,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: -1, y: 3}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &954296748
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6931,6 +7002,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 1, y: -4}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &970389028
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7142,6 +7214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: -2, y: -2}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &1002846069
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7353,6 +7426,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: -4, y: 2}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &1031565093
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7650,6 +7724,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: -1, y: 4}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &1082744617
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7775,6 +7850,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 4, y: -3}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &1084187599
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8751,6 +8827,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: -2, y: -1}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &1204460575
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8854,6 +8931,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: -4, y: 0}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
   goalSound: {fileID: 0}
 --- !u!64 &1224065263
 MeshCollider:
@@ -9002,6 +9080,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 3, y: -1}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &1240544459
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9257,6 +9336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 1, y: 1}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &1290375420
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9382,6 +9462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: -2, y: 4}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &1350541662
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9507,6 +9588,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 0, y: -2}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &1357778108
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9804,6 +9886,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 4, y: -1}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &1419479833
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10104,6 +10187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: -1, y: 0}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &1445836376
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10487,6 +10571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: -1, y: 2}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &1474582941
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10612,6 +10697,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 3, y: 1}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &1481303039
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11253,6 +11339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 2, y: -1}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &1587638594
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11378,6 +11465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 3, y: -4}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &1601542089
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11589,6 +11677,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: -4, y: 3}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &1611048229
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11692,6 +11781,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 4, y: 0}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
   goalSound: {fileID: 0}
 --- !u!64 &1612052239
 MeshCollider:
@@ -12055,6 +12145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 0, y: -1}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &1659849502
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12158,6 +12249,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: -4, y: 4}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
   goalSound: {fileID: 0}
 --- !u!64 &1676727017
 MeshCollider:
@@ -12306,6 +12398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 1, y: 3}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &1700868359
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12517,6 +12610,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 1, y: 0}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &1715432456
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12939,6 +13033,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: -3, y: 0}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &1782729970
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13311,6 +13406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: -3, y: 2}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &1824680124
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13583,6 +13679,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 2, y: 1}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &1860734527
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13854,6 +13951,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: -1, y: -3}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &1877294705
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -14043,6 +14141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 4, y: -4}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
   goalSound: {fileID: 0}
 --- !u!64 &1890841931
 MeshCollider:
@@ -14352,6 +14451,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 3, y: -2}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &1963056568
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -14563,6 +14663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: -1, y: -1}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &1978854521
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -15075,6 +15176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: -2, y: 1}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &2048625058
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -15458,6 +15560,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: -3, y: 3}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &2070440030
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -15583,6 +15686,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 0, y: 3}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &2087757693
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -15745,6 +15849,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axialCoord: {x: 1, y: -3}
   steppedMaterial: {fileID: 2100000, guid: b3b2972a4db15b64d92ecb2c048d0520, type: 2}
+  stepSound: {fileID: 0}
 --- !u!23 &2105957589
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -24190,3 +24295,4 @@ SceneRoots:
   - {fileID: 1123676053}
   - {fileID: 1124035282}
   - {fileID: 556080460}
+  - {fileID: 652811341}
