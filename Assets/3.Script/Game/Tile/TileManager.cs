@@ -69,7 +69,7 @@ public class TileManager : MonoBehaviour
 
     void Start()
     {
-        LoadMap(MapDatabase.Instance.startMap ,0);
+        LoadMap(MapDatabase.Instance.GetStartMap(), 0);
         
         GameManager.Instance.startGameAction += StartGame;
     }

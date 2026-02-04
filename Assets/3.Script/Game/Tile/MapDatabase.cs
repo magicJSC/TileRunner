@@ -10,10 +10,12 @@ public class MapDatabase : MonoBehaviour
     public static MapDatabase Instance { get; private set; }
 
     [Header("Start Map")]
-    public HexMapSO startMap;
+    public AssetReferenceHexMapSO startMapRef;
+    public HexMapSO startMapFallback;
 
     [Header("All Maps")]
-    public List<HexMapSO> mapList = new();
+    public List<AssetReferenceHexMapSO> mapReferences = new();
+    public List<HexMapSO> mapFallbackList = new();
 
     [Header("Difficulty Thresholds")]
     public List<DifficultyWeight> difficultyTable = new();
@@ -36,23 +38,66 @@ public class MapDatabase : MonoBehaviour
 
         if (tier == null)
         {
-            Debug.LogWarning("No difficulty tier found, returning startMap");
-            return startMap;
+            Debug.LogWarning("난이도 테이블이 없습니다");
+            return GetStartMap();
         }
 
         int pickedDifficulty = PickByWeight(tier.weights);
 
-        var candidates = mapList
-            .Where(m => m.difficulty == pickedDifficulty)
+        var candidates = GetAllMaps()
+            .Where(m => m != null && m.difficulty == pickedDifficulty)
             .ToList();
 
         if (candidates.Count == 0)
         {
-            Debug.LogWarning($"No map found for difficulty {pickedDifficulty}");
-            return startMap;
+            Debug.LogWarning($"난이도에 맞는 맵이 없습니다 : {pickedDifficulty}");
+            return GetStartMap();
         }
 
         return candidates[Random.Range(0, candidates.Count)];
+    }
+
+    public HexMapSO GetStartMap()
+    {
+        // Addressable 우선
+        if (IsAddressableReady())
+        {
+            var map = AddressableManager.Instance.Get<HexMapSO>(startMapRef);
+            if (map != null)
+                return map;
+        }
+
+        // Fallback
+        return startMapFallback;
+    }
+
+    private IEnumerable<HexMapSO> GetAllMaps()
+    {
+        // Addressable 사용 가능
+        if (IsAddressableReady())
+        {
+            foreach (var reference in mapReferences)
+            {
+                var map = AddressableManager.Instance.Get<HexMapSO>(reference);
+                if (map != null)
+                    yield return map;
+            }
+        }
+        else
+        {
+            // 에디터 / 개발 중 fallback
+            foreach (var map in mapFallbackList)
+            {
+                if (map != null)
+                    yield return map;
+            }
+        }
+    }
+
+    private bool IsAddressableReady()
+    {
+        return AddressableManager.Instance != null
+               && AddressableManager.Instance.IsReady;
     }
 
     /// <summary>
@@ -71,25 +116,41 @@ public class MapDatabase : MonoBehaviour
                 return w.difficulty;
         }
 
-        return weights.Last().difficulty; // 안전장치
+        return weights.Last().difficulty;
     }
 
 #if UNITY_EDITOR
     public void RefreshMapList()
     {
-        mapList.Clear();
+        mapReferences.Clear();
+        mapFallbackList.Clear();
+
+        string startGuid = startMapRef != null
+            ? startMapRef.AssetGUID
+            : string.Empty;
 
         string[] guids = AssetDatabase.FindAssets("t:HexMapSO");
+
         foreach (string guid in guids)
         {
+            if (!string.IsNullOrEmpty(startGuid) && guid == startGuid)
+                continue;
+
             string path = AssetDatabase.GUIDToAssetPath(guid);
             HexMapSO map = AssetDatabase.LoadAssetAtPath<HexMapSO>(path);
 
-            if (map != null)
-                mapList.Add(map);
+            if (map == null)
+                continue;
+
+            // Addressable용
+            mapReferences.Add(new AssetReferenceHexMapSO(guid));
+
+            // Fallback용
+            mapFallbackList.Add(map);
         }
 
         EditorUtility.SetDirty(this);
+        Debug.Log($"[MapDatabase] Maps refreshed : {mapReferences.Count}");
     }
 #endif
 }
