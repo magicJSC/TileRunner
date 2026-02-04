@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Tile
+  m_EditorClassIdentifier: 
+  m_GroupName: Tile
+  m_GUID: e534ec997e1b5734da2d3579de7d678c
+  m_SerializeEntries:
+  - m_GUID: 203a7fc60f2772c4286c0f5a912ec9d6
+    m_Address: Assets/6.SO/HexMap/Difficult1/Map1_5.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 331871935adbf99418151debc3d8a865
+    m_Address: Assets/6.SO/HexMap/Difficult2/Map2_3.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 364bcf13f22850a489ee7d2ed54adab5
+    m_Address: Assets/6.SO/HexMap/Difficult1/Map1_2.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3f1180f160eb4a4488db0dbb7896d3ee
+    m_Address: Assets/6.SO/HexMap/Difficult1/Map1_6.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 436ec1986523dd341ad717c809abed5f
+    m_Address: Assets/6.SO/HexMap/Difficult2/Map2_2.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6ad656c2dece2f34293f03cf9580f712
+    m_Address: Assets/6.SO/HexMap/StartMap.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6ef97d65b68ae5946a4508cc3c668c38
+    m_Address: Assets/6.SO/HexMap/Difficult2/Map2_5.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7af5fea6324d6624a914a467c1bd8827
+    m_Address: Assets/6.SO/HexMap/Difficult2/Map2_1.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 896eb576d31ca7842a56a62cf4f9778c
+    m_Address: Assets/6.SO/HexMap/Difficult1/Map1_3.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8bf350de3173eb842bdc598db1522e6b
+    m_Address: Assets/6.SO/HexMap/Difficult2/Map2_6.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a3834d1c786391a4e8714dc49d98dbae
+    m_Address: Assets/6.SO/HexMap/Difficult2/Map2_4.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bbbde684fd1a1e149b66d878619fa17e
+    m_Address: Assets/6.SO/HexMap/Difficult1/Map1_1.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f2706111e6e3a24458ba7a7a6f5fd41c
+    m_Address: Assets/6.SO/HexMap/Difficult1/Map1_4.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 9c925745f929a924c98a4645ca3b4150, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 259058459fbd29c4493eb2677f54b82d, type: 2}
+    - {fileID: 11400000, guid: f9e8f86093f4493419df23ab1f67d8cc, type: 2}
