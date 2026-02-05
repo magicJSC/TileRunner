@@ -599,6 +599,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingIcon: {fileID: 662320556}
+  sceneRef:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
 --- !u!95 &1472659198
 Animator:
   serializedVersion: 7
@@ -694,7 +700,22 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 1
-  - m_AssetGUID: 8bf350de3173eb842bdc598db1522e6b
+  - m_AssetGUID: f957f39498925f243a610b343fe6c7dd
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: ff8164d4944c2534d91eeb8ed71eb0d2
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: da4825d818e62ff4e8b6dd43fb00ed7a
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 4e806b02883f98744a5ceedca10fd74b
     m_SubObjectName: 
     m_SubObjectType: 
     m_SubObjectGUID: 

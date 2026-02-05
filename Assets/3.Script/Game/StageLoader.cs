@@ -18,11 +18,14 @@ public class StageLoader : MonoBehaviour
 
     public IEnumerator StartLoad()
     {
+
         if (loadingUI == null)
             loadingUI = GetComponent<UI_Loading>();
 
+        yield return new WaitForSeconds(0.2f);
+
         // AddressableManager가 AssetReference를 받도록 변경
-        yield return AddressableManager.Instance.LoadAssets(preloadAssets);
+        yield return AddressableManager.Instance.CheckAndDownload(preloadAssets);
 
         loadingUI.Hide();
     }

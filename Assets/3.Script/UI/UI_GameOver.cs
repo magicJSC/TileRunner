@@ -116,7 +116,7 @@ public class UI_GameOver : MonoBehaviour
     /// </summary>
     public void ResetGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("GameScene");
     }
 
     private void Revive()

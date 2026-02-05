@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
 
 public class UI_Loading : MonoBehaviour
@@ -11,11 +12,11 @@ public class UI_Loading : MonoBehaviour
     [Header("Load")]
     StageLoader stageLoader;
 
-    Animator anim;
+    [Header("Scene")]
+    [SerializeField] AssetReference sceneRef;
 
     private void Start()
-    {
-        anim = GetComponent<Animator>();
+    { 
         stageLoader = GetComponent<StageLoader>();
         gameObject.SetActive(false);
 
@@ -27,26 +28,28 @@ public class UI_Loading : MonoBehaviour
         AddressableManager.Instance.completeAction -= Hide;
     }
 
+    /// <summary>
+    /// 로딩중 UI 보여주고 로딩 시작
+    /// </summary>
     public void Show()
     {
         loadingIcon.gameObject.SetActive(true);
         loadingIcon.FadeIn();
-        //StartCoroutine(ShowCor());
         StartLoad();
     } 
 
-    //IEnumerator ShowCor()
-    //{
-    //    yi
-        
-    //}
-
+    /// <summary>
+    /// 로딩 끝, 로딩 UI 숨기기
+    /// </summary>
     public void Hide()
     {
         loadingIcon.FadeOut();
         StartCoroutine (HideCor());
     }
 
+    /// <summary>
+    /// 로딩 UI 숨긴뒤 씬 넘기기
+    /// </summary>
     IEnumerator HideCor()
     {
         yield return new WaitForSeconds(0.2f);
