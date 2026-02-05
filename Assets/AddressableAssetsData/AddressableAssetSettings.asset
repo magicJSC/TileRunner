@@ -15,9 +15,10 @@ MonoBehaviour:
   m_DefaultGroup: e534ec997e1b5734da2d3579de7d678c
   m_currentHash:
     serializedVersion: 2
-    Hash: 94975a8c6c75e13ba5244ae647eb07c5
+    Hash: 5d11aec965eb90e695f1403fca12168a
   m_OptimizeCatalogSize: 0
-  m_BuildRemoteCatalog: 0
+  m_BuildRemoteCatalog: 1
+  m_BundleLocalCatalog: 0
   m_CatalogRequestsTimeout: 0
   m_DisableCatalogUpdateOnStart: 0
   m_InternalIdNamingMode: 0
@@ -31,7 +32,7 @@ MonoBehaviour:
     m_ClassName: UnityEngine.ResourceManagement.ResourceProviders.AssetBundleProvider
   m_IgnoreUnsupportedFilesInBuild: 0
   m_UniqueBundleIds: 0
-  m_EnableJsonCatalog: 0
+  m_EnableJsonCatalog: 1
   m_NonRecursiveBuilding: 1
   m_AllowNestedBundleFolders: 0
   m_CCDEnabled: 0
@@ -51,20 +52,21 @@ MonoBehaviour:
   m_CheckForContentUpdateRestrictionsOption: 0
   m_MonoScriptBundleCustomNaming: 
   m_RemoteCatalogBuildPath:
-    m_Id: 
+    m_Id: d68d87807889d87448246c44ce6aaa4f
   m_RemoteCatalogLoadPath:
-    m_Id: 
-  m_ContentStateBuildPathProfileVariableName: 
+    m_Id: fffd5ed33a3b14e4ea55536ef3a3cc64
+  m_ContentStateBuildPathProfileVariableName: <default settings path>
   m_CustomContentStateBuildPath: 
   m_ContentStateBuildPath: 
-  m_BuildAddressablesWithPlayerBuild: 0
-  m_overridePlayerVersion: '[UnityEditor.PlayerSettings.bundleVersion]'
+  m_BuildAddressablesWithPlayerBuild: 2
+  m_overridePlayerVersion: 
   m_GroupAssets:
   - {fileID: 11400000, guid: e20fe9dd913ea9c45b973c3dc41074f1, type: 2}
   - {fileID: 11400000, guid: 58e13f0b4f69c0b4bbe04c5b1d1e20b1, type: 2}
   - {fileID: 11400000, guid: 8b798c090b270d84c8b8e804cabb70d3, type: 2}
   - {fileID: 11400000, guid: fb7d94cf33e7006489bf0e2615ecdc64, type: 2}
   - {fileID: 11400000, guid: 358282faef5115b42a21d47aad80c22e, type: 2}
+  - {fileID: 11400000, guid: e05317edc6d3e024da625027f27e4181, type: 2}
   - {fileID: 11400000, guid: 979b539fa72bbb04295ef7dd5bfcec1f, type: 2}
   m_BuildSettings:
     m_LogResourceManagerExceptions: 1
@@ -84,7 +86,7 @@ MonoBehaviour:
       - m_Id: d68d87807889d87448246c44ce6aaa4f
         m_Value: 'ServerData/[BuildTarget]'
       - m_Id: fffd5ed33a3b14e4ea55536ef3a3cc64
-        m_Value: <undefined>
+        m_Value: 'https://tilerunner-85b77.web.app/[BuildTarget]'
     m_ProfileEntryNames:
     - m_Id: 0ce77336f0213be4aab3de17d92b3c14
       m_Name: Local.LoadPath
@@ -110,6 +112,7 @@ MonoBehaviour:
     - Locale-ja
     - Locale-ko
     - Preload
+    - MapSO
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 346411ac066e2044aafeaacfcdfee316, type: 2}

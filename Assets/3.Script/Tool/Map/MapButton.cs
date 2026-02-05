@@ -1,4 +1,4 @@
-using NUnit.Framework.Internal;
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 
@@ -18,3 +18,4 @@ public class MapButton : Editor
             component.OnClickDeleteMapButton();
     }
 }
+#endif

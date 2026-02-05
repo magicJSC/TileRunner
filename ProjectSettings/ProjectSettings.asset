@@ -142,7 +142,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 0.1.0
+  bundleVersion: 1.0.0
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -165,7 +165,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.4
   androidMinAspectRatio: 1
   applicationIdentifier:
-    Android: com.sample.TileRunner
+    Android: com.sisonstudio.TileRunner
     Standalone: com.Unity-Technologies.com.unity.template.urp-blank
     iPhone: com.Unity-Technologies.com.unity.template.urp-blank
   buildNumber:
@@ -175,7 +175,7 @@ PlayerSettings:
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
   AndroidBundleVersionCode: 1
-  AndroidMinSdkVersion: 23
+  AndroidMinSdkVersion: 26
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
   aotOptions: 
@@ -259,11 +259,11 @@ PlayerSettings:
   templateDefaultScene: Assets/Scenes/SampleScene.unity
   useCustomMainManifest: 0
   useCustomLauncherManifest: 0
-  useCustomMainGradleTemplate: 0
+  useCustomMainGradleTemplate: 1
   useCustomLauncherGradleManifest: 0
   useCustomBaseGradleTemplate: 0
-  useCustomGradlePropertiesTemplate: 0
-  useCustomGradleSettingsTemplate: 0
+  useCustomGradlePropertiesTemplate: 1
+  useCustomGradleSettingsTemplate: 1
   useCustomProguardFile: 0
   AndroidTargetArchitectures: 3
   AndroidSplashScreenScale: 0
@@ -823,24 +823,25 @@ PlayerSettings:
   webGLCloseOnQuit: 0
   webWasm2023: 0
   scriptingDefineSymbols:
-    Android: DOTWEEN
-    EmbeddedLinux: DOTWEEN
+    Android: ENABLE_JSON_CATALOG;DOTWEEN
+    EmbeddedLinux: ENABLE_JSON_CATALOG;DOTWEEN
     GameCoreScarlett: DOTWEEN
     GameCoreXboxOne: DOTWEEN
     Kepler: DOTWEEN
-    LinuxHeadlessSimulation: DOTWEEN
-    Nintendo Switch: DOTWEEN
+    LinuxHeadlessSimulation: ENABLE_JSON_CATALOG;DOTWEEN
+    Nintendo Switch: ENABLE_JSON_CATALOG;DOTWEEN
     Nintendo Switch 2: DOTWEEN
-    PS4: DOTWEEN
+    PS4: ENABLE_JSON_CATALOG;DOTWEEN
     PS5: DOTWEEN
-    QNX: DOTWEEN
-    Standalone: DOTWEEN
+    QNX: ENABLE_JSON_CATALOG;DOTWEEN
+    Server: ENABLE_JSON_CATALOG
+    Standalone: ENABLE_JSON_CATALOG;DOTWEEN
     VisionOS: DOTWEEN
-    WebGL: DOTWEEN
-    Windows Store Apps: DOTWEEN
-    XboxOne: DOTWEEN
-    iPhone: DOTWEEN
-    tvOS: DOTWEEN
+    WebGL: ENABLE_JSON_CATALOG;DOTWEEN
+    Windows Store Apps: ENABLE_JSON_CATALOG;DOTWEEN
+    XboxOne: ENABLE_JSON_CATALOG;DOTWEEN
+    iPhone: ENABLE_JSON_CATALOG;DOTWEEN
+    tvOS: ENABLE_JSON_CATALOG;DOTWEEN
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

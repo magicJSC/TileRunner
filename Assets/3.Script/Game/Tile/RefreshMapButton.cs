@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 
@@ -13,3 +14,4 @@ public class RefreshMapButton : Editor
             component.RefreshMapList();
     }
 }
+#endif
