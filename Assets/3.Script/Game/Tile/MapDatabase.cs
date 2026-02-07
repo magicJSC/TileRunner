@@ -1,6 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEditor.AddressableAssets;
+using UnityEngine.AddressableAssets;
+
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -10,11 +14,12 @@ public class MapDatabase : MonoBehaviour
     public static MapDatabase Instance { get; private set; }
 
     [Header("Start Map")]
-    public AssetReferenceHexMapSO startMapRef;
+    public string startMapName;
+    public AssetReference startMapRef;
     public HexMapSO startMapFallback;
 
     [Header("All Maps")]
-    public List<AssetReferenceHexMapSO> mapReferences = new();
+    public List<string> mapNames = new();
     public List<HexMapSO> mapFallbackList = new();
 
     [Header("Difficulty Thresholds")]
@@ -62,7 +67,7 @@ public class MapDatabase : MonoBehaviour
         // Addressable 우선
         if (IsAddressableReady())
         {
-            var map = AddressableManager.Instance.Get<HexMapSO>(startMapRef);
+            var map = AddressableManager.Instance.Get<HexMapSO>(startMapName);
             if (map != null)
                 return map;
         }
@@ -76,7 +81,7 @@ public class MapDatabase : MonoBehaviour
         // Addressable 사용 가능
         if (IsAddressableReady())
         {
-            foreach (var reference in mapReferences)
+            foreach (var reference in mapNames)
             {
                 var map = AddressableManager.Instance.Get<HexMapSO>(reference);
                 if (map != null)
@@ -122,35 +127,42 @@ public class MapDatabase : MonoBehaviour
 #if UNITY_EDITOR
     public void RefreshMapList()
     {
-        mapReferences.Clear();
+        mapNames.Clear();
         mapFallbackList.Clear();
+        startMapName = string.Empty;
 
-        string startGuid = startMapRef != null
-            ? startMapRef.AssetGUID
-            : string.Empty;
+        // 1. Start Map 정보만 따로 추출해서 변수에 저장
+        if (startMapRef != null)
+        {
+            string startPath = AssetDatabase.GUIDToAssetPath(startMapRef.AssetGUID);
+            HexMapSO startMap = AssetDatabase.LoadAssetAtPath<HexMapSO>(startPath);
 
+            if (startMap != null)
+            {
+                startMapName = startMap.name; 
+            }
+        }
+
+        // 2. 프로젝트 내 모든 HexMapSO 검색 (중복 없이 리스트 채우기)
         string[] guids = AssetDatabase.FindAssets("t:HexMapSO");
 
         foreach (string guid in guids)
         {
-            if (!string.IsNullOrEmpty(startGuid) && guid == startGuid)
-                continue;
-
             string path = AssetDatabase.GUIDToAssetPath(guid);
             HexMapSO map = AssetDatabase.LoadAssetAtPath<HexMapSO>(path);
 
-            if (map == null)
+            if (map == null) continue;
+
+            // 이미 리스트에 들어있다면 (방금 넣은 StartMap인 경우 등) 스킵
+            if (mapNames.Contains(map.name) || map.name == startMapName)
                 continue;
 
-            // Addressable용
-            mapReferences.Add(new AssetReferenceHexMapSO(guid));
-
-            // Fallback용
+            mapNames.Add(map.name);
             mapFallbackList.Add(map);
         }
 
         EditorUtility.SetDirty(this);
-        Debug.Log($"[MapDatabase] Maps refreshed : {mapReferences.Count}");
+        Debug.Log($"[MapDatabase] 리프레시 완료! 시작 맵: {startMapName}, 총 맵 개수: {mapNames.Count}");
     }
 #endif
 }
