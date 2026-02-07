@@ -48,7 +48,8 @@ MonoBehaviour:
   - m_GUID: 4e806b02883f98744a5ceedca10fd74b
     m_Address: Assets/6.SO/HexMap/Difficult3/Map3_4.asset
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - MapSO
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6ad656c2dece2f34293f03cf9580f712
     m_Address: Assets/6.SO/HexMap/StartMap.asset
@@ -95,7 +96,8 @@ MonoBehaviour:
   - m_GUID: da4825d818e62ff4e8b6dd43fb00ed7a
     m_Address: Assets/6.SO/HexMap/Difficult3/Map3_3.asset
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - MapSO
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f2706111e6e3a24458ba7a7a6f5fd41c
     m_Address: Assets/6.SO/HexMap/Difficult1/Map1_4.asset
@@ -106,12 +108,14 @@ MonoBehaviour:
   - m_GUID: f957f39498925f243a610b343fe6c7dd
     m_Address: Assets/6.SO/HexMap/Difficult3/Map3_1.asset
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - MapSO
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ff8164d4944c2534d91eeb8ed71eb0d2
     m_Address: Assets/6.SO/HexMap/Difficult3/Map3_2.asset
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - MapSO
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9c925745f929a924c98a4645ca3b4150, type: 2}

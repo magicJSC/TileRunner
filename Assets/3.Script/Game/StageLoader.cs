@@ -8,9 +8,6 @@ public class StageLoader : MonoBehaviour
 {
     UI_Loading loadingUI;
 
-    [Header("Preload Addressable Assets")]
-    [SerializeField] private List<AssetReference> preloadAssets;
-
     private void Awake()
     {
         loadingUI = GetComponent<UI_Loading>();
