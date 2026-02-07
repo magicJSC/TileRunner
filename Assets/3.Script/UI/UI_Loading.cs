@@ -63,6 +63,7 @@ public class UI_Loading : MonoBehaviour
 
     public void StartGame()
     {
+        Debug.Log("∞‘¿”æ¿ ∑ŒµÂ");
         SceneManager.LoadScene("GameScene");
     }
 }
