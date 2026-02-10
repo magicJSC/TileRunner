@@ -28,7 +28,7 @@ public class BuildScript
                 .Where(s => s.enabled)
                 .Select(s => s.path)
                 .ToArray(),
-            locationPathName = "Builds/Android/Project.aab",
+            locationPathName = "Builds/Android/TileRunner.aab",
             target = BuildTarget.Android,
             options = BuildOptions.None
         };
