@@ -5,7 +5,8 @@ platform :android do
   lane :internal_release do
     upload_to_play_store(
       track: 'internal',
-      aab: 'Builds/Android/TileRunner.aab' # 유니티가 만든 AAB 파일 경로
+      aab: '.../Project_Unity/TileRunner/Builds/Android/TileRunner.aab', # 유니티가 만든 AAB 파일 경로
+      release_status: 'draft'
     )
   end
 end
