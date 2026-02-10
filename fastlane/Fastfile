@@ -1,18 +1,11 @@
 default_platform(:android)
 
 platform :android do
-  desc "내부 테스트 트랙에 유니티 빌드(AAB) 업로드"
+  desc "내부 테스트 트랙으로 업로드"
   lane :internal_release do
     upload_to_play_store(
-      package_name: "com.sisonstudio.TileRunner", # 본인의 유니티 패키지 네임으로 수정!
-      json_key: "fastlane/keys/google-key.json",      # JSON 키 파일 경로
-      track: "internal",                         # 내부 테스트 트랙
-      aab: "Builds/Android/Project.aab",        # 유니티 빌드 스크립트에서 지정한 경로
-      skip_upload_metadata: true,                
-      skip_upload_images: true,                  
-      skip_upload_screenshots: true
+      track: 'internal',
+      aab: 'Builds/Android/TileRunner.aab' # 유니티가 만든 AAB 파일 경로
     )
-    
-    notification(subtitle: "배포 완료", message: "구글 내부 테스트 업로드가 완료되었습니다.")
   end
 end
