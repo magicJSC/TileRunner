@@ -116,6 +116,7 @@ public class UI_GameOver : MonoBehaviour
     /// </summary>
     public void ResetGame()
     {
+        GameManager.Instance.revived = false;
         SceneManager.LoadScene("GameScene");
     }
 
