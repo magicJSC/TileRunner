@@ -50,37 +50,43 @@ public class AddressableManager : Singleton<AddressableManager>
 
     public IEnumerator LoadAssetsByLabel(string label)
     {
-        // 1. 해당 라벨을 가진 모든 에셋 로드 시도
-        // <UnityEngine.Object>로 로드하면 프리팹, 텍스처, 사운드 등 모두 가져올 수 있습니다.
         AsyncOperationHandle<IList<UnityEngine.Object>> handle =
-            Addressables.LoadAssetsAsync<UnityEngine.Object>(label, (asset) =>
-            {
-                // 각 에셋이 로드될 때마다 실행되는 콜백 (선택 사항)
-                // 여기에서 개별 에셋의 로드 완료 처리를 할 수 있습니다.
-            });
+            Addressables.LoadAssetsAsync<UnityEngine.Object>(label, null);
 
         yield return handle;
 
         if (handle.Status == AsyncOperationStatus.Succeeded)
         {
-            // 2. 로드된 결과물들을 loadedAssets 딕셔너리에 저장
             IList<UnityEngine.Object> results = handle.Result;
-
             foreach (var obj in results)
             {
-                // 어드레서블 내부 이름(Address)을 키로 사용하거나, 
-                // 프로젝트 규칙에 따라 이름을 키로 사용할 수 있습니다.
                 if (!loadedAssets.ContainsKey(obj.name))
                 {
                     loadedAssets.Add(obj.name, obj);
+                    Debug.Log($"'{obj.name}' 로드 성공: {obj}");
                 }
             }
-
-            Debug.Log($"[AddressableManager] 라벨 '{label}' 로드 완료! (총 {results.Count}개)");
+            Debug.Log($"'{label}' 로드 성공: {results.Count}개");
         }
         else
         {
-            Debug.LogError($"[AddressableManager] 라벨 '{label}' 로드 실패!");
+            // 핵심 디버깅 정보 출력
+            Debug.LogError($"[AddressableManager] '{label}' 로드 실패!");
+
+            // 1. 에러의 근본 원인 (예외 객체)
+            if (handle.OperationException != null)
+            {
+                Debug.LogError($"에러 원인(Exception): {handle.OperationException.Message}");
+
+                // 만약 네트워크 에러라면 InnerException에 더 자세한 정보가 있을 수 있습니다.
+                if (handle.OperationException.InnerException != null)
+                {
+                    Debug.LogError($"상세 에러(Inner): {handle.OperationException.InnerException.Message}");
+                }
+            }
+
+            // 2. 핸들 상태 확인
+            Debug.LogError($"핸들 상태: {handle.Status}");
         }
 
         IsReady = true;
