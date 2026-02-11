@@ -6,7 +6,11 @@ platform :android do
     upload_to_play_store(
       track: 'internal',
       aab: 'C:/ProgramData/Jenkins/.jenkins/workspace/Unity_Android_Build/Builds/Android/TileRunner.aab', # 유니티가 만든 AAB 파일 경로
-      release_status: 'draft'
+      release_status: 'draft',
+      json_key: 'C:/Users/jeong/Project_Unity/fastlane/keys/google-key.json',
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
     )
   end
 end
