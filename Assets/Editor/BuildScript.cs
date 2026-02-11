@@ -29,6 +29,11 @@ public class BuildScript
 
         Debug.Log($"[CI] Final PlayerSettings VersionCode: {PlayerSettings.Android.bundleVersionCode}");
 
+        PlayerSettings.Android.useCustomKeystore = true;
+        PlayerSettings.Android.keystorePass = "Bajil1016!"; // 키스토어 비번
+        PlayerSettings.Android.keyaliasName = "tilerunner_upload";         // 키 에일리어스 이름
+        PlayerSettings.Android.keyaliasPass = "Bajil1016!";
+
         // 빌드 폴더 생성
         System.IO.Directory.CreateDirectory("Builds/Android");
 
