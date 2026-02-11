@@ -93,20 +93,31 @@ public class BuildScript
     private static void UploadToFirebase()
     {
         string serverDataPath = Path.GetFullPath(Path.Combine(Application.dataPath, "..", "ServerData", "Android"));
-        string publicAndroidPath = Path.GetFullPath(Path.Combine(Application.dataPath, "..", "public", "Android"));
+        string publicPath = Path.GetFullPath(Path.Combine(Application.dataPath, "..", "public")); // firebase.json의 public 경로
+        string publicAndroidPath = Path.Combine(publicPath, "Android");
 
-        // 2. [중요] 기존 public/Android 폴더를 완전히 삭제해서 옛날 해시 파일 제거
-        if (Directory.Exists(publicAndroidPath))
+        try
         {
-            UnityEngine.Debug.Log("[CI/CD] Cleaning old assets in public folder...");
-            Directory.Delete(publicAndroidPath, true);
+            // 2. 기존 public/Android 폴더 삭제 (쓰레기 파일 완전 제거)
+            if (Directory.Exists(publicAndroidPath))
+            {
+                UnityEngine.Debug.Log("[CI/CD] Cleaning old bundles...");
+                Directory.Delete(publicAndroidPath, true);
+            }
+
+            // 3. 폴더 다시 만들고 최신 파일만 복사
+            Directory.CreateDirectory(publicAndroidPath);
+            foreach (string file in Directory.GetFiles(serverDataPath))
+            {
+                string destFile = Path.Combine(publicAndroidPath, Path.GetFileName(file));
+                File.Copy(file, destFile, true);
+            }
+
+            UnityEngine.Debug.Log("[CI/CD] File preparation complete. Starting Firebase Deploy...");
         }
-        Directory.CreateDirectory(publicAndroidPath);
-
-        // 3. 최신 빌드 파일만 복사
-        foreach (string file in Directory.GetFiles(serverDataPath))
+        catch (Exception e)
         {
-            File.Copy(file, Path.Combine(publicAndroidPath, Path.GetFileName(file)));
+            UnityEngine.Debug.LogError($"[CI/CD] Cleanup/Copy Failed: {e.Message}");
         }
 
         // 2. 평소 쓰시던 deploy 명령 실행
