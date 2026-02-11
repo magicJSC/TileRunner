@@ -1,28 +1,40 @@
 using UnityEditor;
 using System.Linq;
+using UnityEngine;
 
 public class BuildScript
 {
     public static void PerformBuild()
     {
-        // 1. 빌드 폴더 생성
+        Debug.Log("=== BuildScript.PerformBuild Started ===");
+
+        // Jenkins 환경 변수 확인
+        string buildNumber = System.Environment.GetEnvironmentVariable("BUILD_NUMBER");
+        int versionCode;
+
+        if (!string.IsNullOrEmpty(buildNumber) && int.TryParse(buildNumber, out int parsed))
+        {
+            versionCode = parsed;
+            Debug.Log($"[CI] Using BUILD_NUMBER from Jenkins: {versionCode}");
+        }
+        else
+        {
+            versionCode = PlayerSettings.Android.bundleVersionCode + 1;
+            Debug.Log($"[CI] BUILD_NUMBER not found. Incrementing local version: {versionCode}");
+        }
+
+        // 버전 코드 강제 설정 및 저장
+        PlayerSettings.Android.bundleVersionCode = versionCode;
+        AssetDatabase.SaveAssets(); // 설정값을 디스크에 강제 저장
+
+        Debug.Log($"[CI] Final PlayerSettings VersionCode: {PlayerSettings.Android.bundleVersionCode}");
+
+        // 빌드 폴더 생성
         System.IO.Directory.CreateDirectory("Builds/Android");
 
-        // 2. 버전 코드 자동 증가 (현재 번호에서 +1)
-        PlayerSettings.Android.bundleVersionCode += 1;
-
-        // (선택) 버전 이름도 바꾸고 싶다면? 예: "1.0.21" (21은 빌드코드)
-        // PlayerSettings.bundleVersion = "1.0." + PlayerSettings.Android.bundleVersionCode;
-
-        // 3. 빌드 타겟 설정 (AAB)
         EditorUserBuildSettings.buildAppBundle = true;
 
-        // 4. 키스토어 비밀번호 설정
-        PlayerSettings.Android.keystorePass = "Bajil1016!";
-        PlayerSettings.Android.keyaliasPass = "Bajil1016!";
-
-        // 5. 빌드 옵션 설정
-        BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions
+        BuildPlayerOptions options = new BuildPlayerOptions
         {
             scenes = EditorBuildSettings.scenes
                 .Where(s => s.enabled)
@@ -33,7 +45,7 @@ public class BuildScript
             options = BuildOptions.None
         };
 
-        // 6. 실행
-        BuildPipeline.BuildPlayer(buildPlayerOptions);
+        var report = BuildPipeline.BuildPlayer(options);
+        Debug.Log($"=== Build Finished. Result: {report.summary.result} ===");
     }
 }
