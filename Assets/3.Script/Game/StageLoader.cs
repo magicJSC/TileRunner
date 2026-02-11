@@ -22,7 +22,6 @@ public class StageLoader : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
 
         // AddressableManager가 AssetReference를 받도록 변경
-        yield return AddressableManager.Instance.CheckAndDownloadAll("Asset");
         yield return AddressableManager.Instance.CheckAndDownloadAllAndLoad("MapSO");
 
         //loadingUI.Hide();
