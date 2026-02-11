@@ -92,13 +92,21 @@ public class BuildScript
 
     private static void UploadToFirebase()
     {
-        // 빌드 직후 생성된 ServerData/Android 폴더 경로 (절대경로)
         string serverDataPath = Path.GetFullPath(Path.Combine(Application.dataPath, "..", "ServerData", "Android"));
+        // 본인의 firebase.json에 설정된 public 폴더 경로 (보통 "public")
+        string firebasePublicPath = Path.GetFullPath(Path.Combine(Application.dataPath, "..", "public", "Android"));
 
-        // Firebase Storage 업로드 명령어
-        // --non-interactive: 젠킨스에서 입력 대기를 방지합니다.
-        // -y: 모든 질문에 Yes
-        string command = $"firebase storage:upload \"{serverDataPath}/*\" --non-interactive";
+        // 1. 폴더 생성 및 파일 복사 (ServerData -> public/Android)
+        if (Directory.Exists(firebasePublicPath)) Directory.Delete(firebasePublicPath, true);
+        Directory.CreateDirectory(firebasePublicPath);
+
+        foreach (string file in Directory.GetFiles(serverDataPath))
+        {
+            File.Copy(file, Path.Combine(firebasePublicPath, Path.GetFileName(file)));
+        }
+
+        // 2. 평소 쓰시던 deploy 명령 실행
+        string command = "firebase deploy --only hosting";
 
         UnityEngine.Debug.Log($"[CI/CD] Executing Command: {command}");
 
