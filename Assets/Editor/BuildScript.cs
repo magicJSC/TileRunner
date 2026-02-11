@@ -93,16 +93,20 @@ public class BuildScript
     private static void UploadToFirebase()
     {
         string serverDataPath = Path.GetFullPath(Path.Combine(Application.dataPath, "..", "ServerData", "Android"));
-        // 본인의 firebase.json에 설정된 public 폴더 경로 (보통 "public")
-        string firebasePublicPath = Path.GetFullPath(Path.Combine(Application.dataPath, "..", "public", "Android"));
+        string publicAndroidPath = Path.GetFullPath(Path.Combine(Application.dataPath, "..", "public", "Android"));
 
-        // 1. 폴더 생성 및 파일 복사 (ServerData -> public/Android)
-        if (Directory.Exists(firebasePublicPath)) Directory.Delete(firebasePublicPath, true);
-        Directory.CreateDirectory(firebasePublicPath);
+        // 2. [중요] 기존 public/Android 폴더를 완전히 삭제해서 옛날 해시 파일 제거
+        if (Directory.Exists(publicAndroidPath))
+        {
+            UnityEngine.Debug.Log("[CI/CD] Cleaning old assets in public folder...");
+            Directory.Delete(publicAndroidPath, true);
+        }
+        Directory.CreateDirectory(publicAndroidPath);
 
+        // 3. 최신 빌드 파일만 복사
         foreach (string file in Directory.GetFiles(serverDataPath))
         {
-            File.Copy(file, Path.Combine(firebasePublicPath, Path.GetFileName(file)));
+            File.Copy(file, Path.Combine(publicAndroidPath, Path.GetFileName(file)));
         }
 
         // 2. 평소 쓰시던 deploy 명령 실행
