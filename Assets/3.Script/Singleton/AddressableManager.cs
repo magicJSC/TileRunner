@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -155,6 +156,7 @@ public class AddressableManager : Singleton<AddressableManager>
     // List<AssetReference> 대신 string(라벨 이름)을 받도록 변경
     public IEnumerator CheckAndDownloadAll(string label)
     {
+        Debug.Log($"{label} 다운로드");
         // 1. 카탈로그 업데이트 (기존 코드와 동일)
         var checkHandle = Addressables.CheckForCatalogUpdates(false);
         yield return checkHandle;
@@ -177,10 +179,12 @@ public class AddressableManager : Singleton<AddressableManager>
             Addressables.Release(downloadHandle);
         }
         Addressables.Release(sizeHandle);
+        Debug.Log($"{label} 다운로드 끝");
     }
 
     public IEnumerator CheckAndDownloadAllAndLoad(string label)
     {
+        Debug.Log($"{label} 다운로드");
         // 1. 카탈로그 업데이트 (기존 코드와 동일)
         var checkHandle = Addressables.CheckForCatalogUpdates(false);
         yield return checkHandle;
@@ -204,6 +208,7 @@ public class AddressableManager : Singleton<AddressableManager>
         }
         Addressables.Release(sizeHandle);
 
+        Debug.Log($"{label} 다운로드 끝");
         yield return LoadAssetsByLabel(label);
     }
     #endregion
