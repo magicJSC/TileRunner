@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterManger : MonoBehaviour
+public class CharacterManger : Singleton<CharacterManger>
 {
-    public static CharacterManger Instance { get; private set; }
 
     [Header("Store")]
     public Camera storeCam;
@@ -15,34 +14,20 @@ public class CharacterManger : MonoBehaviour
     [Header("Data")]
     [SerializeField] public List<CharacterData> characterDatas;
 
-    [HideInInspector]
-    public List<bool> usableList;
+    public List<bool> usableList = new List<bool>();
 
     public int useIndex = 0;
 
     [Header("Player")]
     [SerializeField]public Transform playerSpawnPos;
 
-    void Awake()
+    void Start()
     {
-        // 싱글톤 초기화
-        if (Instance == null)
-            Instance = this;
         InitUsableList();
     }
     
     void InitUsableList()
     {
-        usableList = new List<bool>();
-        for (int i = 0; i < characterDatas.Count; i++)
-        {
-            usableList.Add(false);
-        }
-
-        // 처음 캐릭터 2개는 기본으로 사용 가능
-        usableList[0] = true;
-        usableList[1] = true;
-
         ChangeCharacter(useIndex);
     }
 
