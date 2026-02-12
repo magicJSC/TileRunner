@@ -76,9 +76,14 @@ public class BuildScript
         AddressableAssetSettings.CleanPlayerContent();
 
         // 3. 빌드 실행
-        UnityEngine.Debug.Log("=== [CI/CD] Starting Addressables Build Player Content ===");
-        // out 파라미터를 사용하여 에러를 직접 확인
+        // BuildScript.cs 수정 예시
         AddressableAssetSettings.BuildPlayerContent(out AddressablesPlayerBuildResult result);
+        if (!string.IsNullOrEmpty(result.Error))
+        {
+            // 단순 SBP Error 외에 구체적인 이유가 담겨있는지 확인
+            UnityEngine.Debug.LogError($"[CI/CD] 구체적 에러 내용: {result.Error}");
+            throw new Exception("Addressables Build Failed: " + result.Error);
+        }
 
         // 4. 에러가 있다면 상세 내용 출력 후 중단
         if (!string.IsNullOrEmpty(result.Error))
