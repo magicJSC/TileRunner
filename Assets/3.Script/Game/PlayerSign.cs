@@ -13,6 +13,12 @@ public class PlayerSign : MonoBehaviour
         StartCoroutine(MoveCor());
     }
 
+    private void OnDestroy()
+    {
+        if(playerSign != null)
+             Destroy(playerSign.gameObject);
+    }
+
     IEnumerator MoveCor()
     {
         while (true)
