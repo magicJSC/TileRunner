@@ -20,6 +20,7 @@ public class StoreSwipe : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
 
     void Start()
     {
+        currentIndex = CharacterManger.Instance.useIndex;
         cam = CharacterManger.Instance.storeCam;
         characterPoints = CharacterManger.Instance.characterPoints;
 

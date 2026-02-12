@@ -22,12 +22,7 @@ public class UI_MoveHelp : MonoBehaviour
 
     void RestartAction()
     {
-        StartCoroutine(ShowMoveHelp());
-    }
-
-    IEnumerator ShowMoveHelp()
-    {
-        yield return new WaitForSeconds(2f);
         gameObject.SetActive(true);
     }
+
 }

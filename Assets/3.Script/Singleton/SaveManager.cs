@@ -47,9 +47,9 @@ public class SaveManager : Singleton<SaveManager>
             GameManager.Instance.Score = (int)PlayerPrefs.GetFloat(bestScoreKey);
             CharacterManger.Instance.useIndex = PlayerPrefs.GetInt(useKey);
 
-            for (int i = 0; i < CharacterManger.Instance.usableList.Count; i++)
+            for (int i = 0; i < CharacterManger.Instance.characterDatas.Count; i++)
             {
-                CharacterManger.Instance.usableList[i] = PlayerPrefs.GetInt(skinKey + i) == 1;
+                CharacterManger.Instance.usableList.Add(PlayerPrefs.GetInt(skinKey + i) == 1);
             }
         }
         else

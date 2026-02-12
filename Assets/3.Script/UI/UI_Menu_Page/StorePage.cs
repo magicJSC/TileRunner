@@ -24,14 +24,22 @@ public class StorePage : MonoBehaviour
         leftArrow = Util.FindChild(gameObject, "LeftArrow");
         rightArrow = Util.FindChild(gameObject, "RightArrow");
 
-        coinText.text = $"{GameManager.Instance.Coin}";
+        GameManager.Instance.coinAction += SetCoin;
+        SetCoin(GameManager.Instance.Coin);
 
         characterBtn = Util.FindChild<Image>(gameObject, "CharacterBtn");
         purchaseBtn = Util.FindChild<Image>(gameObject, "PurchaseBtn");
         usingBack = Util.FindChild(gameObject, "UsingBack");
 
+
+
         SwipeAction(CharacterManger.Instance.useIndex);
         InitAction();
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.coinAction -= SetCoin;
     }
 
     void InitAction()
@@ -105,6 +113,11 @@ public class StorePage : MonoBehaviour
         priceText.text = $"{CharacterManger.Instance.GetCharacterData(selectIndex).money}";
     }
 
+    void SetCoin(int coin)
+    {
+        coinText.text = $"{coin}";
+    }
+
     /// <summary>
     /// 캐릭터 구입
     /// </summary>
@@ -115,7 +128,6 @@ public class StorePage : MonoBehaviour
         {
             GameManager.Instance.Coin -= data.money;
 
-            coinText.text = $"{GameManager.Instance.Coin}";
             CharacterManger.Instance.ChangeUsable(selectIndex);
             ChangeUI();
         }
