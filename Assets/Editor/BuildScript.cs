@@ -111,6 +111,13 @@ public class BuildScript
         string serverDataPath = Path.GetFullPath(Path.Combine(Application.dataPath, "..", "ServerData", "Android"));
         string publicAndroidPath = Path.GetFullPath(Path.Combine(Application.dataPath, "..", "public", "Android"));
 
+        // ServerData가 없으면 빌드 실패로 간주
+        if (!Directory.Exists(serverDataPath))
+        {
+            UnityEngine.Debug.LogError($"[CI/CD] ServerData 경로가 없습니다: {serverDataPath}");
+            return; // 여기서 Exception을 던지면 PerformBuild가 중단됩니다.
+        }
+
         try
         {
             // 2. [강력 삭제] Android 폴더가 있으면 하위 파일까지 싹 지움
