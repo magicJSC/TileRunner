@@ -63,17 +63,32 @@ public class BuildScript
 
     private static void BuildAddressables()
     {
-        UnityEngine.Debug.Log("=== [CI/CD] Cleaning Addressables Content ===");
-        AddressableAssetSettings.CleanPlayerContent(); // 이전 빌드 찌꺼기 제거
+        // 1. 설정 파일 로드 확인
+        var settings = AddressableAssetSettingsDefaultObject.Settings;
+        if (settings == null)
+        {
+            UnityEngine.Debug.LogError("[CI/CD] Addressable Settings를 찾지 못했습니다.");
+            return;
+        }
 
-        UnityEngine.Debug.Log("=== [CI/CD] Building Addressables Player Content ===");
+        // 2. [중요] 이전 빌드 데이터 클린업
+        UnityEngine.Debug.Log("=== [CI/CD] Cleaning Old Addressables Data ===");
+        AddressableAssetSettings.CleanPlayerContent();
+
+        // 3. 빌드 실행
+        UnityEngine.Debug.Log("=== [CI/CD] Starting Addressables Build Player Content ===");
+        // out 파라미터를 사용하여 에러를 직접 확인
         AddressableAssetSettings.BuildPlayerContent(out AddressablesPlayerBuildResult result);
 
+        // 4. 에러가 있다면 상세 내용 출력 후 중단
         if (!string.IsNullOrEmpty(result.Error))
         {
-            UnityEngine.Debug.LogError($"[CI/CD] Addressables Build Error: {result.Error}");
-            EditorApplication.Exit(1);
+            UnityEngine.Debug.LogError($"[CI/CD] Addressables Build 실패: {result.Error}");
+            // 강제 종료하지 않고 Exception을 던져서 로그를 남기게 함
+            throw new System.Exception("Addressables Build Failed: " + result.Error);
         }
+
+        UnityEngine.Debug.Log("=== [CI/CD] Addressables Build SUCCESS ===");
     }
 
     private static BuildPlayerOptions GetBuildOptions()
