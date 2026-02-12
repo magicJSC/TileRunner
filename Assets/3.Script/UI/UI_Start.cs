@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UI_Start : MonoBehaviour
-{
-    [SerializeField] float playTerm;
-    [SerializeField] AudioClip music;
+{  
     Canvas canvas;
 
     Animator anim;
@@ -18,8 +16,6 @@ public class UI_Start : MonoBehaviour
         GameManager.Instance.openSettingAction += PlayOpenSetting;
         GameManager.Instance.beforeChangeSettingAction += PlayChangeSetting;
         GameManager.Instance.closeSettingAction += PlayCloseSetting;
-
-        StartCoroutine(PlayMusic());
     }
 
     private void OnDisable()
@@ -30,12 +26,7 @@ public class UI_Start : MonoBehaviour
         GameManager.Instance.closeSettingAction -= PlayCloseSetting;
     }
 
-    IEnumerator PlayMusic()
-    {
-        yield return new WaitForSeconds(playTerm);
-        SoundManager.Instance.PlayBGM(music, true);
-    }
-
+   
     void StartGame()
     {
         Destroy(gameObject);
