@@ -639,87 +639,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfe4e010212edaa46973d3e9d6b64f80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  preloadAssets:
-  - m_AssetGUID: bbbde684fd1a1e149b66d878619fa17e
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: 364bcf13f22850a489ee7d2ed54adab5
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 1
-  - m_AssetGUID: f2706111e6e3a24458ba7a7a6f5fd41c
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 1
-  - m_AssetGUID: 896eb576d31ca7842a56a62cf4f9778c
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 1
-  - m_AssetGUID: 6ad656c2dece2f34293f03cf9580f712
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 1
-  - m_AssetGUID: 203a7fc60f2772c4286c0f5a912ec9d6
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 1
-  - m_AssetGUID: 3f1180f160eb4a4488db0dbb7896d3ee
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 1
-  - m_AssetGUID: 7af5fea6324d6624a914a467c1bd8827
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 1
-  - m_AssetGUID: 436ec1986523dd341ad717c809abed5f
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 1
-  - m_AssetGUID: 331871935adbf99418151debc3d8a865
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 1
-  - m_AssetGUID: a3834d1c786391a4e8714dc49d98dbae
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 1
-  - m_AssetGUID: 6ef97d65b68ae5946a4508cc3c668c38
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 1
-  - m_AssetGUID: f957f39498925f243a610b343fe6c7dd
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: ff8164d4944c2534d91eeb8ed71eb0d2
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: da4825d818e62ff4e8b6dd43fb00ed7a
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: 4e806b02883f98744a5ceedca10fd74b
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 1
 --- !u!1 &1535680352
 GameObject:
   m_ObjectHideFlags: 0
@@ -1198,6 +1117,7 @@ GameObject:
   - component: {fileID: 1851609043}
   - component: {fileID: 1851609048}
   - component: {fileID: 1851609047}
+  - component: {fileID: 1851609049}
   m_Layer: 5
   m_Name: UI_Studio
   m_TagString: Untagged
@@ -1323,6 +1243,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1851609049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851609042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6b10e01e8f39094eb0a5e328f1595e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1879705350
 GameObject:
   m_ObjectHideFlags: 0
