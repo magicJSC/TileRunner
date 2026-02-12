@@ -21,16 +21,6 @@ public class CharacterManger : Singleton<CharacterManger>
     [Header("Player")]
     [SerializeField]public Transform playerSpawnPos;
 
-    void Start()
-    {
-        InitUsableList();
-    }
-    
-    void InitUsableList()
-    {
-        ChangeCharacter(useIndex);
-    }
-
     public CharacterData GetCharacterData(int index)
     {
         return characterDatas[index];
@@ -52,7 +42,12 @@ public class CharacterManger : Singleton<CharacterManger>
             Destroy(GameManager.Instance.Player.gameObject);  
 
         useIndex = index;
-        Instantiate(characterDatas[index].characterPrefab, playerSpawnPos.position, Quaternion.identity);
+        SpawnCharacter();
+    }
+
+    public void SpawnCharacter()
+    {
+        Instantiate(characterDatas[useIndex].characterPrefab, playerSpawnPos.position, Quaternion.identity);
     }
 }
 
