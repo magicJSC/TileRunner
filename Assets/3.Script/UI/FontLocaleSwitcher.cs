@@ -6,11 +6,16 @@ public class FontLocaleSwitcher : MonoBehaviour
    
     TextMeshProUGUI text;
 
-    void Awake()
+    void Start()
     {
         LocalizationManager.Instance.OnLanguageChanged += OnLocaleChanged;
         text = GetComponent<TextMeshProUGUI>();
         OnLocaleChanged();
+    }
+
+    private void OnDisable()
+    {
+        LocalizationManager.Instance.OnLanguageChanged -= OnLocaleChanged;
     }
 
     void OnLocaleChanged()
