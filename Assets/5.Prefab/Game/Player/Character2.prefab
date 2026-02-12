@@ -1050,8 +1050,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b6b41d6403220040b54274ff8367abc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnSpeed: 300
-  moveSpeed: 5
+  turnSpeed: 400
+  moveSpeed: 4
   jumpHeight: 3
   gravity: -12
   moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
