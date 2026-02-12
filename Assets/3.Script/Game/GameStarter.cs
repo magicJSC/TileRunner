@@ -11,6 +11,9 @@ public class GameStarter : MonoBehaviour
         GameManager.Instance.Score = 0;
         GameManager.Instance.isGameOver = false;
 
+        moveAction.action.Enable();
+        CharacterManger.Instance.ChangeCharacter(CharacterManger.Instance.useIndex);
+
         GameManager.Instance.isStart = false;
 
         GameManager.Instance.restartAction += ReStartAction;
@@ -30,6 +33,8 @@ public class GameStarter : MonoBehaviour
             yield return null;
 
             moveInput = moveAction.action.ReadValue<Vector2>();
+            Debug.Log(moveInput);
+            Debug.Log(moveAction.action.enabled);
 
             if (GameManager.Instance.isStart)
                 yield break;
