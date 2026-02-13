@@ -17,8 +17,8 @@ public class TileManager : MonoBehaviour
     public GameObject goalTile;
     public int radius = 5;
     public float tileSize = 1f;
-    public Transform playerTransform;
     public GameObject tileMapParent;
+    private Transform playerTransform;
 
     [Header("특별 타일")]
     public GameObject dangerTile;
@@ -69,6 +69,7 @@ public class TileManager : MonoBehaviour
 
     void Start()
     {
+        playerTransform = CharacterManger.Instance.playerSpawnPos;
         LoadMap(MapDatabase.Instance.GetStartMap(), 0);
         
         GameManager.Instance.startGameAction += StartGame;
