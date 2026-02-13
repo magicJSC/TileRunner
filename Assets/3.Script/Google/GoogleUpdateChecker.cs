@@ -20,6 +20,7 @@ public class GoogleUpdateChecker : MonoBehaviour
 
     IEnumerator CheckForUpdate()
     {
+        Debug.Log("구글 플레이 스토어에서 업데이트 가능 여부를 확인합니다...");
         PlayAsyncOperation<AppUpdateInfo, AppUpdateErrorCode> appUpdateInfoOperation =
             appUpdateManager.GetAppUpdateInfo();
 
