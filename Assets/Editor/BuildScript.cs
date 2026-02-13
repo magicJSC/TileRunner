@@ -114,7 +114,7 @@ public class BuildScript
     {
         // 1. 경로 정의
         string serverDataPath = Path.GetFullPath(Path.Combine(Application.dataPath, "..", "ServerData", "Android"));
-        string publicAndroidPath = Path.GetFullPath(Path.Combine(Application.dataPath, "..", "public", "Android"));
+        string publicAndroidPath = Path.GetFullPath(Path.Combine(Application.dataPath, "..", "ServerData", "Android"));
 
         // ServerData가 없으면 빌드 실패로 간주
         if (!Directory.Exists(serverDataPath))
