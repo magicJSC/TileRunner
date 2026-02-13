@@ -38,3 +38,39 @@ MonoBehaviour:
     type: 0
   - coord: {x: 2, y: -1}
     type: 0
+  - coord: {x: -2, y: 0}
+    type: 0
+  - coord: {x: -3, y: 4}
+    type: 0
+  - coord: {x: -2, y: 4}
+    type: 0
+  - coord: {x: 1, y: 1}
+    type: 0
+  - coord: {x: 1, y: 0}
+    type: 0
+  - coord: {x: 2, y: -2}
+    type: 0
+  - coord: {x: 2, y: -3}
+    type: 0
+  - coord: {x: 0, y: -3}
+    type: 0
+  - coord: {x: 1, y: -3}
+    type: 0
+  - coord: {x: 0, y: 3}
+    type: 0
+  - coord: {x: 1, y: 3}
+    type: 0
+  - coord: {x: 2, y: 2}
+    type: 0
+  - coord: {x: 3, y: 1}
+    type: 0
+  - coord: {x: 4, y: -3}
+    type: 0
+  - coord: {x: 4, y: -2}
+    type: 0
+  - coord: {x: -4, y: 3}
+    type: 0
+  - coord: {x: -4, y: 2}
+    type: 0
+  - coord: {x: -3, y: 1}
+    type: 0
