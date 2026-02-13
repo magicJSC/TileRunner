@@ -9,8 +9,13 @@ public class GoogleUpdateChecker : MonoBehaviour
 
     void Start()
     {
+        // 안드로이드 기기에서만 실행되도록 조건 추가
+#if UNITY_ANDROID && !UNITY_EDITOR
         appUpdateManager = new AppUpdateManager();
         StartCoroutine(CheckForUpdate());
+#else
+        Debug.Log("에디터 환경에서는 구글 업데이트 체크를 건너뜁니다.");
+#endif
     }
 
     IEnumerator CheckForUpdate()
