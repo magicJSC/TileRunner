@@ -19,7 +19,7 @@ public class BuildScript
         SetupAndroidSettings();
 
         // 2. 어드레서블 데이터 빌드 (aa 폴더 생성 및 ServerData 업데이트)
-        BuildAddressables();
+       // BuildAddressables();
 
         // 3. AAB 플레이어 빌드 실행
         BuildPlayerOptions buildOptions = GetBuildOptions();
