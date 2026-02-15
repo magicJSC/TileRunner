@@ -183,21 +183,20 @@ public class BuildScript
 
     private static void ResolveAndroidDependencies()
     {
-        UnityEngine.Debug.Log("=== [CI/CD] Starting Android Dependency Resolution ===");
+        UnityEngine.Debug.Log("=== [CI/CD] Triggering Synchronous Resolution ===");
 
-        // 1. GPGS 11.01 버전에서는 별도의 Upgrader 호출 없이 
-        // 바로 Resolver를 통해 종속성을 정리하는 것이 안정적입니다.
+        // 메뉴의 'Force Resolve'를 직접 클릭하는 것과 동일한 효과 (동기식 동작 확률 높음)
+        System.Type resolverType = System.Type.GetType("Google.JarResolver.PlayServicesResolver, Google.JarResolver");
+        var menuResolveMethod = resolverType?.GetMethod("MenuResolve",
+            System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
 
-        // 2. Force Resolve 실행
-        // 메뉴에서 클릭하는 것과 동일한 효과를 줍니다.
-        PlayServicesResolver.Resolve(
-            forceResolution: true
-        );
+        if (menuResolveMethod != null)
+        {
+            menuResolveMethod.Invoke(null, null);
+            UnityEngine.Debug.Log("=== [CI/CD] MenuResolve Invoked ===");
+        }
 
-        // 3. 유니티 6 및 최신 EDM4U에서 변경사항을 강제 반영
         AssetDatabase.Refresh();
-
-        UnityEngine.Debug.Log("=== [CI/CD] Dependency Resolution Request Sent ===");
 
     }
 }
