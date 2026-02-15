@@ -183,17 +183,42 @@ public class BuildScript
 
     private static void ResolveAndroidDependencies()
     {
-        UnityEngine.Debug.Log("=== [CI/CD] Triggering Synchronous Resolution ===");
+        UnityEngine.Debug.Log("=== [CI/CD] Starting Deep Scan for PlayServicesResolver ===");
 
-        // 메뉴의 'Force Resolve'를 직접 클릭하는 것과 동일한 효과 (동기식 동작 확률 높음)
-        System.Type resolverType = System.Type.GetType("Google.JarResolver.PlayServicesResolver, Google.JarResolver");
-        var menuResolveMethod = resolverType?.GetMethod("MenuResolve",
-            System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+        System.Type resolverType = null;
 
-        if (menuResolveMethod != null)
+        // 현재 프로젝트의 모든 어셈블리를 뒤져서 클래스를 찾습니다. (가장 확실한 방법)
+        foreach (var assembly in System.AppDomain.CurrentDomain.GetAssemblies())
         {
-            menuResolveMethod.Invoke(null, null);
-            UnityEngine.Debug.Log("=== [CI/CD] MenuResolve Invoked ===");
+            resolverType = assembly.GetType("Google.JarResolver.PlayServicesResolver");
+            if (resolverType != null) break;
+        }
+
+        if (resolverType != null)
+        {
+            // 1. 자동 해결 옵션 강제 활성화 (경고 무시용)
+            var autoProperty = resolverType.GetProperty("AutomaticResolutionEnabled",
+                System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+            autoProperty?.SetValue(null, true);
+
+            // 2. MenuResolve 메서드 찾기
+            var method = resolverType.GetMethod("MenuResolve",
+                System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+
+            if (method != null)
+            {
+                UnityEngine.Debug.Log("=== [CI/CD] Found MenuResolve! Invoking now... ===");
+                method.Invoke(null, null);
+                UnityEngine.Debug.Log("=== [CI/CD] MenuResolve Invoked ==="); // 이제 이 로그가 찍혀야 함
+            }
+            else
+            {
+                UnityEngine.Debug.LogError("=== [CI/CD] FAILED: Could not find MenuResolve method! ===");
+            }
+        }
+        else
+        {
+            UnityEngine.Debug.LogError("=== [CI/CD] FAILED: PlayServicesResolver class not found! Check EDM4U Plugin. ===");
         }
 
         AssetDatabase.Refresh();
