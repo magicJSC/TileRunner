@@ -1,3 +1,6 @@
+using Google.JarResolver;
+using GooglePlayGames.Editor; // 상단에 추가
+using GooglePlayServices;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -14,6 +17,8 @@ public class BuildScript
     public static void PerformBuild()
     {
         UnityEngine.Debug.Log("=== [CI/CD] Build Process Started ===");
+
+        ResolveAndroidDependencies();
 
         // 1. 플레이어 설정 (버전 코드 및 키스토어)
         SetupAndroidSettings();
@@ -174,5 +179,21 @@ public class BuildScript
             if (!string.IsNullOrEmpty(output)) UnityEngine.Debug.Log($"[Firebase Success]:\n{output}");
             if (!string.IsNullOrEmpty(error)) UnityEngine.Debug.LogError($"[Firebase Error]:\n{error}");
         }
+    }
+
+    private static void ResolveAndroidDependencies()
+    {
+        // 1. GPGS 11.01 버전에서는 별도의 Upgrader 호출 없이 
+        // 바로 Resolver를 통해 종속성을 정리하는 것이 안정적입니다.
+
+        // 2. Force Resolve 실행
+        // 메뉴에서 클릭하는 것과 동일한 효과를 줍니다.
+        PlayServicesResolver.Resolve(
+            forceResolution: true
+        );
+
+        // 3. 유니티 6 및 최신 EDM4U에서 변경사항을 강제 반영
+        AssetDatabase.Refresh();
+
     }
 }
