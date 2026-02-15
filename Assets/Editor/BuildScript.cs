@@ -18,8 +18,7 @@ public class BuildScript
     {
         UnityEngine.Debug.Log("=== [CI/CD] Build Process Started ===");
 
-        PlayServicesResolver.MenuResolve();
-        //ResolveAndroidDependencies();
+        ResolveAndroidDependencies();
 
         // 1. 플레이어 설정 (버전 코드 및 키스토어)
         SetupAndroidSettings();
