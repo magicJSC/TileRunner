@@ -183,45 +183,55 @@ public class BuildScript
 
     private static void ResolveAndroidDependencies()
     {
-        UnityEngine.Debug.Log("=== [CI/CD] Starting Deep Scan for PlayServicesResolver ===");
+        UnityEngine.Debug.Log("=== [CI/CD] Starting Advanced Scan for PlayServicesResolver ===");
 
         System.Type resolverType = null;
 
-        // 현재 프로젝트의 모든 어셈블리를 뒤져서 클래스를 찾습니다. (가장 확실한 방법)
-        foreach (var assembly in System.AppDomain.CurrentDomain.GetAssemblies())
+        // 프로젝트에 로드된 모든 어셈블리 중에서 이름을 기준으로 정확히 찾습니다.
+        var assemblies = System.AppDomain.CurrentDomain.GetAssemblies();
+        foreach (var assembly in assemblies)
         {
-            resolverType = assembly.GetType("Google.JarResolver.PlayServicesResolver");
-            if (resolverType != null) break;
+            // 버전 숫자가 포함된 폴더에 있어도 어셈블리 이름은 보통 동일합니다.
+            if (assembly.FullName.Contains("Google.JarResolver"))
+            {
+                resolverType = assembly.GetType("Google.JarResolver.PlayServicesResolver");
+                if (resolverType != null) break;
+            }
+        }
+
+        // 만약 위 방법으로 못 찾았다면, 모든 타입을 전수 조사합니다.
+        if (resolverType == null)
+        {
+            resolverType = assemblies
+                .SelectMany(a => a.GetTypes())
+                .FirstOrDefault(t => t.FullName == "Google.JarResolver.PlayServicesResolver");
         }
 
         if (resolverType != null)
         {
-            // 1. 자동 해결 옵션 강제 활성화 (경고 무시용)
-            var autoProperty = resolverType.GetProperty("AutomaticResolutionEnabled",
-                System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-            autoProperty?.SetValue(null, true);
+            UnityEngine.Debug.Log($"=== [CI/CD] Found Resolver Type: {resolverType.FullName} ===");
 
-            // 2. MenuResolve 메서드 찾기
+            // 1. 자동 해결 옵션 강제 활성화
+            var autoProp = resolverType.GetProperty("AutomaticResolutionEnabled",
+                System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+            autoProp?.SetValue(null, true);
+
+            // 2. MenuResolve 실행 (동기식 호출)
             var method = resolverType.GetMethod("MenuResolve",
                 System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
 
             if (method != null)
             {
-                UnityEngine.Debug.Log("=== [CI/CD] Found MenuResolve! Invoking now... ===");
                 method.Invoke(null, null);
-                UnityEngine.Debug.Log("=== [CI/CD] MenuResolve Invoked ==="); // 이제 이 로그가 찍혀야 함
-            }
-            else
-            {
-                UnityEngine.Debug.LogError("=== [CI/CD] FAILED: Could not find MenuResolve method! ===");
+                UnityEngine.Debug.Log("=== [CI/CD] MenuResolve Invoked Successfully ===");
             }
         }
         else
         {
-            UnityEngine.Debug.LogError("=== [CI/CD] FAILED: PlayServicesResolver class not found! Check EDM4U Plugin. ===");
+            UnityEngine.Debug.LogError("=== [CI/CD] FAILED: Still cannot find PlayServicesResolver! ===");
         }
 
-        AssetDatabase.Refresh();
+        UnityEditor.AssetDatabase.Refresh();
 
     }
 }
