@@ -1,4 +1,5 @@
 using DG.Tweening;
+using GooglePlayGames;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -99,13 +100,22 @@ public class UI_MenuBar : MonoBehaviour
     /// </summary>
     void RankPage()
     {
-        shopBtn.sprite = unClickSprite;
-        gameBtn.sprite = unClickSprite;
-        rankBtn.sprite = clickSprite;
+        ShowLeaderboardUI();
 
         SoundManager.Instance.PlayUI(clickSound);
 
-        ChangePage(1, rankPage);
+    }
+
+    public void ShowLeaderboardUI()
+    {
+        if (PlayGamesPlatform.Instance.IsAuthenticated())
+        {
+            PlayGamesPlatform.Instance.ShowLeaderboardUI();
+        }
+        else
+        {
+            Debug.Log("로그인이 필요합니다.");
+        }
     }
 
     /// <summary>

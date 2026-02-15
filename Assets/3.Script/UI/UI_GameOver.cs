@@ -1,4 +1,5 @@
 using DG.Tweening;
+using GooglePlayGames;
 using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
@@ -49,7 +50,7 @@ public class UI_GameOver : MonoBehaviour
         {
             endPanel.SetActive(false);
             newScorePanel.SetActive(false);
-            bestScoreText.text = $"{GameManager.Instance.Score}";
+            bestScoreText.text = $"{GameManager.Instance.bestScore}";
             revivePanel.transform.localScale = Vector3.zero;
             fillCor = StartCoroutine(FillCounter());
             revivePanel.SetActive(true);
@@ -100,7 +101,30 @@ public class UI_GameOver : MonoBehaviour
             CloseBestScorePanel();
             beforeBestScoreText.text = $"{GameManager.Instance.bestScore}";
         }
+        ReportScore(GameManager.Instance.Score);
+        IncrementAchievement(GameManager.Instance.Score);
     }
+
+    public void IncrementAchievement(int score)
+    {
+        PlayGamesPlatform.Instance.IncrementAchievement("CgkI4a37hcUTEAIQAg", score, (bool success) =>
+        {
+            if (success) Debug.Log("업적 진행도 업데이트 완료");
+        });
+    }
+
+    public void ReportScore(long score)
+    {
+        // GPGSIds.leaderboard_rank는 Setup 시 자동 생성된 ID 클래스입니다.
+        // 직접 문자열을 넣으려면 "CgkI..." 형태의 ID를 넣으세요.
+        PlayGamesPlatform.Instance.ReportScore(score, "CgkI4a37hcUTEAIQAQ", (bool success) =>
+        {
+            if (success) Debug.Log("리더보드 점수 등록 성공: " + score);
+            else Debug.LogWarning("리더보드 점수 등록 실패");
+        });
+    }
+
+
 
     /// <summary>
     /// 최고 점수 패널 닫고 종료 패널 열기

@@ -44,7 +44,7 @@ public class SaveManager : Singleton<SaveManager>
         if (PlayerPrefs.HasKey(bestScoreKey))
         {
             GameManager.Instance.Coin = (int)PlayerPrefs.GetFloat(coinKey);
-            GameManager.Instance.Score = (int)PlayerPrefs.GetFloat(bestScoreKey);
+            GameManager.Instance.bestScore = (int)PlayerPrefs.GetFloat(bestScoreKey);
             CharacterManger.Instance.useIndex = PlayerPrefs.GetInt(useKey);
 
             for (int i = 0; i < CharacterManger.Instance.characterDatas.Count; i++)

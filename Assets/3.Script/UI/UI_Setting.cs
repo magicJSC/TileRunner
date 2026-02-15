@@ -1,3 +1,4 @@
+using GooglePlayGames;
 using System;
 using UnityEngine;
 
@@ -101,7 +102,20 @@ public class UI_Setting : MonoBehaviour
     }
     void ClickAchieveBtn()
     {
+        ShowAchievementUI();
         SoundManager.Instance.PlayUI(clickClip);
+    }
+
+    public void ShowAchievementUI()
+    {
+        if (PlayGamesPlatform.Instance.IsAuthenticated())
+        {
+            PlayGamesPlatform.Instance.ShowAchievementsUI();
+        }
+        else
+        {
+            Debug.Log("로그인이 필요합니다.");
+        }
     }
 
     void Disappear()
