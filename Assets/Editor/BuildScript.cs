@@ -183,6 +183,8 @@ public class BuildScript
 
     private static void ResolveAndroidDependencies()
     {
+        UnityEngine.Debug.Log("=== [CI/CD] Starting Android Dependency Resolution ===");
+
         // 1. GPGS 11.01 버전에서는 별도의 Upgrader 호출 없이 
         // 바로 Resolver를 통해 종속성을 정리하는 것이 안정적입니다.
 
@@ -194,6 +196,8 @@ public class BuildScript
 
         // 3. 유니티 6 및 최신 EDM4U에서 변경사항을 강제 반영
         AssetDatabase.Refresh();
+
+        UnityEngine.Debug.Log("=== [CI/CD] Dependency Resolution Request Sent ===");
 
     }
 }
