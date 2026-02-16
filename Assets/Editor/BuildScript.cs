@@ -18,8 +18,6 @@ public class BuildScript
     {
         UnityEngine.Debug.Log("=== [CI/CD] Build Process Started ===");
 
-        ResolveAndroidDependencies();
-
         // 1. 플레이어 설정 (버전 코드 및 키스토어)
         SetupAndroidSettings();
 
@@ -179,59 +177,5 @@ public class BuildScript
             if (!string.IsNullOrEmpty(output)) UnityEngine.Debug.Log($"[Firebase Success]:\n{output}");
             if (!string.IsNullOrEmpty(error)) UnityEngine.Debug.LogError($"[Firebase Error]:\n{error}");
         }
-    }
-
-    private static void ResolveAndroidDependencies()
-    {
-        UnityEngine.Debug.Log("=== [CI/CD] Starting Advanced Scan for PlayServicesResolver ===");
-
-        System.Type resolverType = null;
-
-        // 프로젝트에 로드된 모든 어셈블리 중에서 이름을 기준으로 정확히 찾습니다.
-        var assemblies = System.AppDomain.CurrentDomain.GetAssemblies();
-        foreach (var assembly in assemblies)
-        {
-            // 버전 숫자가 포함된 폴더에 있어도 어셈블리 이름은 보통 동일합니다.
-            if (assembly.FullName.Contains("Google.JarResolver"))
-            {
-                resolverType = assembly.GetType("Google.JarResolver.PlayServicesResolver");
-                if (resolverType != null) break;
-            }
-        }
-
-        // 만약 위 방법으로 못 찾았다면, 모든 타입을 전수 조사합니다.
-        if (resolverType == null)
-        {
-            resolverType = assemblies
-                .SelectMany(a => a.GetTypes())
-                .FirstOrDefault(t => t.FullName == "Google.JarResolver.PlayServicesResolver");
-        }
-
-        if (resolverType != null)
-        {
-            UnityEngine.Debug.Log($"=== [CI/CD] Found Resolver Type: {resolverType.FullName} ===");
-
-            // 1. 자동 해결 옵션 강제 활성화
-            var autoProp = resolverType.GetProperty("AutomaticResolutionEnabled",
-                System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-            autoProp?.SetValue(null, true);
-
-            // 2. MenuResolve 실행 (동기식 호출)
-            var method = resolverType.GetMethod("MenuResolve",
-                System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-
-            if (method != null)
-            {
-                method.Invoke(null, null);
-                UnityEngine.Debug.Log("=== [CI/CD] MenuResolve Invoked Successfully ===");
-            }
-        }
-        else
-        {
-            UnityEngine.Debug.LogError("=== [CI/CD] FAILED: Still cannot find PlayServicesResolver! ===");
-        }
-
-        UnityEditor.AssetDatabase.Refresh();
-
     }
 }
