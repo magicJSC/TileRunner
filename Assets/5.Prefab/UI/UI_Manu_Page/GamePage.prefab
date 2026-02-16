@@ -1247,7 +1247,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 456110001165673625, guid: b227e9dc91a3d734baf0de8163d38952, type: 3}
       propertyPath: m_fontSize
-      value: 38.5
+      value: 33.5
       objectReference: {fileID: 0}
     - target: {fileID: 1899021374508188508, guid: b227e9dc91a3d734baf0de8163d38952, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1272,6 +1272,14 @@ PrefabInstance:
     - target: {fileID: 1899021374508188508, guid: b227e9dc91a3d734baf0de8163d38952, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2596902840993087583, guid: b227e9dc91a3d734baf0de8163d38952, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 2533.463
+      objectReference: {fileID: 0}
+    - target: {fileID: 2596902840993087583, guid: b227e9dc91a3d734baf0de8163d38952, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.0001
       objectReference: {fileID: 0}
     - target: {fileID: 3663609456531778357, guid: b227e9dc91a3d734baf0de8163d38952, type: 3}
       propertyPath: m_AnchorMax.y
