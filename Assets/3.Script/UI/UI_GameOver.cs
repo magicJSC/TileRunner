@@ -50,7 +50,7 @@ public class UI_GameOver : MonoBehaviour
         {
             endPanel.SetActive(false);
             newScorePanel.SetActive(false);
-            bestScoreText.text = $"{GameManager.Instance.bestScore}";
+            beforeBestScoreText.text = $"{GameManager.Instance.bestScore}";
             revivePanel.transform.localScale = Vector3.zero;
             fillCor = StartCoroutine(FillCounter());
             revivePanel.SetActive(true);
