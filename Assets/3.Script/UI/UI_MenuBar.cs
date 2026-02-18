@@ -110,12 +110,24 @@ public class UI_MenuBar : MonoBehaviour
     {
         if (PlayGamesPlatform.Instance.IsAuthenticated())
         {
+            ReportScore(GameManager.Instance.bestScore);
             PlayGamesPlatform.Instance.ShowLeaderboardUI();
         }
         else
         {
             Debug.Log("로그인이 필요합니다.");
         }
+    }
+
+    public void ReportScore(long score)
+    {
+        // GPGSIds.leaderboard_rank는 Setup 시 자동 생성된 ID 클래스입니다.
+        // 직접 문자열을 넣으려면 "CgkI..." 형태의 ID를 넣으세요.
+        PlayGamesPlatform.Instance.ReportScore(score, "CgkI4a37hcUTEAIQAQ", (bool success) =>
+        {
+            if (success) Debug.Log("리더보드 점수 등록 성공: " + score);
+            else Debug.LogWarning("리더보드 점수 등록 실패");
+        });
     }
 
     /// <summary>

@@ -110,12 +110,35 @@ public class UI_Setting : MonoBehaviour
     {
         if (PlayGamesPlatform.Instance.IsAuthenticated())
         {
+            SetAchievementProgress(GameManager.Instance.bestScore);
             PlayGamesPlatform.Instance.ShowAchievementsUI();
         }
         else
         {
             Debug.Log("로그인이 필요합니다.");
         }
+    }
+
+    public void SetAchievementProgress(int currentScore)
+    {
+        int targetScore = 400; // 예시 목표 점수
+
+        // 1. 점수를 퍼센트(0.0 ~ 100.0)로 변환
+        // 주의: 정수 나눗셈 방지를 위해 하나는 double로 형변환 필수
+        double progress = ((double)currentScore / targetScore) * 100.0;
+
+        // 2. PlayGamesPlatform 인스턴스를 통한 리포트
+        PlayGamesPlatform.Instance.ReportProgress("CgkI4a37hcUTEAIQAg", progress, (bool success) =>
+        {
+            if (success)
+            {
+                Debug.Log($"[GPGS] \"CgkI4a37hcUTEAIQAg\" 업적 진행도 {progress:F1}% 설정 완료");
+            }
+            else
+            {
+                Debug.LogError("[GPGS] 업적 업데이트 실패");
+            }
+        });
     }
 
     void Disappear()
