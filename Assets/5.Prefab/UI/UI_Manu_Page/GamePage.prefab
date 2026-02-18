@@ -1425,7 +1425,8 @@ PrefabInstance:
       propertyPath: m_OverrideSorting
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8602250255392435291, guid: b227e9dc91a3d734baf0de8163d38952, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1560,7 +1561,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_Score
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5974964997868352450, guid: cabdf26d15c127349a27ca8e2a5e7d12, type: 3}
+    - {fileID: 5904724558182284542, guid: cabdf26d15c127349a27ca8e2a5e7d12, type: 3}
+    - {fileID: 2686096039589412350, guid: cabdf26d15c127349a27ca8e2a5e7d12, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1686,7 +1690,8 @@ PrefabInstance:
       propertyPath: m_OverrideSorting
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8945083360492551900, guid: 76b8c3f5ce8c17b4b8e76dac9cb85b0f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
