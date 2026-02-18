@@ -1682,6 +1682,7 @@ GameObject:
   - component: {fileID: 4678917268858224951}
   - component: {fileID: 8275097345571670713}
   - component: {fileID: 8257522810147102627}
+  - component: {fileID: 4863359355063818488}
   m_Layer: 5
   m_Name: UI_GameOver
   m_TagString: Untagged
@@ -1793,6 +1794,18 @@ MonoBehaviour:
   reviveEvent: {fileID: 4777817488972501815}
   cancelEvent: {fileID: 5370137303337820465}
   clickSound: {fileID: 0}
+--- !u!114 &4863359355063818488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6888648301587976944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b1c803bdd7132042b5efb2b7db1a252, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7230221701989159866
 GameObject:
   m_ObjectHideFlags: 0
