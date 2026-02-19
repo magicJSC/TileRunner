@@ -29,7 +29,7 @@ public class MobileDynamicJoystick : MonoBehaviour, IPointerDownHandler, IPointe
         // 터치/클릭한 위치로 조이스틱 이동
         startPos = eventData.position;
         joystickBackground.position = startPos;
-        GameManager.Instance.touchSignalAction?.Invoke();
+        GameManager.Instance.touchSignalAction?.Invoke(true);
     }
 
     // 2. 드래그 중 (IDrag)
@@ -45,7 +45,7 @@ public class MobileDynamicJoystick : MonoBehaviour, IPointerDownHandler, IPointe
 
         // 캐릭터 회전 호출 (카메라 방향 보정)
         player.RotateByJoystick(direction.normalized * (distance / dragRange));
-        Debug.Log(direction.normalized * (distance / dragRange));
+
     }
 
     // 3. 손을 뗐을 때 (IPointerUp)
@@ -53,6 +53,7 @@ public class MobileDynamicJoystick : MonoBehaviour, IPointerDownHandler, IPointe
     {
         joystickBackground.anchoredPosition = new Vector2(0,-642);
         joystickHandle.anchoredPosition = Vector2.zero;
+        GameManager.Instance.touchSignalAction?.Invoke(false);
     }
 
     void GetPlayer()

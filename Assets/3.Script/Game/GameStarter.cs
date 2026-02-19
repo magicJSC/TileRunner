@@ -55,9 +55,9 @@ public class GameStarter : MonoBehaviour
         }
     }
 
-    void TouchSignal()
+    void TouchSignal(bool touch)
     {
-        IsTouched = true;
+        IsTouched = touch;
     }
 
     /// <summary>
