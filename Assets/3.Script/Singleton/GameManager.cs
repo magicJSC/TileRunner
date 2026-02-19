@@ -45,7 +45,6 @@ public class GameManager : Singleton<GameManager>
     public bool showAds;
 
     public Action openSettingAction;
-    public Action touchSignalAction;
     public Action changeSettingAction;
     public Action beforeChangeSettingAction;
     public Action closeSettingAction;
@@ -54,6 +53,7 @@ public class GameManager : Singleton<GameManager>
     public Action endGameAction;
     public Action resetAction;
     public Action restartAction;
+    public Action<bool> touchSignalAction;
 
     private Transform player;
     public Transform Player { get { return player; } set { player = value; playerAction?.Invoke(); } }
