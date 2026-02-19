@@ -111,6 +111,7 @@ public class UI_GameOver : MonoBehaviour
     {
         SoundManager.Instance.PlayUI(clickSound);
         ShowResultPanel();
+        revivePanel.SetActive(false);
         StopCoroutine(fillCor);
         Destroy(revivePanel);
     }

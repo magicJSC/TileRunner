@@ -45,6 +45,7 @@ public class GameManager : Singleton<GameManager>
     public bool showAds;
 
     public Action openSettingAction;
+    public Action touchSignalAction;
     public Action changeSettingAction;
     public Action beforeChangeSettingAction;
     public Action closeSettingAction;

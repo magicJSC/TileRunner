@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
 
     private Vector2 moveInput;
 
+    private Transform camTransform;
+
     Coroutine moveCor;
     Coroutine jumpCor;
 
@@ -31,6 +33,7 @@ public class Player : MonoBehaviour
     {
         GameManager.Instance.Player = transform;
         isGrounded = true;
+        camTransform = Camera.main.transform;
     }
 
     private void OnDisable()
@@ -117,25 +120,23 @@ public class Player : MonoBehaviour
         }
     }
 
-    void RotateByJoystick(Vector2 input)
+    public void RotateByJoystick(Vector2 input)
     {
-        // 데드존
+        // 1. 데드존 처리
         if (input.sqrMagnitude < 0.1f)
             return;
 
-        //// 이동 중일 때만 회전
-        //if (!isMoving)
-        //    return;
+        // 2. 조이스틱 입력을 각도로 변환
+        float joystickAngle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg;
 
-        float targetAngle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg;
+        // 3. 메인 카메라의 Y축 회전값 가져오기
+        float cameraAngle = camTransform.eulerAngles.y;
 
-        Quaternion targetRot = Quaternion.Euler(0, targetAngle, 0);
+        // 4. 조이스틱 각도에 카메라 각도를 더해서 최종 목표 각도 계산
+        float targetAngle = joystickAngle + cameraAngle;
 
-        transform.rotation = Quaternion.RotateTowards(
-            transform.rotation,
-            targetRot,
-            turnSpeed * Time.deltaTime
-        );
+        // 5. 즉시 회전 적용
+        transform.rotation = Quaternion.Euler(0, targetAngle, 0);
     }
 
 
