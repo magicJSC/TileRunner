@@ -168,11 +168,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5244081025090275396}
+  m_Father: {fileID: 3940366413990998673}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 48, y: -684}
+  m_AnchoredPosition: {x: 48, y: -42.00006}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &472173961583047282
@@ -962,11 +962,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7293983987213956328}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 251790351396254835}
+  - {fileID: 2654439944008796996}
   m_Father: {fileID: 5244081025090275396}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1041,8 +1043,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3940366413990998673}
-  - {fileID: 251790351396254835}
-  - {fileID: 2654439944008796996}
   m_Father: {fileID: 3545100831425052012}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1076,16 +1076,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8107953324873831731}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5244081025090275396}
+  m_Father: {fileID: 3940366413990998673}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -642}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5611700622802170809
@@ -1138,7 +1138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9d677f1681015749b15c436eec6d880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MovementRange: 50
+  m_MovementRange: 100
   m_DynamicOriginRange: 100
   m_ControlPath: <Joystick>/stick
   m_Behaviour: 0
@@ -1172,6 +1172,7 @@ GameObject:
   - component: {fileID: 7702959784418085107}
   - component: {fileID: 185037727522331598}
   - component: {fileID: 7706989625703283718}
+  - component: {fileID: 934443709644301908}
   m_Layer: 5
   m_Name: GameScreen
   m_TagString: Untagged
@@ -1237,6 +1238,21 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &934443709644301908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8433654514912318083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b24cb16d93975a343833fba5d8172ee4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  joystickBackground: {fileID: 3940366413990998673}
+  joystickHandle: {fileID: 251790351396254835}
+  dragRange: 100
 --- !u!1001 &702768074659782259
 PrefabInstance:
   m_ObjectHideFlags: 0

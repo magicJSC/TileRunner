@@ -5,11 +5,17 @@ using UnityEngine.InputSystem;
 public class GameStarter : MonoBehaviour
 {
     [SerializeField] private InputActionReference moveAction; // Vector2 (조이스틱)
+
     private Vector2 moveInput;
+
+    private bool IsTouched;
+
     private void Start()
     {
         GameManager.Instance.Score = 0;
         GameManager.Instance.isGameOver = false;
+
+        IsTouched = false;
 
         moveAction.action.Enable();
         CharacterManger.Instance.ChangeCharacter(CharacterManger.Instance.useIndex);
@@ -17,6 +23,7 @@ public class GameStarter : MonoBehaviour
         GameManager.Instance.isStart = false;
 
         GameManager.Instance.restartAction += ReStartAction;
+        GameManager.Instance.touchSignalAction += TouchSignal;
 
         StartCoroutine(CheckTouch());
     }
@@ -24,6 +31,7 @@ public class GameStarter : MonoBehaviour
     private void OnDisable()
     {
         GameManager.Instance.restartAction -= ReStartAction;
+        GameManager.Instance.touchSignalAction -= TouchSignal;
     }
 
     private IEnumerator CheckTouch()
@@ -33,19 +41,23 @@ public class GameStarter : MonoBehaviour
             yield return null;
 
             moveInput = moveAction.action.ReadValue<Vector2>();
-            Debug.Log(moveInput);
-            Debug.Log(moveAction.action.enabled);
 
             if (GameManager.Instance.isStart)
                 yield break;
             // 조이스틱 입력이 있을 때만 이동
-            if (moveInput.sqrMagnitude > 0.01f)
+            if (moveInput.sqrMagnitude > 0.01f || IsTouched)
             {
                 GameManager.Instance.isStart = true;
                 StartGame();
+                IsTouched = false;
                 yield break;
             }
         }
+    }
+
+    void TouchSignal()
+    {
+        IsTouched = true;
     }
 
     /// <summary>
