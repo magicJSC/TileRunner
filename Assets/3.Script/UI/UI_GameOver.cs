@@ -17,9 +17,6 @@ public class UI_GameOver : MonoBehaviour
     private TextMeshProUGUI beforeBestScoreText;
 
 
-    [SerializeField] float fillTime;
-    [SerializeField] Image fill;
-
     [SerializeField] GameObject revivePanel;
 
     [SerializeField] UI_EventHandler reviveEvent;
@@ -52,30 +49,8 @@ public class UI_GameOver : MonoBehaviour
             newScorePanel.SetActive(false);
             beforeBestScoreText.text = $"{GameManager.Instance.bestScore}";
             revivePanel.transform.localScale = Vector3.zero;
-            fillCor = StartCoroutine(FillCounter());
             revivePanel.SetActive(true);
             revivePanel.transform.DOScale(Vector3.one, 0.3f);
-        }
-    }
-
-    IEnumerator FillCounter()
-    {
-        float time = fillTime;
-        fill.fillAmount = 1;
-        while (true)
-        {
-            yield return null;
-            if(time > 0)
-            {
-                time -= Time.deltaTime;
-                fill.fillAmount = time / fillTime;
-            }
-            else
-            {
-                revivePanel.SetActive(false);
-                ShowResultPanel();
-                yield break;
-            }
         }
     }
 
