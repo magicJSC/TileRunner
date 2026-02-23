@@ -26,6 +26,8 @@ public class MobileDynamicJoystick : MonoBehaviour, IPointerDownHandler, IPointe
         if (player == null && GameManager.Instance.Player != null)
             GetPlayer();
 
+        if (GameManager.Instance.isGameOver)
+            return;
         // 터치/클릭한 위치로 조이스틱 이동
         startPos = eventData.position;
         joystickBackground.position = startPos;
@@ -35,6 +37,9 @@ public class MobileDynamicJoystick : MonoBehaviour, IPointerDownHandler, IPointe
     // 2. 드래그 중 (IDrag)
     public void OnDrag(PointerEventData eventData)
     {
+        if (GameManager.Instance.isGameOver)
+            return;
+
         Vector2 currentPos = eventData.position;
         Vector2 direction = currentPos - startPos;
 
