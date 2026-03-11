@@ -38,7 +38,7 @@ public class UI_GameOver : MonoBehaviour
         reviveEvent.clickAction += Revive;
         cancelEvent.clickAction += CancelRevive;
 
-        if (GameManager.Instance.revived)
+        if (GameManager.Instance.revived || !AdsManager.Instance.CanShowAd())
         {
             revivePanel.SetActive(false);
             ShowResultPanel();
@@ -83,39 +83,39 @@ public class UI_GameOver : MonoBehaviour
 
     public void SetAchievementProgress(int currentScore)
     {
-        int targetScore = 400; // ¿¹½Ã ¸ñÇ¥ Á¡¼ö
+        int targetScore = 400; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½
 
-        // 1. Á¡¼ö¸¦ ÆÛ¼¾Æ®(0.0 ~ 100.0)·Î º¯È¯
-        // ÁÖÀÇ: Á¤¼ö ³ª´°¼À ¹æÁö¸¦ À§ÇØ ÇÏ³ª´Â double·Î Çüº¯È¯ ÇÊ¼ö
+        // 1. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½Æ®(0.0 ~ 100.0)ï¿½ï¿½ ï¿½ï¿½È¯
+        // ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ doubleï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È¯ ï¿½Ê¼ï¿½
         double progress = ((double)currentScore / targetScore) * 100.0;
 
-        // 2. PlayGamesPlatform ÀÎ½ºÅÏ½º¸¦ ÅëÇÑ ¸®Æ÷Æ®
+        // 2. PlayGamesPlatform ï¿½Î½ï¿½ï¿½Ï½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
         PlayGamesPlatform.Instance.ReportProgress("CgkI4a37hcUTEAIQAg", progress, (bool success) =>
         {
             if (success)
             {
-                Debug.Log($"[GPGS] \"CgkI4a37hcUTEAIQAg\" ¾÷Àû ÁøÇàµµ {progress:F1}% ¼³Á¤ ¿Ï·á");
+                Debug.Log($"[GPGS] \"CgkI4a37hcUTEAIQAg\" ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½àµµ {progress:F1}% ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½");
             }
             else
             {
-                Debug.LogError("[GPGS] ¾÷Àû ¾÷µ¥ÀÌÆ® ½ÇÆÐ");
+                Debug.LogError("[GPGS] ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½");
             }
         });
     }
 
     public void ReportScore(long score)
     {
-        // GPGSIds.leaderboard_rank´Â Setup ½Ã ÀÚµ¿ »ý¼ºµÈ ID Å¬·¡½ºÀÔ´Ï´Ù.
-        // Á÷Á¢ ¹®ÀÚ¿­À» ³ÖÀ¸·Á¸é "CgkI..." ÇüÅÂÀÇ ID¸¦ ³ÖÀ¸¼¼¿ä.
+        // GPGSIds.leaderboard_rankï¿½ï¿½ Setup ï¿½ï¿½ ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ID Å¬ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ "CgkI..." ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ IDï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
         PlayGamesPlatform.Instance.ReportScore(score, "CgkI4a37hcUTEAIQAQ", (bool success) =>
         {
-            if (success) Debug.Log("¸®´õº¸µå Á¡¼ö µî·Ï ¼º°ø: " + score);
-            else Debug.LogWarning("¸®´õº¸µå Á¡¼ö µî·Ï ½ÇÆÐ");
+            if (success) Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: " + score);
+            else Debug.LogWarning("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
         });
     }
 
     /// <summary>
-    /// ÃÖ°í Á¡¼ö ÆÐ³Î ´Ý°í Á¾·á ÆÐ³Î ¿­±â
+    /// ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ð³ï¿½ ï¿½Ý°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ð³ï¿½ ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     public void CloseBestScorePanel()
     {
@@ -125,7 +125,7 @@ public class UI_GameOver : MonoBehaviour
     }
 
     /// <summary>
-    /// °ÔÀÓ Àç½ÃÀÛ
+    /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     public void ResetGame()
     {

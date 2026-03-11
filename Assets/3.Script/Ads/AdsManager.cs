@@ -3,9 +3,13 @@ using UnityEngine;
 
 public class AdsManager : Singleton<AdsManager>
 {
-    // Å×½ºÆ®¿ë IDÀÔ´Ï´Ù. ½ÇÁ¦ ¹èÆ÷ ½Ã¿¡´Â AdMob ÄÜ¼ÖÀÇ ID·Î ±³Ã¼ÇÏ¼¼¿ä!
+    // ï¿½×½ï¿½Æ®ï¿½ï¿½ IDï¿½Ô´Ï´ï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã¿ï¿½ï¿½ï¿½ AdMob ï¿½Ü¼ï¿½ï¿½ï¿½ IDï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½Ï¼ï¿½ï¿½ï¿½!
 #if UNITY_ANDROID
-    private string _adUnitId = "ca-app-pub-3940256099942544/5224354917";
+   #if UNITY_EDITOR
+private string _adUnitId = "ca-app-pub-3940256099942544/5224354917"; // í…ŒìŠ¤íŠ¸ ê´‘ê³ 
+#else
+private string _adUnitId = "ca-app-pub-6017085359919621/3370759866";
+#endif
 #elif UNITY_IPHONE
         private string _adUnitId = "ca-app-pub-3940256099942544/1712485313";
 #else
@@ -16,7 +20,7 @@ public class AdsManager : Singleton<AdsManager>
 
     void Start()
     {
-        // SDK ÃÊ±âÈ­
+        // SDK ï¿½Ê±ï¿½È­
         MobileAds.Initialize((InitializationStatus status) => {
             LoadInterstitialAd();
         });
@@ -35,30 +39,35 @@ public class AdsManager : Singleton<AdsManager>
         {
             if (error != null || ad == null)
             {
-                Debug.LogError("Àü¸é ±¤°í ·Îµå ½ÇÆÐ: " + error);
+                Debug.LogError("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½: " + error);
                 return;
             }
             _interstitialAd = ad;
 
-            // ±¤°í°¡ ´ÝÇûÀ» ¶§ ´ÙÀ½ ±¤°í¸¦ ¹Ì¸® ·ÎµåÇÏ´Â ÀÌº¥Æ® µî·Ï
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½Îµï¿½ï¿½Ï´ï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½
             _interstitialAd.OnAdFullScreenContentClosed += () => {
-                Debug.Log("±¤°í°¡ ´ÝÇû½À´Ï´Ù. »õ ±¤°í¸¦ ·ÎµåÇÕ´Ï´Ù.");
+                Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½Õ´Ï´ï¿½.");
                 LoadInterstitialAd();
             };
         });
+    }
+
+    public bool CanShowAd()
+    {
+        return _interstitialAd != null && _interstitialAd.CanShowAd();
     }
 
     public void ShowAd()
     {
         if (_interstitialAd != null && _interstitialAd.CanShowAd())
         {
-            Debug.Log("±¤°í¸¦ Ç¥½ÃÇÕ´Ï´Ù.");
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ï¿½Õ´Ï´ï¿½.");
             _interstitialAd.Show();
         }
         else
         {
-            Debug.Log("±¤°í°¡ ¾ÆÁ÷ ·ÎµåµÇÁö ¾Ê¾Ò½À´Ï´Ù.");
-            LoadInterstitialAd(); // ½ÇÆÐ ´ëºñ ´Ù½Ã ·Îµå
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò½ï¿½ï¿½Ï´ï¿½.");
+            LoadInterstitialAd(); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½Îµï¿½
         }
     }
 }
