@@ -13,4 +13,17 @@ platform :android do
       skip_upload_screenshots: true
     )
   end
+
+  desc "프로덕션 트랙으로 업로드"
+  lane :production_release do
+    upload_to_play_store(
+      track: 'production',
+      aab: 'C:/ProgramData/Jenkins/.jenkins/workspace/Unity_Android_Build/Builds/Android/TileRunner.aab', # 유니티가 만든 AAB 파일 경로
+      release_status: 'completed',
+      json_key: 'fastlane/keys/google-key.json',
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+  end
 end
